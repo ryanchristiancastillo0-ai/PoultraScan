@@ -129,13 +129,69 @@ export default function Register() {
     <div className="bg-[#f8f9ff] min-h-screen flex text-[#0b1c30] antialiased w-full">
       <div className="flex w-full min-h-screen">
 
-        <div className="hidden md:flex md:w-1/2 bg-[#d3e4fe] relative overflow-hidden flex-col justify-center items-center">
-          <div
-            className="absolute inset-0 bg-cover bg-center w-full h-full opacity-90"
-            style={{ backgroundImage: `url('/img/logo.png')` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00855d]/20 to-[#f8f9ff]/40 mix-blend-multiply" />
-        </div>
+       <div className="hidden md:flex md:w-1/2 h-full min-h-screen bg-[#d3e4fe] relative overflow-hidden">
+  {/* Base Image - blurred */}
+  <img
+    src="/img/left-panel-logo.png"
+    alt=""
+    className="absolute inset-0 w-full h-full object-cover object-top scale-110 blur-xs opacity-90"
+  />
+
+  {/* Decorative blurred blobs for depth */}
+  <div className="absolute -top-16 -left-16 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
+  <div className="absolute bottom-0 -right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
+
+  {/* Top-left brand mark */}
+  <div className="absolute top-8 left-8 flex items-center gap-2 z-10">
+    <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg">
+      <FiFeather className="text-white text-xl" />
+    </div>
+    <span className="text-white font-semibold tracking-wide text-lg drop-shadow-sm">
+      PoultraScan AI
+    </span>
+  </div>
+
+  {/* Bottom overlay text */}
+  <div className="absolute bottom-0 left-0 right-0 p-10 z-10 bg-gradient-to-t from-[#0b1c30]/70 via-[#0b1c30]/20 to-transparent">
+    <h2 className="text-white text-2xl font-semibold tracking-tight mb-2 drop-shadow-sm">
+      Smarter poultry health, in real time.
+    </h2>
+    <p className="text-white/80 text-sm max-w-sm">
+      AI-powered scans help you catch issues early and keep your flock thriving.
+    </p>
+  </div>
+</div><div className="hidden md:flex md:w-1/2 h-full min-h-screen bg-[#d3e4fe] relative overflow-hidden">
+  {/* Base Image - blurred */}
+  <img
+    src="/img/left-panel-logo.png"
+    alt=""
+    className="absolute inset-0 w-full h-full object-cover object-top scale-110 blur-xs opacity-90"
+  />
+
+  {/* Decorative blurred blobs for depth */}
+  <div className="absolute -top-16 -left-16 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
+  <div className="absolute bottom-0 -right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
+
+  {/* Top-left brand mark */}
+  <div className="absolute top-8 left-8 flex items-center gap-2 z-10">
+    <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg">
+      <FiFeather className="text-white text-xl" />
+    </div>
+    <span className="text-white font-semibold tracking-wide text-lg drop-shadow-sm">
+      PoultraScan AI
+    </span>
+  </div>
+
+  {/* Bottom overlay text */}
+  <div className="absolute bottom-0 left-0 right-0 p-10 z-10 bg-gradient-to-t from-[#0b1c30]/70 via-[#0b1c30]/20 to-transparent">
+    <h2 className="text-white text-2xl font-semibold tracking-tight mb-2 drop-shadow-sm">
+      Smarter poultry health, in real time.
+    </h2>
+    <p className="text-white/80 text-sm max-w-sm">
+      AI-powered scans help you catch issues early and keep your flock thriving.
+    </p>
+  </div>
+</div>
 
         <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-16 bg-[#f8f9ff]">
           <div className="w-full max-w-[480px] bg-white rounded-2xl p-6 md:p-10 shadow-[0_4px_12px_rgba(15,23,42,0.04)] border border-[#e5eeff]">
