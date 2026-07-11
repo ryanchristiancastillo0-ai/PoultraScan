@@ -61,8 +61,8 @@ class AuthController:
             key="access_token",
             value=token,
             httponly=True,
-            samesite="lax",
-            secure=False,
+            samesite="none",
+            secure=True,
             max_age=cookie_max_age
         )
         return response
@@ -74,7 +74,12 @@ class AuthController:
             title="Logged out",
             message="You logged out."
         ))
-        response.delete_cookie("access_token")
+        response.delete_cookie(
+            "access_token",
+            httponly=True,
+            samesite="none",
+            secure=True,
+        )
         return {"message": "Logout successful"}
 
     @staticmethod
@@ -128,8 +133,8 @@ class AuthController:
             key="access_token",
             value=token,
             httponly=True,
-            samesite="lax",
-            secure=False,
+            samesite="none",
+            secure=True,
             max_age=DEFAULT_SESSION_MAX_AGE
         )
         return response
