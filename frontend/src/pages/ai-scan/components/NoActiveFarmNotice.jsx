@@ -1,7 +1,7 @@
 import {
   MdInfoOutline,
 } from 'react-icons/md';
-
+import {useNavigate} from 'react-router-dom'
 export default function NoActiveFarmNotice() {
   const navigate = useNavigate();
   return (
