@@ -30,10 +30,6 @@ app.add_middleware(
 )
 
 
-@app.on_event("startup")
-def load_ai_model():
-    ModelLoader.load()  # loads chicken_disease_model.h5 once, kept in memory for all requests
-
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
