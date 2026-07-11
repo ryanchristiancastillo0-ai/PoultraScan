@@ -13,7 +13,7 @@ from routes.farm_route import router as farm_router
 from routes.activity_log_route import router as activity_log_router
 from routes.ai_prediction_route import router as ai_prediction_router
 from routes.chicken_image_route import router as chicken_image_router
-from utils.ai_loader_model import ModelLoader
+
 from routes.detection_route import router as detection_router
 from routes.journal_entry_route import router as journal_entry_router
 from fastapi.middleware.cors import CORSMiddleware
