@@ -13,7 +13,7 @@ export default function ResultsView({ onScanAgain, onSave, detectionData, predic
   const totalWeight = predictionData?.total_weight ?? 0;
   const totalOilMl = predictionData?.total_oil_ml ?? 0;
   const marketReadyCount = predictionData?.market_ready_count ?? 0;
-  console.log(JSON.stringify(detectionData, null, 2))
+
 
   return (
     <div className="w-full max-w-6xl mx-auto">
