@@ -8,6 +8,7 @@ import {
   MdArrowForward,
   MdWarningAmber,
   MdHealthAndSafety,
+  MdOutlineAgriculture,
 } from 'react-icons/md';
 import { useQuickScan } from '../hooks/useQuickScan';
 import {CameraCaptureModal} from '../pages/ai-scan/components/index'
@@ -23,28 +24,46 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
 
   if (!isOpen) return null;
 
+  // Guard: no active/valid farm selected
+  const hasFarm = farmId !== null && farmId !== undefined && farmId !== '';
+
   const handleClose = () => {
     setCameraOpen(false);
     reset();
     onClose();
   };
 
-  const handleUploadClick = () => fileInputRef.current?.click();
+  const handleUploadClick = () => {
+    if (!hasFarm) return;
+    fileInputRef.current?.click();
+  };
 
   const handleFileSelected = (e) => {
     const file = e.target.files?.[0];
     e.target.value = '';
+    if (!hasFarm) return;
     if (file) runQuickScan(file, 'UPLOAD');
+  };
+
+  const handleCaptureClick = () => {
+    if (!hasFarm) return;
+    setCameraOpen(true);
   };
 
   const handleCameraCapture = (file) => {
     setCameraOpen(false);
+    if (!hasFarm) return;
     runQuickScan(file, 'WEBCAM');
   };
 
   const handleMoreInfo = () => {
     handleClose();
     navigate('/scan'); // TODO: adjust to your actual scan route
+  };
+
+  const handleGoToFarms = () => {
+    handleClose();
+    navigate('/farm'); // TODO: adjust to your actual farm creation/list route
   };
 
   const sev = SEVERITY_STYLES[summary?.topSeverity?.toUpperCase()] || SEVERITY_STYLES.UNKNOWN;
@@ -63,14 +82,7 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
 
   return (
     <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center">
-      <style>{`
-        @keyframes qs-backdrop { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes qs-sheet-up { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes qs-pop { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .qs-backdrop { animation: qs-backdrop 0.2s ease-out; }
-        .qs-sheet { animation: qs-sheet-up 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
-        @media (min-width: 640px) { .qs-sheet { animation: qs-pop 0.2s cubic-bezier(0.16, 1, 0.3, 1); } }
-      `}</style>
+      
 
       <div className="qs-backdrop absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleClose} />
 
@@ -94,10 +106,29 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
           className="hidden"
         />
 
-        {status === 'idle' && (
+        {/* No farm selected — block scanning entirely */}
+        {!hasFarm && (
+          <div className="flex flex-col items-center gap-3 py-6">
+            <div className="flex items-start gap-2 bg-[#FFF7E6] border border-[#F5D998] rounded-xl p-3 w-full">
+              <MdOutlineAgriculture className="text-[#B7791F] flex-shrink-0 mt-0.5 text-lg" />
+              <p className="text-sm text-[#92600D]">
+                Please create a farm first before running a scan.
+              </p>
+            </div>
+            <button
+              onClick={handleGoToFarms}
+              className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#2F5D3A] text-white font-semibold hover:bg-[#254A2E] active:scale-[0.98] transition-all shadow-sm w-full"
+            >
+              Create a Farm
+              <MdArrowForward className="text-lg" />
+            </button>
+          </div>
+        )}
+
+        {hasFarm && status === 'idle' && (
           <div className="grid grid-cols-2 gap-3">
             <button
-              onClick={() => setCameraOpen(true)}
+              onClick={handleCaptureClick}
               className="flex flex-col items-center gap-2 py-6 rounded-xl bg-[#2F5D3A] text-white font-semibold hover:bg-[#254A2E] active:scale-[0.97] transition-all shadow-sm"
             >
               <MdCameraAlt className="text-2xl" />
@@ -113,14 +144,14 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
           </div>
         )}
 
-        {status === 'processing' && (
+        {hasFarm && status === 'processing' && (
           <div className="flex flex-col items-center justify-center py-10 gap-3">
             <div className="w-10 h-10 border-2 border-[#E5E7EB] border-t-[#2F5D3A] rounded-full animate-spin" />
             <p className="text-sm text-[#6B7280] font-medium">Analyzing flock...</p>
           </div>
         )}
 
-        {status === 'error' && (
+        {hasFarm && status === 'error' && (
           <div className="flex flex-col items-center gap-3 py-6">
             <div className="flex items-start gap-2 bg-[#FBEBEB] border border-[#F3C9C9] rounded-xl p-3 w-full">
               <MdWarningAmber className="text-[#DC2626] flex-shrink-0 mt-0.5" />
@@ -135,7 +166,7 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
           </div>
         )}
 
-        {status === 'done' && summary && (
+        {hasFarm && status === 'done' && summary && (
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EAF2EC] border border-[#CFE2D4]">
               <MdCheckCircle className="text-[#2F5D3A] text-lg flex-shrink-0" />
