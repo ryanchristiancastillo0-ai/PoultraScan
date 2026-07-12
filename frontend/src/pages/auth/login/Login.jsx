@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FiUser,
@@ -10,6 +10,7 @@ import {
 } from "react-icons/fi";
 import { useAuth } from "../hooks/useAuth";
 import { useGoogleLogin } from "@react-oauth/google";
+import { checkServerHealth } from "../api/auth"
 
 export default function Login() {
   const { login, loading, error, loginWithGoogle } = useAuth();
@@ -25,6 +26,28 @@ export default function Login() {
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
+  // Server wake-up state
+  const [serverStatus, setServerStatus] = useState("waking"); // "waking" | "ready" | "unreachable"
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const pingServer = async () => {
+      try {
+        await checkServerHealth();
+        if (!cancelled) setServerStatus("ready");
+      } catch (err) {
+        if (!cancelled) setServerStatus("unreachable");
+      }
+    };
+
+    pingServer();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -37,7 +60,6 @@ export default function Login() {
 
   const googleLoginHandler = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      
       try {
         await loginWithGoogle(tokenResponse.access_token);
         console.log("loginWithGoogle finished, navigating...");
@@ -59,38 +81,38 @@ export default function Login() {
       {/* Split Screen Layout */}
       <div className="flex w-full min-h-[100dvh]">
         {/* Left Side: Illustration (Hidden on screens smaller than lg) */}
-     <div className="hidden md:flex md:w-1/2 h-full min-h-screen bg-[#d3e4fe] relative overflow-hidden">
-  {/* Base Image - blurred */}
-  <img
-    src="/img/left-panel-logo.png"
-    alt=""
-    className="absolute inset-0 w-full h-full object-cover object-top scale-110 blur-xs opacity-90"
-  />
+        <div className="hidden md:flex md:w-1/2 h-full min-h-screen bg-[#d3e4fe] relative overflow-hidden">
+          {/* Base Image - blurred */}
+          <img
+            src="/img/left-panel-logo.png"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-top scale-110 blur-xs opacity-90"
+          />
 
-  {/* Decorative blurred blobs for depth */}
-  <div className="absolute -top-16 -left-16 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
-  <div className="absolute bottom-0 -right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
+          {/* Decorative blurred blobs for depth */}
+          <div className="absolute -top-16 -left-16 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 -right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
 
-  {/* Top-left brand mark */}
-  <div className="absolute top-8 left-8 flex items-center gap-2 z-10">
-    <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg">
-      <FiFeather className="text-white text-xl" />
-    </div>
-    <span className="text-white font-semibold tracking-wide text-lg drop-shadow-sm">
-      PoultraScan AI
-    </span>
-  </div>
+          {/* Top-left brand mark */}
+          <div className="absolute top-8 left-8 flex items-center gap-2 z-10">
+            <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg">
+              <FiFeather className="text-white text-xl" />
+            </div>
+            <span className="text-white font-semibold tracking-wide text-lg drop-shadow-sm">
+              PoultraScan AI
+            </span>
+          </div>
 
-  {/* Bottom overlay text */}
-  <div className="absolute bottom-0 left-0 right-0 p-10 z-10 bg-gradient-to-t from-[#0b1c30]/70 via-[#0b1c30]/20 to-transparent">
-    <h2 className="text-white text-2xl font-semibold tracking-tight mb-2 drop-shadow-sm">
-      Smarter poultry health, in real time.
-    </h2>
-    <p className="text-white/80 text-sm max-w-sm">
-      AI-powered scans help you catch issues early and keep your flock thriving.
-    </p>
-  </div>
-</div>
+          {/* Bottom overlay text */}
+          <div className="absolute bottom-0 left-0 right-0 p-10 z-10 bg-gradient-to-t from-[#0b1c30]/70 via-[#0b1c30]/20 to-transparent">
+            <h2 className="text-white text-2xl font-semibold tracking-tight mb-2 drop-shadow-sm">
+              Smarter poultry health, in real time.
+            </h2>
+            <p className="text-white/80 text-sm max-w-sm">
+              AI-powered scans help you catch issues early and keep your flock thriving.
+            </p>
+          </div>
+        </div>
 
         {/* Right Side: Login Form (Optimized padding for all devices) */}
         <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-8 bg-[#f8f9ff] min-h-[100dvh]">
@@ -107,6 +129,18 @@ export default function Login() {
                 Log in to access your poultry health dashboard.
               </p>
             </div>
+
+            {/* Server waking up notice */}
+            {serverStatus === "waking" && (
+              <div className="text-sm text-[#00855d] bg-[#006948]/5 border border-[#006948]/20 rounded-lg px-4 py-2 text-center">
+                Connecting to server, this can take up to a minute if it's been idle...
+              </div>
+            )}
+            {serverStatus === "unreachable" && (
+              <div className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 text-center">
+                Having trouble reaching the server. Please wait a moment and try again.
+              </div>
+            )}
 
             {/* Form */}
             <form
@@ -207,7 +241,7 @@ export default function Login() {
                 {/* TODO: no forgot-password endpoint in backend yet */}
 
                 
-                 <a className="text-xs sm:text-sm text-[#006948] hover:text-[#00855d] font-medium transition-colors"
+                <a  className="text-xs sm:text-sm text-[#006948] hover:text-[#00855d] font-medium transition-colors"
                   href="/forgot-password"
                 >
                   Forgot Password?

@@ -51,3 +51,9 @@ export function resetPassword({ token, newPassword }) {
     body: JSON.stringify({ token, new_password: newPassword }),
   });
 }
+
+export function checkServerHealth() {
+  return apiRequest('/api/health', {
+    method: 'GET',
+  });
+}

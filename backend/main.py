@@ -46,3 +46,8 @@ app.include_router(chicken_image_router)
 app.include_router(detection_router)
 app.include_router(journal_entry_router)
 app.include_router(user_router)
+
+
+@app.get("/api/health")
+async def health_check():
+    return {"status": "ok"}
