@@ -5,3 +5,5 @@ export const SEVERITY_STYLES = {
   HIGH:    { bg: 'bg-[#FBEBEB]', text: 'text-[#B91C1C]', dot: 'bg-[#DC2626]', label: 'High' },
   UNKNOWN: { bg: 'bg-[#F7F8F5]', text: 'text-[#6B7280]', dot: 'bg-[#9CA3AF]', label: 'Unknown' },
 };
+
+
