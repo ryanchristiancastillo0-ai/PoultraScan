@@ -126,7 +126,7 @@ export default function Login() {
                     className={`text-lg sm:text-xl mr-2 sm:mr-3 flex-shrink-0 transition-colors duration-200 ${emailFocused ? "text-[#006948]" : "text-[#6d7a72]"}`}
                   />
                   <input
-                    className="w-full h-full bg-transparent border-0 p-0 pt-3 sm:pt-3.5 focus:ring-0 text-[#0b1c30] text-sm sm:text-base outline-none peer"
+                    className="w-full h-full bg-transparent border-0 p-0 pt-4 sm:pt-[18px] focus:ring-0 text-[#0b1c30] text-sm sm:text-base outline-none peer"
                     id="email"
                     name="email"
                     required
@@ -140,7 +140,7 @@ export default function Login() {
                     htmlFor="email"
                     className={`absolute left-11 sm:left-14 origin-left pointer-events-none transition-all duration-250 ease-[cubic-bezier(0.25,0.8,0.25,1)] ${
                       emailFloated
-                        ? "top-1.5 scale-[0.8] font-semibold text-[#006948]"
+                        ? "top-0.5 scale-[0.72] font-semibold text-[#006948]"
                         : "top-1/2 -translate-y-1/2 scale-100 text-sm sm:text-base text-[#8a958e]"
                     }`}
                   >
@@ -156,7 +156,7 @@ export default function Login() {
                     className={`text-lg sm:text-xl mr-2 sm:mr-3 flex-shrink-0 transition-colors duration-200 ${passwordFocused ? "text-[#006948]" : "text-[#6d7a72]"}`}
                   />
                   <input
-                    className="w-full h-full bg-transparent border-0 p-0 pt-3 sm:pt-3.5 focus:ring-0 text-[#0b1c30] text-sm sm:text-base outline-none peer"
+                    className="w-full h-full bg-transparent border-0 p-0 pt-4 sm:pt-[18px] focus:ring-0 text-[#0b1c30] text-sm sm:text-base outline-none peer"
                     id="password"
                     name="password"
                     required
@@ -170,7 +170,7 @@ export default function Login() {
                     htmlFor="password"
                     className={`absolute left-11 sm:left-14 origin-left pointer-events-none transition-all duration-250 ease-[cubic-bezier(0.25,0.8,0.25,1)] ${
                       passwordFloated
-                        ? "top-1.5 scale-[0.8] font-semibold text-[#006948]"
+                        ? "top-0.5 scale-[0.72] font-semibold text-[#006948]"
                         : "top-1/2 -translate-y-1/2 scale-100 text-sm sm:text-base text-[#8a958e]"
                     }`}
                   >
@@ -206,8 +206,8 @@ export default function Login() {
                 </label>
                 {/* TODO: no forgot-password endpoint in backend yet */}
 
-                <a
-                  className="text-xs sm:text-sm text-[#006948] hover:text-[#00855d] font-medium transition-colors"
+                
+                 <a className="text-xs sm:text-sm text-[#006948] hover:text-[#00855d] font-medium transition-colors"
                   href="/forgot-password"
                 >
                   Forgot Password?
@@ -268,8 +268,8 @@ export default function Login() {
             <div className="text-center">
               <p className="text-xs sm:text-base text-[#3d4a42]">
                 Don't have an account?{" "}
-                <a
-                  className="text-[#006948] hover:text-[#00855d] font-semibold transition-colors ml-1"
+                
+                 <a className="text-[#006948] hover:text-[#00855d] font-semibold transition-colors ml-1"
                   href="/register"
                 >
                   Register
