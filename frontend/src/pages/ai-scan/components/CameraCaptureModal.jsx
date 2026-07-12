@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { MdClose, MdCameraAlt } from 'react-icons/md';
+import { MdClose, MdCameraAlt, MdStayCurrentPortrait, MdStayCurrentLandscape } from 'react-icons/md';
 
 export default function CameraCaptureModal({ onCapture, onClose }) {
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const [error, setError] = useState(null);
   const [ready, setReady] = useState(false);
+  const [orientation, setOrientation] = useState('landscape'); // 'landscape' | 'portrait'
 
   useEffect(() => {
     let cancelled = false;
@@ -60,9 +61,15 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
     onClose();
   };
 
+  const toggleOrientation = () => {
+    setOrientation((prev) => (prev === 'landscape' ? 'portrait' : 'landscape'));
+  };
+
+  const isPortrait = orientation === 'portrait';
+
   return (
     <div className="fixed inset-0 z-[60] bg-[#0b1c30]/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="relative w-full max-w-2xl bg-[#0b1c30] rounded-2xl overflow-hidden shadow-2xl">
+      <div className="relative w-full max-w-3xl bg-[#0b1c30] rounded-2xl overflow-hidden shadow-2xl">
         <button
           onClick={handleClose}
           aria-label="Close camera"
@@ -71,27 +78,53 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
           <MdClose className="text-xl" />
         </button>
 
-        <div className="relative aspect-video bg-black flex items-center justify-center">
-          {error ? (
-            <p className="text-red-300 text-sm px-6 text-center">{error}</p>
+        <button
+          onClick={toggleOrientation}
+          aria-label="Toggle camera orientation"
+          className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-3 py-2 rounded-full bg-black/40 text-white text-xs font-semibold hover:bg-black/60 transition-all"
+        >
+          {isPortrait ? (
+            <MdStayCurrentLandscape className="text-lg" />
           ) : (
-            <video
-              ref={videoRef}
-              autoPlay
-              playsInline
-              muted
-              className="w-full h-full object-contain"
-            />
+            <MdStayCurrentPortrait className="text-lg" />
           )}
+          {isPortrait ? 'Landscape' : 'Portrait'}
+        </button>
+
+        {/*
+          Only this container changes size/aspect-ratio when toggling —
+          everything else (modal shell, button bar, backdrop) stays fixed.
+          Using a max-h so portrait mode doesn't blow past the viewport.
+        */}
+        <div className="flex items-center justify-center bg-black py-6 px-4 sm:px-6">
+          <div
+            className={`relative bg-black flex items-center justify-center transition-all duration-300 ease-out overflow-hidden rounded-xl ${
+              isPortrait
+                ? 'aspect-[3/4] h-[65vh] max-h-[600px] w-auto'
+                : 'aspect-video w-full max-h-[70vh]'
+            }`}
+          >
+            {error ? (
+              <p className="text-red-300 text-sm px-6 text-center">{error}</p>
+            ) : (
+              <video
+                ref={videoRef}
+                autoPlay
+                playsInline
+                muted
+                className="w-full h-full object-cover"
+              />
+            )}
+          </div>
         </div>
 
-        <div className="flex justify-center py-4 bg-[#0b1c30]">
+        <div className="flex justify-center py-5 bg-[#0b1c30]">
           <button
             onClick={handleSnap}
             disabled={!ready || !!error}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#006948] text-white text-sm font-semibold hover:bg-[#00855d] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#006948] text-white text-base font-semibold hover:bg-[#00855d] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <MdCameraAlt className="text-lg" />
+            <MdCameraAlt className="text-xl" />
             Take Photo
           </button>
         </div>
