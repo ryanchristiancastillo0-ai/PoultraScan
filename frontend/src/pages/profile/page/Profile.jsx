@@ -131,7 +131,7 @@ export default function Profile() {
   return (
     <div className="min-h-screen bg-[#F7F8F5] flex flex-col font-['Manrope','Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
       <TopNav />
-      <div className="lg:hidden">
+      <div className="md:hidden">
   <BottomNav />
 </div>
 

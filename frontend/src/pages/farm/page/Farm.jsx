@@ -63,7 +63,7 @@ export default function FarmDetails() {
      
   <TopNav />
 
-<div className="lg:hidden">
+<div className="md:hidden">
   <BottomNav />
 </div>
 

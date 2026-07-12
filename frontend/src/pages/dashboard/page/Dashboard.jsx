@@ -28,7 +28,7 @@ export default function Dashboard() {
   
   <TopNav />
 
-<div className="lg:hidden">
+<div className="md:hidden">
   <BottomNav />
 </div>
   

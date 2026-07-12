@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <div className="bg-[#F7F8F5] text-[#111827] antialiased min-h-screen flex flex-col font-['Manrope','Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
       <TopNav />
-      <div className="lg:hidden">
+      <div className="md:hidden">
   <BottomNav />
 </div>
 

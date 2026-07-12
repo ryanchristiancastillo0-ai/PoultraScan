@@ -38,7 +38,7 @@ export default function ScanHistory() {
   return (
     <div className="bg-[#F7F8F5] text-[#111827] antialiased min-h-screen flex flex-col font-sans">
       <TopNav />
-<div className="lg:hidden">
+<div className="md:hidden">
   <BottomNav />
 </div>
 

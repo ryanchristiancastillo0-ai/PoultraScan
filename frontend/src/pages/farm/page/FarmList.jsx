@@ -49,7 +49,7 @@ export default function FarmsList() {
           
   <TopNav />
 
-<div className="lg:hidden">
+<div className="md:hidden">
   <BottomNav />
 </div>
   

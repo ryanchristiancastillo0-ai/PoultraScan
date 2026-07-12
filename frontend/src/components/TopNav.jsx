@@ -45,7 +45,7 @@ function TopNav() {
           <span className="w-8 h-8 rounded-lg bg-[#2F5D3A] flex items-center justify-center text-white">
             <MdBiotech className="text-lg" />
           </span>
-          <span className="text-[17px] font-bold text-[#111827] tracking-tight">PoultraScan AI</span>
+          <span className="hidden lg:inline text-[17px] font-bold text-[#111827] tracking-tight">PoultraScan AI</span>
         </div>
 
         <nav className="hidden md:flex gap-8 items-center h-full">

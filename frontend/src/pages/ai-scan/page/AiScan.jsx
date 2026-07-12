@@ -36,6 +36,7 @@ export default function AiScan() {
   const [errorMsg, setErrorMsg] = useState(null);
   const [showFarmModal, setShowFarmModal] = useState(false);
   const [cameraOpen, setCameraOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const uploadInputRef = useRef(null);
 
@@ -46,6 +47,11 @@ export default function AiScan() {
   const isProcessing = detectionLoading || predictionLoading;
 
   const runFullScan = async (file, scanType) => {
+    if (!farmId) {
+      setShowFarmModal(true);
+      return;
+    }
+
     setErrorMsg(null);
     const blobPreview = URL.createObjectURL(file);
     setPreviewUrl(blobPreview);
@@ -86,8 +92,21 @@ export default function AiScan() {
     e.target.value = '';
   };
 
-  const handleUpload = () => uploadInputRef.current?.click();
-  const handleCapture = () => setCameraOpen(true);
+  const handleUpload = () => {
+    if (!farmId) {
+      setShowFarmModal(true);
+      return;
+    }
+    uploadInputRef.current?.click();
+  };
+
+  const handleCapture = () => {
+    if (!farmId) {
+      setShowFarmModal(true);
+      return;
+    }
+    setCameraOpen(true);
+  };
 
   const handleCameraCapture = (file) => {
     setCameraOpen(false);
@@ -108,7 +127,7 @@ export default function AiScan() {
     <div className="min-h-screen bg-[#F7F8F5] font-sans">
       <TopNav onMenuClick={() => setMobileNavOpen(true)} />
 
-        <div className="lg:hidden">
+        <div className="md:hidden">
   <BottomNav />
 </div>
 

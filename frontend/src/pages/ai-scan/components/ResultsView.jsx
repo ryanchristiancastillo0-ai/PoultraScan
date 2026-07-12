@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect, useCallback } from 'react';
 import {
   MdCheckCircle,
   MdRefresh,
@@ -14,33 +15,103 @@ export default function ResultsView({ onScanAgain, onSave, detectionData, predic
   const totalOilMl = predictionData?.total_oil_ml ?? 0;
   const marketReadyCount = predictionData?.market_ready_count ?? 0;
 
+  const containerRef = useRef(null);
+  const imgRef = useRef(null);
+  // Rendered rect of the actual picture content inside the img element
+  // (accounting for object-contain letterboxing), plus the scale factor
+  // from the image's natural pixel size to its displayed size.
+  const [renderInfo, setRenderInfo] = useState(null);
+
+  const recalcRenderInfo = useCallback(() => {
+    const container = containerRef.current;
+    const img = imgRef.current;
+    if (!container || !img || !img.naturalWidth || !img.naturalHeight) return;
+
+    const containerW = container.clientWidth;
+    const containerH = container.clientHeight;
+    const naturalW = img.naturalWidth;
+    const naturalH = img.naturalHeight;
+    const imgAspect = naturalW / naturalH;
+    const containerAspect = containerW / containerH;
+
+    let renderW, renderH, offsetX, offsetY;
+
+    if (imgAspect > containerAspect) {
+      // Image is wider than container -> letterboxed top/bottom
+      renderW = containerW;
+      renderH = containerW / imgAspect;
+      offsetX = 0;
+      offsetY = (containerH - renderH) / 2;
+    } else {
+      // Image is taller than container -> letterboxed left/right
+      renderH = containerH;
+      renderW = containerH * imgAspect;
+      offsetY = 0;
+      offsetX = (containerW - renderW) / 2;
+    }
+
+    setRenderInfo({
+      offsetX,
+      offsetY,
+      // How much to multiply original-image pixel coords by to get
+      // displayed pixel coords.
+      scaleX: renderW / naturalW,
+      scaleY: renderH / naturalH,
+    });
+  }, []);
+
+  useEffect(() => {
+    recalcRenderInfo();
+    window.addEventListener('resize', recalcRenderInfo);
+    return () => window.removeEventListener('resize', recalcRenderInfo);
+  }, [recalcRenderInfo, previewUrl]);
 
   return (
     <div className="w-full max-w-6xl mx-auto">
       {/* Preview with detection boxes */}
-      <div className="relative rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm bg-[#111827]">
+      <div
+        ref={containerRef}
+        className="relative rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm bg-[#111827] h-[400px]"
+      >
         {previewUrl && (
-          <img src={previewUrl} alt="Scan result" className="w-full max-h-[400px] object-contain" />
+          <img
+            ref={imgRef}
+            src={previewUrl}
+            alt="Scan result"
+            className="w-full h-full object-contain"
+            onLoad={recalcRenderInfo}
+          />
         )}
-        {detections.map((d, i) => {
-  const box = d.bounding_box ?? d;
-  return (
-    <div
-      key={d.tracking_id ?? i}
-      className="absolute border-2 border-[#4ADE80] rounded pointer-events-none"
-      style={{
-        left: `${(box.x ?? 0) / 10}%`,
-        top: `${(box.y ?? 0) / 10}%`,
-        width: `${(box.width ?? 0) / 10}%`,
-        height: `${(box.height ?? 0) / 10}%`,
-      }}
-    >
-      <span className="absolute -top-5 left-0 bg-[#4ADE80] text-[#111827] text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
-        #{d.tracking_id ?? i + 1}
-      </span>
-    </div>
-  );
-})}
+        {renderInfo && detections.map((d, i) => {
+          const box = d.bounding_box ?? d;
+          // Backend sends x/y as the CENTER point and width/height, all
+          // in the ORIGINAL image's pixel space (not normalized, not
+          // top-left). Convert to top-left, then scale to displayed size.
+          const boxWidth = (box.width ?? 0) * renderInfo.scaleX;
+          const boxHeight = (box.height ?? 0) * renderInfo.scaleY;
+          const centerX = (box.x ?? 0) * renderInfo.scaleX;
+          const centerY = (box.y ?? 0) * renderInfo.scaleY;
+
+          const left = renderInfo.offsetX + centerX - boxWidth / 2;
+          const top = renderInfo.offsetY + centerY - boxHeight / 2;
+
+          return (
+            <div
+              key={d.tracking_id ?? i}
+              className="absolute border-2 border-[#4ADE80] rounded pointer-events-none"
+              style={{
+                left: `${left}px`,
+                top: `${top}px`,
+                width: `${boxWidth}px`,
+                height: `${boxHeight}px`,
+              }}
+            >
+              <span className="absolute -top-5 left-0 bg-[#4ADE80] text-[#111827] text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
+                #{d.tracking_id ?? i + 1}
+              </span>
+            </div>
+          );
+        })}
         <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#2F5D3A] text-white">
           <MdCheckCircle className="text-sm" />
           <span className="text-[10px] font-bold uppercase tracking-wider">

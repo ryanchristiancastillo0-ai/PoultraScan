@@ -43,7 +43,7 @@ export default function Journal() {
   return (
     <div className="bg-[#f8f9ff] min-h-screen">
       <TopNav />
-      <div className="lg:hidden">
+      <div className="md:hidden">
   <BottomNav />
 </div>
 
