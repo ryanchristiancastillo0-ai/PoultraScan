@@ -16,6 +16,7 @@ export default function ScanSummary({ recentScans }) {
     FAILED: { bg: '#FEF2F2', text: '#DC2626', label: 'Failed' },
   };
 
+
   const formatDate = (value) => {
     if (!value) return '—';
     return new Date(value).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
@@ -51,7 +52,7 @@ export default function ScanSummary({ recentScans }) {
               <li key={scan.summary_id} className="px-6 py-4 flex items-center gap-4 hover:bg-[#F7F8F5] transition-colors">
                 <div className="w-11 h-11 rounded-lg overflow-hidden flex-shrink-0 bg-[#F7F8F5] border border-[#E5E7EB] flex items-center justify-center">
                   {scan.thumbnail_url ? (
-                    <img src={`${BASE_URL}${scan.thumbnail_url}`} alt="" className="w-full h-full object-cover" />
+                    <img onClick={()=> console.log(scan)} src={`${BASE_URL}${scan.thumbnail_url}`} alt="" className="w-full h-full object-cover" />
                   ) : (
                     <MdAgriculture className="text-[#6B7280] text-lg" />
                   )}
