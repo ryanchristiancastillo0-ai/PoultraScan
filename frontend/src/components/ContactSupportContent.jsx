@@ -1,3 +1,4 @@
+import {MdEmail} from 'react-icons/md'
 export default function ContactSupportContent() {
     const SUPPORT_EMAIL = 'louigiecastillo1009@gmail.com';
   return (

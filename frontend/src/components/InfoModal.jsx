@@ -1,3 +1,4 @@
+import {MdClose} from 'react-icons/md'
 export default function InfoModal({ isOpen, onClose, title, children }) {
   if (!isOpen) return null;
 
