@@ -1,6 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
-import { MdNotifications, MdClose, MdDoneAll, MdNotificationsNone } from 'react-icons/md';
+import {
+  MdNotifications,
+  MdClose,
+  MdDoneAll,
+  MdNotificationsNone,
+  MdExpandMore,
+  MdExpandLess,
+} from 'react-icons/md';
 import { useNotifications } from '../hooks/useNotification';
+
+const VISIBLE_LIMIT = 5;
 
 function timeAgo(value) {
   if (!value) return '';
@@ -16,6 +25,7 @@ function timeAgo(value) {
 
 export default function NotificationsMenu() {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const containerRef = useRef(null);
   const { notifications, unreadCount, loading, error, markAsRead, markAllAsRead } = useNotifications();
 
@@ -28,6 +38,13 @@ export default function NotificationsMenu() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (!open) setExpanded(false);
+  }, [open]);
+
+  const visibleNotifications = expanded ? notifications : notifications.slice(0, VISIBLE_LIMIT);
+  const hasMore = notifications.length > VISIBLE_LIMIT;
 
   return (
     <>
@@ -90,7 +107,7 @@ export default function NotificationsMenu() {
 
               {!loading &&
                 !error &&
-                notifications.map((n) => (
+                visibleNotifications.map((n) => (
                   <button
                     key={n.id}
                     onClick={() => markAsRead(n.id)}
@@ -114,6 +131,25 @@ export default function NotificationsMenu() {
                     </div>
                   </button>
                 ))}
+
+              {!loading && !error && hasMore && (
+                <button
+                  onClick={() => setExpanded((prev) => !prev)}
+                  className="flex w-full items-center justify-center gap-1.5 border-b border-[#f0f2fa] py-2.5 text-xs font-semibold text-[#006948] transition-all hover:bg-[#f0f9f5]"
+                >
+                  {expanded ? (
+                    <>
+                      <MdExpandLess className="text-sm" />
+                      <span className="hidden sm:inline">Show less</span>
+                    </>
+                  ) : (
+                    <>
+                      <MdExpandMore className="text-sm" />
+                      <span className="hidden sm:inline">Show more</span>
+                    </>
+                  )}
+                </button>
+              )}
             </div>
 
             {/* Footer */}
