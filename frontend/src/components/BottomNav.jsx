@@ -62,7 +62,7 @@ export default function BottomNav() {
           }`}
         >
           <Icon
-            className={`text-[18px] transition-colors duration-200 ${
+            className={`text-[20px] transition-colors duration-200 ${
               active ? 'text-[#2F5D3A]' : 'text-[#9CA3AF] group-active:text-[#6B7280]'
             }`}
           />

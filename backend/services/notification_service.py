@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 
@@ -24,9 +26,14 @@ class NotificationService:
 
     @staticmethod
     def find_by_user_id(db: Session, user_id: int, skip: int = 0, limit: int = 100) -> list[Notification]:
+        today_start = datetime.combine(datetime.now().date(), datetime.min.time())
+        today_end = today_start + timedelta(days=1)
+
         return (
             db.query(Notification)
             .filter(Notification.user_id == user_id)
+            .filter(Notification.created_at >= today_start)
+            .filter(Notification.created_at < today_end)
             .order_by(Notification.created_at.desc())
             .offset(skip)
             .limit(limit)

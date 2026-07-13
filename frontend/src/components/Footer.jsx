@@ -2,11 +2,6 @@ import { useState } from 'react';
 import { MdClose, MdEmail } from 'react-icons/md';
 
 import { FeedbackModal,ContactSupportContent,InfoModal,PrivacyPolicyContent,TermsOfServiceContent } from './index'
-
-
-
-
-// ---------- Footer ----------
 export default function Footer() {
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [activeInfo, setActiveInfo] = useState(null); // null | 'privacy' | 'terms' | 'support'

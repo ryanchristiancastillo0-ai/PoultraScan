@@ -6,24 +6,8 @@ import {
 } from 'react-icons/md';
 import { useProfile } from '../pages/profile/hooks/useProfile';
 import { ProfileAPI } from '../pages/profile/api/profileApi';
-
-const API_BASE = `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}`; 
-
-function resolveAvatarSrc(avatarUrl) {
-  if (!avatarUrl) return null;
-  if (avatarUrl.startsWith('http') || avatarUrl.startsWith('blob:')) return avatarUrl;
-  return `${API_BASE}${avatarUrl}`;
-}
-
-function getInitials(fullname) {
-  if (!fullname) return '?';
-  return fullname
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase())
-    .join('');
-}
+import {resolveAvatarSrc} from '../utils/AvatarSrc'
+import {getInitials} from '../utils/getInitials'
 
 // Small avatar used in the trigger button and dropdown header.
 // Falls back to initials on a colored circle when there's no avatar_url.

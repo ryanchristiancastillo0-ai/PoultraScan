@@ -1,6 +1,6 @@
-
-import { MdCameraAlt,} from 'react-icons/md';
-import {resolveAvatarSrc} from '../../../utils/AvatarSrc'
+import { MdCameraAlt } from 'react-icons/md';
+import { resolveAvatarSrc } from '../../../utils/AvatarSrc';
+import { AVATAR_ICONS, isIconAvatar, getIconKey } from '../../../utils/avatarIcons';
 
 export default function Avatar({ fullname, avatarUrl, size = 'w-24 h-24', onClick, uploading }) {
   const initials = fullname
@@ -12,7 +12,10 @@ export default function Avatar({ fullname, avatarUrl, size = 'w-24 h-24', onClic
         .join('')
     : '?';
 
-  const src = resolveAvatarSrc(avatarUrl);
+  const isIcon = isIconAvatar(avatarUrl);
+  const iconKey = getIconKey(avatarUrl);
+  const IconEntry = isIcon ? AVATAR_ICONS[iconKey] : null;
+  const src = !isIcon ? resolveAvatarSrc(avatarUrl) : null;
 
   return (
     <button
@@ -21,12 +24,16 @@ export default function Avatar({ fullname, avatarUrl, size = 'w-24 h-24', onClic
       disabled={!onClick}
       className={`${size} rounded-full bg-[#EAF2EC] text-[#2F5D3A] flex items-center justify-center text-2xl font-semibold flex-shrink-0 ring-4 ring-white shadow-sm overflow-hidden relative ${onClick ? 'cursor-pointer' : 'cursor-default'}`}
     >
-      {src ? (
+      {IconEntry ? (
+        <IconEntry.Icon className="w-[70%] h-[70%]" />
+      ) : src ? (
         <img
           src={src}
           alt={fullname || 'Profile'}
           className="w-full h-full object-cover"
-          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
         />
       ) : (
         initials

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   MdPerson,
@@ -10,14 +10,13 @@ import {
   MdLogout,
   MdCheckCircle,
   MdErrorOutline,
-
 } from 'react-icons/md';
 
 import { useProfile } from '../hooks/useProfile';
 import { ProfileAPI } from '../api/profileApi';
-import { TopNav, Footer,BottomNav } from '../../../components/index';
+import { TopNav, Footer, BottomNav } from '../../../components/index';
 
-import {Avatar,AvatarModal,InfoRow} from '../components/index'
+import { Avatar, AvatarModal, InfoRow } from '../components/index';
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -29,24 +28,15 @@ export default function Profile() {
   const [loggingOut, setLoggingOut] = useState(false);
 
   // Avatar modal state
-  const [pendingFile, setPendingFile] = useState(null);
-  const [pendingPreviewUrl, setPendingPreviewUrl] = useState(null);
+  const [avatarModalOpen, setAvatarModalOpen] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [avatarError, setAvatarError] = useState('');
-
-  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (user) {
       setForm({ fullname: user.fullname || '', email: user.email || '' });
     }
   }, [user]);
-
-  useEffect(() => {
-    return () => {
-      if (pendingPreviewUrl) URL.revokeObjectURL(pendingPreviewUrl);
-    };
-  }, [pendingPreviewUrl]);
 
   const formatDate = (value) => {
     if (!value) return '—';
@@ -80,38 +70,41 @@ export default function Profile() {
     }
   };
 
-  const handleAvatarClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFilePicked = (e) => {
-    const file = e.target.files?.[0];
-    e.target.value = '';
-    if (!file) return;
-
+  const openAvatarModal = () => {
     setAvatarError('');
-    setPendingFile(file);
-    setPendingPreviewUrl(URL.createObjectURL(file));
+    setAvatarModalOpen(true);
   };
 
   const closeAvatarModal = () => {
-    if (pendingPreviewUrl) URL.revokeObjectURL(pendingPreviewUrl);
-    setPendingFile(null);
-    setPendingPreviewUrl(null);
+    setAvatarModalOpen(false);
     setAvatarError('');
   };
 
-  const handleConfirmAvatarSave = async () => {
-    if (!pendingFile || !user?.id) return;
-
+  const handleSaveAvatarFile = async (file) => {
+    if (!user?.id) return;
     setUploadingAvatar(true);
     setAvatarError('');
     try {
-      await ProfileAPI.uploadAvatar(user.id, pendingFile);
+      await ProfileAPI.uploadAvatar(user.id, file);
       await refetch();
       closeAvatarModal();
     } catch (err) {
       setAvatarError(err.message || 'Failed to upload image.');
+    } finally {
+      setUploadingAvatar(false);
+    }
+  };
+
+  const handleSaveAvatarIcon = async (iconKey) => {
+    if (!user?.id) return;
+    setUploadingAvatar(true);
+    setAvatarError('');
+    try {
+      await ProfileAPI.updateProfile(user.id, { avatar_url: `icon:${iconKey}` });
+      await refetch();
+      closeAvatarModal();
+    } catch (err) {
+      setAvatarError(err.message || 'Failed to save icon.');
     } finally {
       setUploadingAvatar(false);
     }
@@ -132,8 +125,8 @@ export default function Profile() {
     <div className="min-h-screen bg-[#F7F8F5] flex flex-col font-['Manrope','Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
       <TopNav />
       <div className="md:hidden">
-  <BottomNav />
-</div>
+        <BottomNav />
+      </div>
 
       <main className="flex-grow pt-24 pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
@@ -168,20 +161,13 @@ export default function Profile() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             {/* Left: Avatar / summary card */}
             <div className="md:col-span-4 bg-white rounded-xl p-6 border border-[#E5E7EB] shadow-sm flex flex-col items-center text-center">
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/png, image/jpeg, image/webp"
-                className="hidden"
-                onChange={handleFilePicked}
-              />
               <Avatar
                 fullname={user.fullname}
                 avatarUrl={user.avatar_url}
-                onClick={handleAvatarClick}
+                onClick={openAvatarModal}
               />
               <button
-                onClick={handleAvatarClick}
+                onClick={openAvatarModal}
                 className="text-xs font-medium text-[#2F5D3A] hover:text-[#254A2E] mt-3 transition-colors"
               >
                 Change photo
@@ -293,10 +279,11 @@ export default function Profile() {
         )}
       </main>
 
-      {pendingPreviewUrl && (
+      {avatarModalOpen && (
         <AvatarModal
-          previewUrl={pendingPreviewUrl}
-          onSave={handleConfirmAvatarSave}
+          currentAvatarUrl={user?.avatar_url}
+          onSaveFile={handleSaveAvatarFile}
+          onSaveIcon={handleSaveAvatarIcon}
           onCancel={closeAvatarModal}
           saving={uploadingAvatar}
           error={avatarError}

@@ -9,7 +9,7 @@ import {
 import { useJournal } from '../hooks/useJournal';
 import { TopNav, BottomNav } from '../../../components/index';
 
-import {EntryCard,EntryFormModal} from '../components/index'
+import { EntryCard, EntryFormModal } from '../components/index';
 
 export default function Journal() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -42,27 +42,42 @@ export default function Journal() {
 
   return (
     <div className="bg-[#f8f9ff] min-h-screen">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
+        .font-journal { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; }
+        @keyframes journalFadeUp {
+          from { opacity: 0; transform: translateY(6px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .journal-entry { animation: journalFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        @media (prefers-reduced-motion: reduce) {
+          .journal-entry { animation: none; }
+        }
+      `}</style>
+
       <TopNav />
       <div className="md:hidden">
-  <BottomNav />
-</div>
+        <BottomNav />
+      </div>
 
-      <main className="pt-24 pb-16 px-4 md:px-8 max-w-5xl mx-auto">
+      <main className="pt-24 pb-16 px-4 md:px-8 max-w-3xl mx-auto">
         {/* Header */}
-        <div className="mb-8 flex items-start gap-4">
+        <div className="mb-9 flex items-start gap-4">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#006948] to-[#00855d] flex items-center justify-center shadow-[0_8px_20px_rgba(0,105,72,0.25)] flex-shrink-0">
             <MdOutlineBook className="text-white text-xl" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-[28px] font-bold text-[#0b1c30] tracking-tight">Journal</h1>
-            <p className="text-sm text-[#565e74] mt-1">
+            <h1 className="font-journal text-[28px] sm:text-[32px] font-semibold text-[#0b1c30] tracking-tight leading-none">
+              Journal
+            </h1>
+            <p className="text-sm text-[#565e74] mt-2">
               Record observations, decisions, and insights from your farm.
             </p>
           </div>
         </div>
 
         {/* Toolbar */}
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#e5eeff]">
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#e5eeff]">
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center justify-center min-w-[1.5rem] h-6 px-2 rounded-full bg-[#006948]/10 text-xs font-bold text-[#006948]">
               {entries.length}
@@ -98,7 +113,7 @@ export default function Journal() {
               <MdOutlineNotes className="text-3xl text-[#006948]" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-bold text-[#0b1c30]">No entries yet</p>
+              <p className="font-journal text-base font-semibold text-[#0b1c30]">No entries yet</p>
               <p className="text-sm text-[#8a958e] mt-1">Start documenting your farm observations.</p>
             </div>
             <button
@@ -110,10 +125,20 @@ export default function Journal() {
             </button>
           </div>
         ) : (
-          <div className="space-y-3">
-            {entries.map((entry) => (
-              <EntryCard key={entry.id} entry={entry} onEdit={openEditModal} onDelete={removeEntry} />
-            ))}
+          <div className="relative pl-14 sm:pl-[72px]">
+            {/* Timeline spine */}
+            <div className="absolute left-[21px] sm:left-[27px] top-2 bottom-2 w-px bg-gradient-to-b from-[#006948]/25 via-[#e5eeff] to-transparent" />
+            <div className="space-y-4">
+              {entries.map((entry, index) => (
+                <div
+                  key={entry.id}
+                  className="journal-entry relative"
+                  style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
+                >
+                  <EntryCard entry={entry} onEdit={openEditModal} onDelete={removeEntry} />
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </main>
