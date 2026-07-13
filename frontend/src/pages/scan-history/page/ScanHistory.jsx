@@ -42,7 +42,7 @@ export default function ScanHistory() {
   <BottomNav />
 </div>
 
-      <main className="flex-grow pt-20 sm:pt-24 pb-10 px-4 md:px-8 max-w-[1280px] mx-auto w-full">
+      <main className="flex-grow pt-20 sm:pt-24 pb-10 px-4 md:px-8 max-w-[1280px] mx-auto w-full mb-8 md:mb-0">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
           <div>
             <h1 className="text-xl sm:text-2xl md:text-[28px] font-bold text-[#111827] tracking-tight text-balance">Scan History</h1>

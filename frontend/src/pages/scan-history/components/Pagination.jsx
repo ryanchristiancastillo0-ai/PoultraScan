@@ -5,7 +5,7 @@ import {
 
 export default function Pagination({ page, hasMore, onPrev, onNext, count }) {
   return (
-    <div className="mt-5 pt-4 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div className="mt-5  pt-4 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-3">
       <span className="text-[#9CA3AF] text-xs">Page {page} • {count} results</span>
       <div className="flex items-center gap-1.5">
         <button
