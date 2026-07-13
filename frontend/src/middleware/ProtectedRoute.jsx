@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../middleware/AuthContext';
-
+import {LoadingScreen} from '../components/index'
 export default function ProtectedRoute() {
   const { user, initializing, fetchCurrentUser } = useAuth();
   const location = useLocation();
@@ -12,7 +12,7 @@ export default function ProtectedRoute() {
   }, [fetchCurrentUser]);
 
   if (initializing) {
-    return <div className="min-h-[100dvh] flex items-center justify-center text-[#3d4a42]">Loading...</div>;
+    return <div className="min-h-[100dvh] flex items-center justify-center text-[#3d4a42]"><LoadingScreen/></div>;
   }
 
   if (!user) {
