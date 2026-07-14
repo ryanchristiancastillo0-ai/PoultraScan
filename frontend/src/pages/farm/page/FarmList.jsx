@@ -63,7 +63,16 @@ export default function FarmsList() {
         </div>
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+     <div className="relative overflow-hidden rounded-2xl mb-6 border border-[#E5E7EB]">
+        {/* blurred background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center scale-110 blur-md opacity-20"
+          style={{ backgroundImage: `url('/farm-banner.jpg')` }}
+        />
+        {/* soft tint so text stays readable over any image */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/70" />
+
+        <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-6">
           <div>
             <h1 className="text-2xl md:text-[28px] font-bold text-[#111827] tracking-tight">My Farms</h1>
             <p className="text-[#6B7280] text-sm mt-1.5">
@@ -79,12 +88,13 @@ export default function FarmsList() {
           </div>
           <button
             onClick={() => setAddOpen(true)}
-            className="bg-[#2F5D3A] text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#274d31] transition-colors active:scale-[0.98] w-full sm:w-auto justify-center"
+            className="bg-[#2F5D3A] text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#274d31] transition-colors active:scale-[0.98] w-full sm:w-auto justify-center shadow-sm"
           >
             <MdAdd className="text-lg" />
             Add New Farm
           </button>
         </div>
+      </div>
 
         {/* Metric pills */}
         <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 mb-8">

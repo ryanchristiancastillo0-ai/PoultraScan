@@ -50,7 +50,7 @@ export default function FarmDetails() {
     setDeleteError(null);
     try {
       await deleteFarm(farm.id);
-      navigate('/farms');
+      navigate('/farm');
     } catch (err) {
       setDeleteError(err.message || 'Failed to delete farm. Please try again.');
     } finally {

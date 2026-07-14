@@ -4,6 +4,8 @@ import {
   MdGridView,
 } from 'react-icons/md';
 
+import {thumbnailSrc} from '../../../utils/thumbnailSrc'
+
 export default function FarmInfoCard({ farmName, location, capacity, imageUrl }) {
   const details = [
     { icon: MdLocationOn, label: 'Location', value: location || '—' },
@@ -18,7 +20,7 @@ export default function FarmInfoCard({ farmName, location, capacity, imageUrl })
     <div className="lg:col-span-8 bg-white rounded-xl border border-[#E5E7EB] shadow-sm overflow-hidden flex flex-col sm:flex-row">
       <div className="w-full sm:w-2/5 aspect-[4/3] sm:aspect-auto relative flex-shrink-0 bg-[#EEF3EF]">
        {imageUrl ? (
-  <img alt="" className="w-full h-full object-cover" src={`${BASE_URL}${imageUrl}`} />
+  <img alt="" className="w-full h-full object-cover" src={`${thumbnailSrc(imageUrl)}`} />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#2F5D3A]" fill="none" xmlns="http://www.w3.org/2000/svg">
