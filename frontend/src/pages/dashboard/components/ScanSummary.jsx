@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdCenterFocusStrong, MdAgriculture, MdChevronRight,  MdArrowForward,} from 'react-icons/md';
 
-
-import { BASE_URL } from '../../../api/apiClient';
-
-
+import { thumbnailSrc } from '../../../utils/thumbnailSrc';
 
 export default function ScanSummary({ recentScans }) {
   const navigate = useNavigate();
@@ -52,7 +49,7 @@ export default function ScanSummary({ recentScans }) {
               <li key={scan.summary_id} className="px-6 py-4 flex items-center gap-4 hover:bg-[#F7F8F5] transition-colors">
                 <div className="w-11 h-11 rounded-lg overflow-hidden flex-shrink-0 bg-[#F7F8F5] border border-[#E5E7EB] flex items-center justify-center">
                   {scan.thumbnail_url ? (
-                    <img onClick={()=> console.log(scan)} src={`${BASE_URL}${scan.thumbnail_url}`} alt="" className="w-full h-full object-cover" />
+                    <img onClick={()=> console.log(scan)} src={thumbnailSrc(scan.thumbnail_url)} alt="" className="w-full h-full object-cover" />
                   ) : (
                     <MdAgriculture className="text-[#6B7280] text-lg" />
                   )}
