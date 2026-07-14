@@ -12,7 +12,6 @@ export default defineConfig({
       registerType: "autoUpdate",
       injectRegister: "auto",
 
-  
       manifest: {
         name: "Poultry Scanner",
         short_name: "Poultry",
@@ -45,13 +44,32 @@ export default defineConfig({
       },
 
       workbox: {
-          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true,
+
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB
 
         globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg,jpeg,webp}"],
 
         runtimeCaching: [
           {
-            urlPattern: ({ request }) => request.destination === "image",
+            // Cloudinary/cross-origin images: always try network first so
+            // updated/replaced images don't get stuck on a broken cached entry
+            urlPattern: ({ url }) => url.origin === "https://res.cloudinary.com",
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "cloudinary-images",
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
+              },
+            },
+          },
+          {
+            // Your own static/local images: fine to cache-first
+            urlPattern: ({ request, url }) =>
+              request.destination === "image" && url.origin === self.location.origin,
             handler: "CacheFirst",
             options: {
               cacheName: "images",

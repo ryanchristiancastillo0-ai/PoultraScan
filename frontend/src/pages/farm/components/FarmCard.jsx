@@ -1,7 +1,6 @@
-
 import { MdLocationOn,MdArrowForward,MdCheckCircle,MdRadioButtonUnchecked,} from 'react-icons/md';
 
-import {BASE_URL} from '../../../api/apiClient'
+import { thumbnailSrc } from '../../../utils/thumbnailSrc'
 
 export default function FarmCard({ farm, isActive, onSelectActive, onOpenDetails }) {
   return (
@@ -19,7 +18,7 @@ export default function FarmCard({ farm, isActive, onSelectActive, onOpenDetails
   <img
     alt=""
     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-    src={`${BASE_URL}${farm.image_url}`}
+    src={thumbnailSrc(farm.image_url)}
   />
         ) : (
          <div className="w-full h-full flex items-center justify-center">

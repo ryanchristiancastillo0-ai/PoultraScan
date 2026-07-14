@@ -6,7 +6,16 @@ import App from './App.jsx'
 import { AuthProvider } from './middleware/AuthContext.jsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { registerSW } from "virtual:pwa-register";
-registerSW({ immediate: true });
+
+registerSW({
+  immediate: true,
+  onNeedRefresh() {
+    window.location.reload()
+  },
+  onOfflineReady() {
+    console.log('App ready to work offline')
+  },
+})
 
 createRoot(document.getElementById('root')).render(
   

@@ -1,5 +1,6 @@
 import secrets
 import string
+import io
 from datetime import datetime, timedelta, timezone
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
@@ -8,12 +9,10 @@ from models.user import User
 from schemas.user_schema import RegisterUserSchema, UpdateUserSchema
 from utils.security import hash_password, verify_password
 from utils.jwt_handler import create_access_token
-import os
-import uuid
 from fastapi import UploadFile
 from utils.image_compression import compress_image
-
-AVATAR_UPLOAD_DIR = "static/uploads/avatars"
+from utils.cloudinary_upload import cloudinary  # reuse existing cloudinary.config() setup
+import cloudinary.uploader
 
 MAX_AVATAR_SIZE = 5 * 1024 * 1024      # 5MB — real limit, checked AFTER compression
 RAW_UPLOAD_CAP = 25 * 1024 * 1024      # 25MB — just blocks absurd uploads before wasting CPU compressing them
@@ -49,15 +48,19 @@ class UserService:
                 detail="Image still too large after compression."
             )
 
-        os.makedirs(AVATAR_UPLOAD_DIR, exist_ok=True)
+        try:
+            result = cloudinary.uploader.upload(
+                io.BytesIO(compressed_bytes),
+                folder="poultrascan/avatars",
+                resource_type="image",
+            )
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_502_BAD_GATEWAY,
+                detail="Failed to upload avatar to Cloudinary."
+            )
 
-        filename = f"{uuid.uuid4().hex}.{ext}"
-        filepath = os.path.join(AVATAR_UPLOAD_DIR, filename)
-
-        with open(filepath, "wb") as f:
-            f.write(compressed_bytes)
-
-        user.avatar_url = f"/static/uploads/avatars/{filename}"
+        user.avatar_url = result["secure_url"]
         db.commit()
         db.refresh(user)
         return user
