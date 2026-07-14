@@ -5,42 +5,15 @@ import { useActiveFarm } from '../context/activeFarmContext';
 import { QuickScanModal } from './index';
 import { navLinks, navLinksRight } from '../constant/navList';
 
-const ACTIVE_BOTTOM_NAV_KEY = 'poultrascan_active_bottom_nav';
-
-const allLinks = [...navLinks, ...navLinksRight];
-
-function getStoredActive() {
-  try {
-    const stored = localStorage.getItem(ACTIVE_BOTTOM_NAV_KEY);
-    return allLinks.some((l) => l.key === stored) ? stored : null;
-  } catch (err) {
-    console.error('Failed to read active bottom nav:', err);
-    return null;
-  }
-}
-
 export default function BottomNav() {
   const navigate = useNavigate();
   const location = useLocation();
   const { activeFarmId } = useActiveFarm();
   const [quickScanOpen, setQuickScanOpen] = useState(false);
-  const [storedActive, setStoredActive] = useState(getStoredActive);
 
-  const isActive = (link) => {
-    if (location.pathname.startsWith(link.path)) return true;
-    if (storedActive === link.key && !allLinks.some((l) => location.pathname.startsWith(l.path))) {
-      return true;
-    }
-    return false;
-  };
+  const isActive = (link) => location.pathname.startsWith(link.path);
 
   const handleNavClick = (link) => {
-    setStoredActive(link.key);
-    try {
-      localStorage.setItem(ACTIVE_BOTTOM_NAV_KEY, link.key);
-    } catch (err) {
-      console.error('Failed to save active bottom nav:', err);
-    }
     navigate(link.path);
   };
 

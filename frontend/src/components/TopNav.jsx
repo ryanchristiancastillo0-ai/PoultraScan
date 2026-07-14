@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { MdBiotech } from 'react-icons/md';
 import { NotificationsMenu, ProfileMenu } from './index';
@@ -11,31 +10,21 @@ const navLinks = [
   { label: 'Journal', path: '/journal' },
 ];
 
-const ACTIVE_NAV_KEY = 'poultrascan_active_nav';
-
-function getStoredActive() {
-  try {
-    const stored = localStorage.getItem(ACTIVE_NAV_KEY);
-    // guard against a stale label from an old build that no longer exists in navLinks
-    return navLinks.some((l) => l.label === stored) ? stored : 'Dashboard';
-  } catch (err) {
-    console.error('Failed to read active nav:', err);
-    return 'Dashboard';
-  }
+function getActiveFromPath(pathname) {
+  // matches '/farm' and also nested routes like '/farm/123'
+  const match = navLinks.find(
+    (l) => pathname === l.path || pathname.startsWith(`${l.path}/`)
+  );
+  return match ? match.label : null;
 }
 
 function TopNav() {
   const navigate = useNavigate();
-  const [active, setActive] = useState(getStoredActive);
+  const location = useLocation();
+  const active = getActiveFromPath(location.pathname);
 
   const handleNavClick = (link) => {
-    setActive(link.label);
-    try {
-      localStorage.setItem(ACTIVE_NAV_KEY, link.label);
-    } catch (err) {
-      console.error('Failed to save active nav:', err);
-    }
-    navigate(link.path); // TODO: confirm these paths match your router
+    navigate(link.path);
   };
 
   return (
