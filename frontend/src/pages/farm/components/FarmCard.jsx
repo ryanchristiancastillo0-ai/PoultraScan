@@ -26,44 +26,25 @@ export default function FarmCard({ farm, isActive, onSelectActive, onOpenDetails
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#EEF3EF] to-[#E4ECE6]">
-            <svg viewBox="0 0 64 64" className="w-16 h-16 transition-transform duration-500 group-hover:scale-105" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* backdrop circle */}
-              <circle cx="32" cy="32" r="30" fill="#EEF3EF" stroke="#2F5D3A" strokeWidth="1.5" />
+           <svg viewBox="0 0 64 64" className="w-16 h-16 transition-transform duration-500 group-hover:scale-105" fill="none" xmlns="http://www.w3.org/2000/svg">
+  {/* backdrop circle */}
+  <circle cx="32" cy="32" r="30" fill="#EEF3EF" stroke="#2F5D3A" strokeWidth="1.5" />
 
-              {/* tail feather */}
-              <path d="M16 34c-4-2-6-6-5-10 3 1 6 4 7 8z" fill="#2F5D3A" />
+  {/* placeholder image frame */}
+  <rect x="18" y="20" width="28" height="24" rx="4" stroke="#2F5D3A" strokeWidth="2" fill="none" />
 
-              {/* body */}
-              <ellipse cx="30" cy="38" rx="14" ry="11" fill="#2F5D3A" />
+  {/* sun / focus accent */}
+  <circle cx="25" cy="27" r="2.5" fill="#2F5D3A" />
 
-              {/* wing */}
-              <path d="M22 33c3-1 7-1 9 2-3 3-7 3-10 1z" fill="#274d31" />
-
-              {/* head */}
-              <circle cx="41" cy="24" r="8" fill="#2F5D3A" />
-
-              {/* comb */}
-              <path
-                d="M36 17c1-3 2-3 2-1-1-3 1-4 2-1 0-3 2-3 2 0-1-2 1-3 1 0"
-                stroke="#F59E0B"
-                strokeWidth="2"
-                strokeLinecap="round"
-                fill="none"
-              />
-
-              {/* beak */}
-              <path d="M48 24c2-1 4-1 5 1-1 2-3 2-5 1z" fill="#F59E0B" />
-
-              {/* wattle */}
-              <path d="M43 29c1 2 1 4-0.5 5-1.5-1-1.5-3-0.5-5z" fill="#DC2626" />
-
-              {/* eye */}
-              <circle cx="43" cy="22" r="1.2" fill="#fff" />
-
-              {/* legs */}
-              <path d="M26 48v6M34 48v6" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
-              <path d="M23 54h6M31 54h6" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
-            </svg>
+  {/* mountain / landscape graphic */}
+  <path
+    d="M20 39l7.5-8 5.5 6 4-4 7 6"
+    stroke="#2F5D3A"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+</svg>
           </div>
         )}
 

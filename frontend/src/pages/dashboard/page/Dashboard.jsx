@@ -5,17 +5,17 @@ import {
   MdCenterFocusStrong,
   MdCheckCircle,
   MdWarning,
-   MdHomeWork,
+  MdHomeWork,
 } from 'react-icons/md';
 
 import { useDashboardStats } from '../hooks/useDashboard';
 
-import {TopNav,Footer,BottomNav} from  '../../../components/index'
-import {AlertFeed,AnomalyChart,FarmHealthChart,MetricCard,ScanSummary} from '../components/index'
+import { TopNav, Footer, BottomNav } from '../../../components/index';
+import { AlertFeed, AnomalyChart, FarmHealthChart, MetricCard, ScanSummary } from '../components/index';
 
 // ---------- Dashboard (default export) ----------
 export default function Dashboard() {
-  
+
   const navigate = useNavigate();
   const { stats, loading, error } = useDashboardStats();
 
@@ -24,24 +24,23 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="bg-[#F7F8F5] text-[#111827] antialiased min-h-screen flex flex-col font-['Manrope','Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
-  
-  <TopNav />
+    <div className="bg-[#F5F5F4] text-[#171715] antialiased min-h-screen flex flex-col font-['Manrope','Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
 
-<div className="md:hidden">
-  <BottomNav />
-</div>
-  
+      <TopNav />
+
+      <div className="md:hidden">
+        <BottomNav />
+      </div>
 
       <main className="flex-grow pt-24 pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
-            <h1 className="text-2xl md:text-[28px] font-bold text-[#111827] tracking-tight">Overview</h1>
-            <p className="text-[#6B7280] text-sm mt-1.5">Today's system metrics and diagnostics.</p>
+            <h1 className="text-2xl md:text-[28px] font-bold text-[#171715] tracking-tight">Overview</h1>
+            <p className="text-[#6B6863] text-sm mt-1.5">Today's system metrics and diagnostics.</p>
           </div>
           <button
             onClick={handleNewScan}
-            className="bg-[#2F5D3A] text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#274d31] transition-colors active:scale-[0.98] w-full sm:w-auto justify-center"
+            className="bg-[#1F4B43] text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#2F6B5D] transition-colors active:scale-[0.98] w-full sm:w-auto justify-center"
           >
             <MdAdd className="text-lg" />
             New Scan
@@ -49,10 +48,10 @@ export default function Dashboard() {
         </div>
 
         {loading && (
-         <div className="flex flex-col items-center justify-center py-20 gap-3">
-  <div className="w-8 h-8 border-4 border-[#E5E7EB] border-t-[#6B7280] rounded-full animate-spin" />
-  <p className="text-sm text-[#6B7280] animate-pulse">Loading dashboard...</p>
-</div>
+          <div className="flex flex-col items-center justify-center py-20 gap-3">
+            <div className="w-8 h-8 border-4 border-[#E2E0DB] border-t-[#1F4B43] rounded-full animate-spin" />
+            <p className="text-sm text-[#6B6863] animate-pulse">Loading dashboard...</p>
+          </div>
         )}
 
         {error && !loading && (
@@ -63,7 +62,7 @@ export default function Dashboard() {
 
         {!loading && !error && stats && (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-           <div className="md:col-span-12 grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <div className="md:col-span-12 grid grid-cols-2 sm:grid-cols-4 gap-6">
               <MetricCard
                 icon={MdHomeWork}
                 label="Total Farms"

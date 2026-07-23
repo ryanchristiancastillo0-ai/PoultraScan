@@ -19,7 +19,7 @@ export default function ScanningView({ onCapture, onUpload, uploadInputRef, onFi
 
       <AccuracyNotice />
 
-      <div className="relative rounded-2xl bg-[#111827] border border-[#1F2937] aspect-video overflow-hidden shadow-sm">
+      <div className="relative rounded-2xl bg-[#1F1710] border border-[#3A2A1C] aspect-video overflow-hidden shadow-sm">
         {previewUrl ? (
           <img src={previewUrl} alt="Scan preview" className="w-full h-full object-cover" />
         ) : (
@@ -29,17 +29,17 @@ export default function ScanningView({ onCapture, onUpload, uploadInputRef, onFi
           </div>
         )}
 
-        <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-[#2F5D3A] text-white text-[10px] font-bold uppercase tracking-wider">
+        <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-[#542D18] text-white text-[10px] font-bold uppercase tracking-wider">
           Live Preview
         </div>
 
         {!previewUrl && (
-          <div className="absolute left-0 right-0 h-0.5 bg-[#4ADE80] shadow-[0_0_10px_#4ADE80] animate-scan-line" />
+          <div className="absolute left-0 right-0 h-0.5 bg-[#C88B5E] shadow-[0_0_10px_#C88B5E] animate-scan-line" />
         )}
 
         {isProcessing && (
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center gap-3">
-            <div className="w-10 h-10 border-2 border-white/20 border-t-[#4ADE80] rounded-full animate-spin" />
+            <div className="w-10 h-10 border-2 border-white/20 border-t-[#C88B5E] rounded-full animate-spin" />
             <p className="text-white text-sm font-medium">Analyzing image...</p>
           </div>
         )}
@@ -56,7 +56,7 @@ export default function ScanningView({ onCapture, onUpload, uploadInputRef, onFi
         <button
           onClick={onUpload}
           disabled={isProcessing}
-          className="flex items-center justify-center gap-2 py-3 rounded-lg bg-white border border-[#E5E7EB] text-[#111827] font-semibold hover:bg-[#F7F8F5] disabled:opacity-50 transition-colors"
+          className="flex items-center justify-center gap-2 py-3 rounded-lg bg-white border border-[#C4BCB3] text-[#120C07] font-semibold hover:bg-[#F4F4F5] disabled:opacity-50 transition-colors"
         >
           <MdUpload className="text-lg" />
           <span className="hidden sm:inline">Upload Image</span>
@@ -64,7 +64,7 @@ export default function ScanningView({ onCapture, onUpload, uploadInputRef, onFi
         <button
           onClick={onCapture}
           disabled={isProcessing}
-          className="flex items-center justify-center gap-2 py-3 rounded-lg bg-[#2F5D3A] text-white font-semibold hover:bg-[#254A2E] disabled:opacity-50 transition-colors shadow-sm"
+          className="flex items-center justify-center gap-2 py-3 rounded-lg bg-[#542D18] text-white font-semibold hover:bg-[#965E39] disabled:opacity-50 transition-colors shadow-sm"
         >
           <MdPhotoCamera className="text-lg" />
           <span className="hidden sm:inline">Capture</span>

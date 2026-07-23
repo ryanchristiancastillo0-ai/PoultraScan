@@ -6,33 +6,7 @@ import {
 } from 'react-icons/md';
 import { useProfile } from '../pages/profile/hooks/useProfile';
 import { ProfileAPI } from '../pages/profile/api/profileApi';
-import {resolveAvatarSrc} from '../utils/AvatarSrc'
-import {getInitials} from '../utils/getInitials'
-
-// Small avatar used in the trigger button and dropdown header.
-// Falls back to initials on a colored circle when there's no avatar_url.
-function MiniAvatar({ fullname, avatarUrl, sizeClass }) {
-  const src = resolveAvatarSrc(avatarUrl);
-
-  return (
-    <div
-      className={`${sizeClass} rounded-full bg-[#EAF2EC] text-[#2F5D3A] flex items-center justify-center font-semibold overflow-hidden flex-shrink-0`}
-    >
-      {src ? (
-        <img
-          alt="User profile avatar"
-          className="w-full h-full object-cover"
-          src={src}
-          onError={(e) => {
-            e.currentTarget.style.display = 'none';
-          }}
-        />
-      ) : (
-        <span className="text-xs">{getInitials(fullname)}</span>
-      )}
-    </div>
-  );
-}
+import {MiniAvatar} from './index'
 
 export default function ProfileMenu() {
   const [open, setOpen] = useState(false);

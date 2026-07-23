@@ -84,7 +84,7 @@ export default function Login() {
         <div className="hidden md:flex md:w-1/2 h-full min-h-screen bg-[#d3e4fe] relative overflow-hidden">
           {/* Base Image - blurred */}
           <img
-            src="/img/left-panel-logo.png"
+            src="/img/left-hero.png"
             alt=""
             className="absolute inset-0 w-full h-full object-cover object-top scale-110 blur-xs opacity-90"
           />

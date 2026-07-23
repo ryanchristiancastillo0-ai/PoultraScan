@@ -13,6 +13,7 @@ import ProtectedRoute from '../middleware/ProtectedRoute';
 import Profile from '../pages/profile/page/Profile';
 import HomeRedirect from '../middleware/HomeRedirect'
 import NotFound from '../pages/not-found/page/NotFound';
+import HomePage from '../pages/home/page/Home';
 
 export default function AppRoutes(){
     return (
@@ -22,7 +23,7 @@ export default function AppRoutes(){
             <Route path='/register' element={<Register/>}/>
             <Route path='/forgot-password' element={<ForgotPassword/>}/>
             <Route path='/reset-password' element={<ResetPassword/>}/>
-
+            <Route path='home' element={<HomePage/>} />
             <Route element={<ProtectedRoute/>}>
                 <Route path='/dashboard' element={<Dashboard/>}/>
                 <Route path='/farm/:farmId' element={<FarmDetails/>}/>

@@ -9,5 +9,5 @@ export default function HomeRedirect() {
     return <LoadingScreen />;
   }
 
-  return <Navigate to={user ? "/dashboard" : "/login"} replace />;
+  return <Navigate to={user ? "/dashboard" : "/home"} replace />;
 }
