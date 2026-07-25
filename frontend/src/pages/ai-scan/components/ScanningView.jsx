@@ -19,7 +19,7 @@ export default function ScanningView({ onCapture, onUpload, uploadInputRef, onFi
 
       <AccuracyNotice />
 
-      <div className="relative rounded-2xl bg-[#1F1710] border border-[#3A2A1C] aspect-video overflow-hidden shadow-sm">
+      <div className="relative rounded-2xl bg-[#1F1710] border border-[#3A2A1C] aspect-video overflow-hidden shadow-md">
         {previewUrl ? (
           <img src={previewUrl} alt="Scan preview" className="w-full h-full object-cover" />
         ) : (
@@ -29,7 +29,7 @@ export default function ScanningView({ onCapture, onUpload, uploadInputRef, onFi
           </div>
         )}
 
-        <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-[#542D18] text-white text-[10px] font-bold uppercase tracking-wider">
+        <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-[#542D18] text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
           Live Preview
         </div>
 
@@ -56,7 +56,7 @@ export default function ScanningView({ onCapture, onUpload, uploadInputRef, onFi
         <button
           onClick={onUpload}
           disabled={isProcessing}
-          className="flex items-center justify-center gap-2 py-3 rounded-lg bg-white border border-[#C4BCB3] text-[#120C07] font-semibold hover:bg-[#F4F4F5] disabled:opacity-50 transition-colors"
+          className="flex items-center justify-center gap-2 py-3 rounded-lg bg-white border border-[#C4BCB3] text-[#120C07] font-semibold hover:bg-[#F4F4F5] active:scale-[0.98] disabled:opacity-50 transition-all shadow-sm"
         >
           <MdUpload className="text-lg" />
           <span className="hidden sm:inline">Upload Image</span>
@@ -64,7 +64,7 @@ export default function ScanningView({ onCapture, onUpload, uploadInputRef, onFi
         <button
           onClick={onCapture}
           disabled={isProcessing}
-          className="flex items-center justify-center gap-2 py-3 rounded-lg bg-[#542D18] text-white font-semibold hover:bg-[#965E39] disabled:opacity-50 transition-colors shadow-sm"
+          className="flex items-center justify-center gap-2 py-3 rounded-lg bg-[#542D18] text-white font-semibold hover:bg-[#6B3B20] active:scale-[0.98] disabled:opacity-50 transition-all shadow-sm"
         >
           <MdPhotoCamera className="text-lg" />
           <span className="hidden sm:inline">Capture</span>

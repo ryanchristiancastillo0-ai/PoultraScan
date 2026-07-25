@@ -124,7 +124,7 @@ export default function AiScan() {
 
 
   return (
-    <div className="min-h-screen bg-[#F7F8F5] font-sans">
+    <div className="min-h-screen bg-[#F7F8F5] ">
       <TopNav onMenuClick={() => setMobileNavOpen(true)} />
 
         <div className="md:hidden">
