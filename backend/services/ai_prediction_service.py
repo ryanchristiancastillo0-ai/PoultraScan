@@ -39,6 +39,14 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 class AIPredictionService:
 
     @staticmethod
+    def _display_status(disease_name: str) -> str:
+        """
+        UNKNOWN (classification failed) is treated as Not Healthy so a
+        failed scan never gets shown to the user as a clean bill of health.
+        """
+        return "Healthy" if disease_name == "HEALTHY" else "Not Healthy"
+
+    @staticmethod
     def _validate_file(file: UploadFile, contents: bytes):
         if not file or not file.filename:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, "No image file was provided.")
@@ -158,6 +166,9 @@ class AIPredictionService:
 
         processing_time_ms = int((time.time() - start_time) * 1000)
 
+        # NOTE: the actual disease name is still stored in the DB (still
+        # used above to generate the recommendation/prevention tips) —
+        # only the API response is simplified to Healthy/Not Healthy.
         ai_prediction = AIPrediction(
             detected_chicken_id=detected_chicken.id,
             disease=disease_name,
@@ -185,9 +196,9 @@ class AIPredictionService:
             "chicken_image_id": chicken_image.id,
             "image_url": image_url,
             "ai_prediction_id": ai_prediction.id,
-            "disease": ai_prediction.disease,
+            "disease": AIPredictionService._display_status(disease_name),
             "confidence": confidence_score,
-            "healthy": ai_prediction.disease == "HEALTHY",
+            "healthy": disease_name == "HEALTHY",
             "reasoning": reasoning,
             "estimated_weight": float(ai_prediction.estimated_weight),
             "estimated_oil_ml": float(ai_prediction.estimated_oil_ml),
@@ -294,13 +305,12 @@ class AIPredictionService:
                 )
 
                 if diseased:
-                    disease_names = ", ".join(sorted({c["disease"] for c in diseased}))
                     NotificationService.create(
                         db,
                         CreateNotificationSchema(
                             user_id=farm.user_id,
                             title="Disease alert",
-                            message=f"{farm.farm_name}: possible {disease_names} detected.",
+                            message=f"{farm.farm_name}: {len(diseased)} chicken(s) flagged as not healthy.",
                         ),
                     )
 
@@ -342,7 +352,7 @@ class AIPredictionService:
                 "chicken_image_id": image.id if image else None,
                 "image_url": image.image_url if image else None,
                 "ai_prediction_id": prediction.id,
-                "disease": prediction.disease,
+                "disease": AIPredictionService._display_status(prediction.disease),
                 "confidence": float(prediction.disease_confidence) if prediction.disease_confidence is not None else None,
                 "healthy": prediction.disease == "HEALTHY",
                 "reasoning": None,
