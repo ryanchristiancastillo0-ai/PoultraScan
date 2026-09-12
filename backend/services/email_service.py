@@ -90,7 +90,8 @@ class EmailService:
         sender_name = os.getenv("BREVO_SENDER_NAME") or "PoultraScan AI"
 
         if not api_key or not sender_email:
-            raise RuntimeError("Brevo is not configured (BREVO_API_KEY / BREVO_SENDER_EMAIL missing)")
+            missing = [name for name in ("BREVO_API_KEY", "BREVO_SENDER_EMAIL") if not os.getenv(name)]
+            raise RuntimeError(f"Brevo is not configured; missing env var(s): {', '.join(missing)}")
 
         payload = {
             "sender": {"name": sender_name, "email": sender_email},

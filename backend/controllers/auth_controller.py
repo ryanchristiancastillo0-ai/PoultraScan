@@ -98,12 +98,20 @@ class AuthController:
         token = UserService.create_reset_token(db, payload.email)
 
         if token:
-            # Email the code directly from the backend. Failures are logged but the
-            # response stays generic so we never reveal whether the email exists.
+            # Email the code directly from the backend. If the send actually fails
+            # (provider/config problem), surface a clean 502 instead of silently
+            # telling the user the email was sent. The "email doesn't exist" case
+            # still returns the generic 200 so the field can't be enumerated.
             try:
                 EmailService.send_reset_password_code(payload.email, token)
+            except HTTPException:
+                raise
             except Exception as exc:
                 logger.warning("Failed to send password reset code to %s: %s", payload.email, exc)
+                raise HTTPException(
+                    status_code=status.HTTP_502_BAD_GATEWAY,
+                    detail="We couldn't send the password reset email right now. Please try again in a few minutes or contact support.",
+                )
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,
