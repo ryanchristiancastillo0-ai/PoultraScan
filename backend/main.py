@@ -16,8 +16,8 @@ from routes.chicken_image_route import router as chicken_image_router
 
 from routes.detection_route import router as detection_router
 from routes.journal_entry_route import router as journal_entry_router
+from routes.feedback_route import router as feedback_router
 from fastapi.middleware.cors import CORSMiddleware
-from routes.user_route import router as user_router
 
 app = FastAPI()
 
@@ -45,7 +45,7 @@ app.include_router(ai_prediction_router)
 app.include_router(chicken_image_router)
 app.include_router(detection_router)
 app.include_router(journal_entry_router)
-app.include_router(user_router)
+app.include_router(feedback_router)
 
 
 @app.get("/api/health")

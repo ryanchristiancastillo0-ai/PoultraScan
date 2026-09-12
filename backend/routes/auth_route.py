@@ -7,6 +7,7 @@ from schemas.user_schema import (
     RegisterUserSchema,
     LoginUserSchema,
     ForgotPasswordSchema,
+    VerifyResetCodeSchema,
     ResetPasswordSchema,
     GoogleLoginSchema,
 )
@@ -56,6 +57,14 @@ def forgot_password(
     db: Session = Depends(get_db)
 ):
     return AuthController.forgot_password(payload, db)
+
+
+@router.post("/verify-reset-code")
+def verify_reset_code(
+    payload: VerifyResetCodeSchema,
+    db: Session = Depends(get_db)
+):
+    return AuthController.verify_reset_code(payload, db)
 
 
 @router.post("/reset-password")

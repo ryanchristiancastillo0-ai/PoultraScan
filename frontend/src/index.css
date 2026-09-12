@@ -41,6 +41,15 @@ textarea {
   color: #1b1d1b;
 }
 
+input:focus,
+input:focus-visible,
+input:active {
+  outline: none !important;
+  box-shadow: none !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+}
+
 :focus-visible {
   outline: 2px solid rgba(46, 125, 50, 0.5);
   outline-offset: 2px;

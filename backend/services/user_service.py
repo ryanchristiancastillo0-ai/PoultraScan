@@ -7,6 +7,7 @@ from fastapi import HTTPException, status
 
 from models.user import User
 from schemas.user_schema import RegisterUserSchema, UpdateUserSchema
+from services.abstract_email_service import AbstractEmailService
 from utils.security import hash_password, verify_password
 from utils.jwt_handler import create_access_token
 from fastapi import UploadFile
@@ -92,6 +93,13 @@ class UserService:
         if UserService.find_by_username(db, user.username):
             raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Username already exists")
 
+        check_result = AbstractEmailService.check(user.email)
+        if not check_result["allowed"]:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+                detail=check_result.get("reason") or "This email address appears invalid or risky.",
+            )
+
         hashed_password = hash_password(user.password)
 
         new_user = User(
@@ -139,6 +147,20 @@ class UserService:
         user.reset_token_expiry = datetime.now(timezone.utc) + timedelta(minutes=30)
         db.commit()
         return code
+
+    @staticmethod
+    def is_reset_token_valid(db: Session, token: str) -> bool:
+        """Check a reset code without consuming it (used by the verify step)."""
+        user = db.query(User).filter(User.reset_token == token.upper()).first()
+
+        if not user or not user.reset_token_expiry:
+            return False
+
+        expiry = user.reset_token_expiry
+        if expiry.tzinfo is None:
+            expiry = expiry.replace(tzinfo=timezone.utc)
+
+        return expiry >= datetime.now(timezone.utc)
 
     @staticmethod
     def reset_password_with_token(db: Session, token: str, new_password: str) -> User:
@@ -203,6 +225,13 @@ class UserService:
             existing = UserService.find_by_email(db, update_data["email"])
             if existing:
                 raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Email already exists")
+
+            check_result = AbstractEmailService.check(update_data["email"])
+            if not check_result["allowed"]:
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+                    detail=check_result.get("reason") or "This email address appears invalid or risky.",
+                )
 
         for field, value in update_data.items():
             setattr(user, field, value)

@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import { MdClose, MdEmail, MdCheckCircle } from 'react-icons/md';
-import emailjs from '@emailjs/browser';
+import { FeedbackAPI } from '../api/feedbackApi';
 export default function FeedbackModal({ isOpen, onClose }) {
   const [message, setMessage] = useState('');
   const [senderEmail, setSenderEmail] = useState('');
@@ -25,16 +25,10 @@ export default function FeedbackModal({ isOpen, onClose }) {
     setLoading(true);
     setError(null);
     try {
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_FEEDBACK_TEMPLATE_ID,
-        {
-          to_email: 'louigiecastillo1009@gmail.com',
-          from_email: senderEmail || 'Not provided',
-          message: message,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
+      await FeedbackAPI.send({
+        senderEmail: senderEmail,
+        message: message,
+      });
       setIsSent(true);
     } catch (err) {
       setError('Something went wrong sending your feedback. Please try again.');

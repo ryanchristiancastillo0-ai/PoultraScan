@@ -11,6 +11,12 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       injectRegister: "auto",
+      manifestFilename: "manifest.json",
+
+      devOptions: {
+        enabled: true,
+        type: "module",
+      },
 
       manifest: {
         name: "Poultry Scanner",

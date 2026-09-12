@@ -1,10 +1,13 @@
 from datetime import timedelta
+import logging
+
 from sqlalchemy.orm import Session
-from fastapi import status, Response
+from fastapi import status, Response, HTTPException
 from fastapi.responses import JSONResponse
 from utils.jwt_handler import ACCESS_TOKEN_EXPIRE_MINUTES
 from services.user_service import UserService
 from services.notification_service import NotificationService
+from services.email_service import EmailService
 from utils.google_auth import get_google_user_info
 from utils.jwt_handler import create_access_token
 from schemas.user_schema import (
@@ -12,9 +15,12 @@ from schemas.user_schema import (
     LoginUserSchema,
     UserResponseSchema,
     ForgotPasswordSchema,
+    VerifyResetCodeSchema,
     ResetPasswordSchema,
 )
 from schemas.notification_schema import CreateNotificationSchema
+
+logger = logging.getLogger(__name__)
 
 REMEMBER_ME_EXPIRE_DAYS = 30
 DEFAULT_SESSION_MAX_AGE = ACCESS_TOKEN_EXPIRE_MINUTES * 60  # matches the JWT's exp
@@ -91,13 +97,29 @@ class AuthController:
     def forgot_password(payload: ForgotPasswordSchema, db: Session):
         token = UserService.create_reset_token(db, payload.email)
 
+        if token:
+            # Email the code directly from the backend. Failures are logged but the
+            # response stays generic so we never reveal whether the email exists.
+            try:
+                EmailService.send_reset_password_code(payload.email, token)
+            except Exception as exc:
+                logger.warning("Failed to send password reset code to %s: %s", payload.email, exc)
+
         return JSONResponse(
             status_code=status.HTTP_200_OK,
             content={
                 "message": "If that email exists, a reset link has been generated.",
-                "reset_token": token,
             }
         )
+
+    @staticmethod
+    def verify_reset_code(payload: VerifyResetCodeSchema, db: Session):
+        if not UserService.is_reset_token_valid(db, payload.token):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid or expired reset code",
+            )
+        return {"message": "Reset code verified successfully"}
 
     @staticmethod
     def reset_password(payload: ResetPasswordSchema, db: Session):

@@ -2,6 +2,7 @@ import {Route,Routes} from 'react-router-dom'
 import Login from '../pages/auth/login/Login';
 import Register from '../pages/auth/register/Register';
 import ForgotPassword from '../pages/auth/forgot-password/ForgotPassword';
+import VerifyResetCode from '../pages/auth/verify-reset-code/VerifyResetCode';
 import ResetPassword from '../pages/auth/reset-password/ResetPassword';
 import Dashboard from '../pages/dashboard/page/Dashboard';
 import FarmDetails from '../pages/farm/page/Farm';
@@ -22,6 +23,7 @@ export default function AppRoutes(){
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/forgot-password' element={<ForgotPassword/>}/>
+            <Route path='/verify-reset-code' element={<VerifyResetCode/>}/>
             <Route path='/reset-password' element={<ResetPassword/>}/>
             <Route path='home' element={<HomePage/>} />
             <Route element={<ProtectedRoute/>}>

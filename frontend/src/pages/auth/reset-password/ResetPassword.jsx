@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import { FiLock, FiShield, FiEye, FiEyeOff, FiCheckCircle, FiArrowLeft, FiFeather } from 'react-icons/fi';
 import { resetPassword } from '../api/auth';
 
 export default function ResetPassword() {
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const navigate = useNavigate();
-  const token = searchParams.get('token');
+  const token = location.state?.token ?? searchParams.get('token');
 
   // Input Form State Hooks
   const [password, setPassword] = useState('');
@@ -116,10 +117,10 @@ export default function ResetPassword() {
 
                 {/* New Password Field */}
                 <div className="relative">
-                  <div className="relative flex items-center h-[52px] sm:h-[58px] bg-[#F8FAF7]/60 border-2 border-[#D8E3DA]/60 rounded-xl sm:rounded-2xl focus-within:border-[#2E7D32] focus-within:bg-white focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 overflow-hidden px-4 sm:px-5">
+                  <div className="relative flex items-center h-[52px] sm:h-[58px] bg-[#F8FAF7]/60 border-2 border-[#D8E3DA]/60 rounded-xl sm:rounded-2xl focus-within:border-[#2E7D32] focus-within:bg-white transition-all duration-300 overflow-hidden px-4 sm:px-5">
                     <FiLock className={`text-lg sm:text-xl mr-2 sm:mr-3 flex-shrink-0 transition-colors duration-200 ${passwordFocused ? 'text-[#2E7D32]' : 'text-[#6B7280]'}`} />
                     <input
-                      className="w-full h-full bg-transparent border-0 p-0 pt-3 sm:pt-3.5 focus:ring-0 text-[#1B1D1B] text-sm sm:text-base outline-none peer"
+                      className="w-full h-full bg-transparent border-0 p-0 pt-3 sm:pt-3.5 text-[#1B1D1B] text-sm sm:text-base outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 shadow-none peer"
                       id="new-password"
                       name="new-password"
                       required
@@ -152,10 +153,10 @@ export default function ResetPassword() {
 
                 {/* Confirm Password Field */}
                 <div className="relative">
-                  <div className="relative flex items-center h-[52px] sm:h-[58px] bg-[#F8FAF7]/60 border-2 border-[#D8E3DA]/60 rounded-xl sm:rounded-2xl focus-within:border-[#2E7D32] focus-within:bg-white focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 overflow-hidden px-4 sm:px-5">
+                  <div className="relative flex items-center h-[52px] sm:h-[58px] bg-[#F8FAF7]/60 border-2 border-[#D8E3DA]/60 rounded-xl sm:rounded-2xl focus-within:border-[#2E7D32] focus-within:bg-white transition-all duration-300 overflow-hidden px-4 sm:px-5">
                     <FiShield className={`text-lg sm:text-xl mr-2 sm:mr-3 flex-shrink-0 transition-colors duration-200 ${confirmPasswordFocused ? 'text-[#2E7D32]' : 'text-[#6B7280]'}`} />
                     <input
-                      className="w-full h-full bg-transparent border-0 p-0 pt-3 sm:pt-3.5 focus:ring-0 text-[#1B1D1B] text-sm sm:text-base outline-none peer"
+                      className="w-full h-full bg-transparent border-0 p-0 pt-3 sm:pt-3.5 text-[#1B1D1B] text-sm sm:text-base outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 shadow-none peer"
                       id="confirm-password"
                       name="confirm-password"
                       required
@@ -224,7 +225,7 @@ export default function ResetPassword() {
 
                 {/* Submit Reset Action */}
                 <button
-                  className="w-full h-[52px] sm:h-[58px] bg-gradient-to-r from-[#2E7D32] to-[#43A047] text-white text-base sm:text-lg font-semibold rounded-xl sm:rounded-2xl shadow-[0_10px_24px_-6px_rgba(0,105,72,0.3)] hover:shadow-[0_14px_28px_-6px_rgba(0,105,72,0.4)] active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-1 disabled:opacity-50"
+                  className="w-full h-[52px] sm:h-[58px] bg-gradient-to-r from-[#2E7D32] to-[#43A047] text-white text-base sm:text-lg font-semibold rounded-xl sm:rounded-2xl shadow-[0_10px_24px_-6px_rgba(0,105,72,0.3)] hover:shadow-[0_14px_28px_-6px_rgba(0,105,72,0.4)] active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-1 disabled:opacity-50 focus:outline-none"
                   type="submit"
                   disabled={loading}
                 >
@@ -245,7 +246,7 @@ export default function ResetPassword() {
                 Your credentials have been securely updated. You can now log back into the system with your new password.
               </p>
               <button
-                className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#43A047] active:scale-[0.98] text-white rounded-lg font-bold text-base transition-all"
+                className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#43A047] active:scale-[0.98] text-white rounded-lg font-bold text-base transition-all focus:outline-none"
                 onClick={() => {
                   setIsSuccess(false);
                   setPassword('');

@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
-import { FiMail, FiArrowLeft, FiCheckCircle, FiFeather, FiLock, FiHash } from 'react-icons/fi';
+import { FiMail, FiArrowLeft, FiCheckCircle, FiFeather } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import emailjs from '@emailjs/browser';
-import { forgotPassword, resetPassword } from '../api/auth';
+import { forgotPassword } from '../api/auth';
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
 
-  // Step control: 'request' -> enter email, 'verify' -> enter code + new password
-  const [step, setStep] = useState('request');
-
   const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   const [emailFocused, setEmailFocused] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,42 +17,8 @@ export default function ForgotPassword() {
     setLoading(true);
     setError(null);
     try {
-      const result = await forgotPassword(email);
-
-      if (result.reset_token) {
-        await emailjs.send(
-          import.meta.env.VITE_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-          { to_email: email, reset_code: result.reset_token },
-          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-        );
-      }
-
-      // Always move to the code-entry step, even if the email didn't match a user,
-      // so we don't reveal whether the account exists.
-      setStep('verify');
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleResetPassword = async (e) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
-    if (newPassword.length < 8) {
-      setError('Password must be at least 8 characters long.');
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-    try {
-      await resetPassword({ token: code, newPassword });
+      // The backend emails the 6-character reset code directly via Brevo.
+      await forgotPassword(email);
       setIsSuccess(true);
     } catch (err) {
       setError(err.message);
@@ -82,26 +40,43 @@ export default function ForgotPassword() {
           </div>
 
           {isSuccess ? (
-            /* Final Success State */
+            /* Success: code was emailed — move on to the code page */
             <div className="w-full flex flex-col items-center animate-[fadeIn_0.3s_ease-out]">
               <div className="w-16 h-16 bg-[#E8F5E9] text-[#2E7D32] rounded-full flex items-center justify-center mb-6">
                 <FiCheckCircle className="text-3xl" />
               </div>
               <h1 className="text-2xl font-semibold tracking-tight text-[#1B1D1B] mb-3">
-                Password Reset Successfully
+                Check Your Email
               </h1>
               <p className="text-base text-[#6B7280] mb-8 leading-relaxed">
-                You can now log back in with your new password.
+                We've sent a 6-character code to <span className="font-semibold text-[#1B1D1B]">{email}</span>. Enter it on the next page to reset your password.
               </p>
               <button
-                className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#43A047] active:scale-[0.98] text-white rounded-lg font-bold text-base transition-all"
-                onClick={() => navigate('/login')}
+                className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#276C2A] active:scale-[0.98] text-white rounded-lg font-bold text-base transition-all"
+                onClick={() => navigate('/verify-reset-code', { state: { email } })}
               >
-                Go to Sign In
+                I Have a Code — Continue
+              </button>
+              <button
+                type="button"
+                className="mt-4 text-sm text-[#6B7280] hover:text-[#2E7D32] transition-colors"
+                onClick={async () => {
+                  setError(null);
+                  setLoading(true);
+                  try {
+                    await forgotPassword(email);
+                  } catch (err) {
+                    setError(err.message);
+                  } finally {
+                    setLoading(false);
+                  }
+                }}
+                disabled={loading}
+              >
+                {loading ? 'Sending...' : "Didn't get a code? Resend"}
               </button>
             </div>
-
-          ) : step === 'request' ? (
+          ) : (
             /* Step 1: Enter Email */
             <>
               <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#1B1D1B] mb-3">
@@ -146,7 +121,7 @@ export default function ForgotPassword() {
                 </div>
 
                 <button
-                  className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#43A047] active:scale-[0.98] text-white rounded-lg font-bold text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] transition-all mt-2 flex justify-center items-center disabled:opacity-50"
+                  className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#276C2A] active:scale-[0.98] text-white rounded-lg font-bold text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] transition-all mt-2 flex justify-center items-center disabled:opacity-50"
                   type="submit"
                   disabled={loading}
                 >
@@ -154,95 +129,11 @@ export default function ForgotPassword() {
                 </button>
               </form>
             </>
-
-          ) : (
-            /* Step 2: Enter Code + New Password */
-            <>
-              <div className="w-16 h-16 bg-[#E8F5E9] text-[#2E7D32] rounded-full flex items-center justify-center mb-6">
-                <FiCheckCircle className="text-3xl" />
-              </div>
-              <h1 className="text-2xl font-semibold tracking-tight text-[#1B1D1B] mb-3">
-                Check Your Email
-              </h1>
-              <p className="text-base text-[#6B7280] mb-8 leading-relaxed">
-                We've sent a 6-character code to <span className="font-semibold text-[#1B1D1B]">{email}</span>. Enter it below with your new password.
-              </p>
-
-              <form onSubmit={handleResetPassword} className="w-full flex flex-col gap-5">
-                {error && (
-                  <div className="text-sm text-[#D32F2F] bg-[#FFEBEE] border border-[#F3C9C9] rounded-lg px-4 py-2 text-center">
-                    {error}
-                  </div>
-                )}
-
-                {/* Code Field */}
-                <div className="relative w-full">
-                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
-                    <FiHash className="text-xl mr-3 flex-shrink-0 text-[#6B7280]" />
-                    <input
-                      className="w-full h-full bg-transparent border-0 p-0 text-[#1B1D1B] text-base outline-none tracking-[0.3em] uppercase font-semibold"
-                      placeholder="XXXXXX"
-                      maxLength={6}
-                      required
-                      value={code}
-                      onChange={(e) => setCode(e.target.value.toUpperCase())}
-                    />
-                  </div>
-                </div>
-
-                {/* New Password */}
-                <div className="relative w-full">
-                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
-                    <FiLock className="text-xl mr-3 flex-shrink-0 text-[#6B7280]" />
-                    <input
-                      className="w-full h-full bg-transparent border-0 p-0 text-[#1B1D1B] text-base outline-none"
-                      type="password"
-                      placeholder="New password"
-                      required
-                      value={newPassword}
-                      onChange={(e) => setNewPassword(e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                {/* Confirm Password */}
-                <div className="relative w-full">
-                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
-                    <FiLock className="text-xl mr-3 flex-shrink-0 text-[#6B7280]" />
-                    <input
-                      className="w-full h-full bg-transparent border-0 p-0 text-[#1B1D1B] text-base outline-none"
-                      type="password"
-                      placeholder="Confirm new password"
-                      required
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                <button
-                  className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#43A047] active:scale-[0.98] text-white rounded-lg font-bold text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] transition-all mt-2 flex justify-center items-center disabled:opacity-50"
-                  type="submit"
-                  disabled={loading}
-                >
-                  {loading ? 'Resetting...' : 'Reset Password'}
-                </button>
-
-                <button
-                  type="button"
-                  className="text-sm text-[#6B7280] hover:text-[#2E7D32] transition-colors"
-                  onClick={() => setStep('request')}
-                >
-                  Didn't get a code? Try again
-                </button>
-              </form>
-            </>
           )}
 
           {/* Back to Login Anchor */}
           <div className="mt-8">
-            
-             <a className="text-sm font-semibold text-[#2E7D32] hover:text-[#43A047] transition-colors flex items-center gap-2"
+            <a className="text-sm font-semibold text-[#2E7D32] hover:text-[#43A047] transition-colors flex items-center gap-2"
               href="/login"
             >
               <FiArrowLeft className="text-lg" />

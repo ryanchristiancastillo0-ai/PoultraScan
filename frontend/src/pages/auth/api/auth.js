@@ -44,6 +44,14 @@ export function forgotPassword(email) {
   });
 }
 
+export function verifyResetCode(token) {
+  return apiRequest('/api/auth/verify-reset-code', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token }),
+  });
+}
+
 export function resetPassword({ token, newPassword }) {
   return apiRequest('/api/auth/reset-password', {
     method: 'POST',

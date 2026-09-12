@@ -42,8 +42,11 @@ class ForgotPasswordSchema(BaseModel):
 
 
 class ForgotPasswordResponseSchema(BaseModel):
-    reset_token: str  # returned so the frontend can email it via EmailJS
-    message: str
+    message: str  # The reset code is emailed directly by the backend via Brevo
+
+
+class VerifyResetCodeSchema(BaseModel):
+    token: str
 
 
 class ResetPasswordSchema(BaseModel):
