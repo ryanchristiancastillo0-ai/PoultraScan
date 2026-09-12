@@ -2,40 +2,31 @@
 
 @import "tailwindcss";
 
-body {
-  font-family: "Plus Jakarta Sans", sans-serif;
-}
 @theme {
   --font-sans: "Plus Jakarta Sans", sans-serif;
+
+  /* PoultraScan AgriTech palette */
+  --color-primary: #2e7d32;
+  --color-primary-dark: #276c2a;
+  --color-primary-light: #66bb6a;
+  --color-primary-lighter: #e8f5e9;
+  --color-canvas: #f8faf7;
+  --color-ink: #1b1d1b;
+  --color-warn: #f9a825;
+  --color-critical: #d32f2f;
+  --color-info: #1976d2;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #f8faf7;
+  color: #1b1d1b;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 code {
   font-family: "Plus Jakarta Sans", sans-serif;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-@keyframes modal-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-.animate-modal-in {
-  animation: modal-in 0.18s ease-out;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
 }
 
 button,
@@ -45,6 +36,41 @@ textarea {
   font-family: inherit;
 }
 
+::selection {
+  background-color: #e8f5e9;
+  color: #1b1d1b;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(46, 125, 50, 0.5);
+  outline-offset: 2px;
+}
+
+/* Subtle native scrollbars that match the theme */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cfe2d4 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #cfe2d4;
+  border-radius: 8px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #66bb6a;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @keyframes modal-in {
   from {
     opacity: 0;
@@ -58,6 +84,7 @@ textarea {
 .animate-modal-in {
   animation: modal-in 0.18s ease-out;
 }
+
 @keyframes slide-in {
   from {
     transform: translateX(100%);
@@ -68,13 +95,6 @@ textarea {
 }
 .animate-slide-in {
   animation: slide-in 0.2s ease-out;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 @keyframes scan-line {
@@ -91,57 +111,7 @@ textarea {
 .animate-scan-line {
   animation: scan-line 2s linear infinite;
 }
-@keyframes slide-in {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-.animate-slide-in {
-  animation: slide-in 0.25s ease-out;
-}
 
-@keyframes qs-backdrop {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes qs-sheet-up {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes qs-pop {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-.qs-backdrop {
-  animation: qs-backdrop 0.2s ease-out;
-}
-.qs-sheet {
-  animation: qs-sheet-up 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-}
-@media (min-width: 640px) {
-  .qs-sheet {
-    animation: qs-pop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-}
 @keyframes qs-backdrop {
   from {
     opacity: 0;

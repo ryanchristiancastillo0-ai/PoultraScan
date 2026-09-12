@@ -36,7 +36,7 @@ export default function ScanHistory() {
   const { scans, page, hasMore, loading, error, filters, updateFilters, nextPage, prevPage, removeScan } = useScanHistory();
 
   return (
-    <div className="bg-[#F7F8F5] text-[#111827] antialiased min-h-screen flex flex-col font-sans">
+    <div className="bg-[#F8FAF7] text-[#1B1D1B] antialiased min-h-screen flex flex-col font-sans">
       <TopNav />
 <div className="md:hidden">
   <BottomNav />
@@ -45,12 +45,12 @@ export default function ScanHistory() {
       <main className="flex-grow pt-20 sm:pt-24 pb-10 px-4 md:px-8 max-w-[1280px] mx-auto w-full mb-8 md:mb-0">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
           <div>
-            <h1 className="text-xl sm:text-2xl md:text-[28px] font-bold text-[#111827] tracking-tight text-balance">Scan History</h1>
+            <h1 className="text-xl sm:text-2xl md:text-[28px] font-bold text-[#1B1D1B] tracking-tight text-balance">Scan History</h1>
             <p className="text-[#6B7280] text-xs sm:text-sm mt-1 text-pretty">Review and manage past AI diagnostic scans across all facilities.</p>
           </div>
           <button
             onClick={() => navigate('/scan')}
-            className="bg-[#2F5D3A] text-white px-4 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#254B2E] transition-colors shadow-sm active:scale-95 w-full sm:w-auto justify-center"
+            className="bg-[#2E7D32] text-white px-4 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#276C2A] transition-colors shadow-sm active:scale-95 w-full sm:w-auto justify-center"
           >
             <MdAdd className="text-lg" />
             New Scan
@@ -60,16 +60,16 @@ export default function ScanHistory() {
          <FilterBar filters={filters} onChange={updateFilters} />
 
         {error && (
-          <div className="mb-4 flex items-center gap-2 px-4 py-3 rounded-xl bg-[#FBEBEB] border border-[#F3D3D3]">
-            <MdErrorOutline className="text-[#DC2626] text-base flex-shrink-0" />
-            <p className="text-xs text-[#B91C1C] font-medium">{error}</p>
+          <div className="mb-4 flex items-center gap-2 px-4 py-3 rounded-xl bg-[#FFEBEE] border border-[#FFEBEE]">
+            <MdErrorOutline className="text-[#D32F2F] text-base flex-shrink-0" />
+            <p className="text-xs text-[#D32F2F] font-medium">{error}</p>
           </div>
         )}
 
         <div className="bg-white rounded-2xl border border-[#E5E7EB] p-3 sm:p-4 md:p-6 shadow-sm">
           {loading ? (
             <div className="py-16 flex flex-col items-center gap-3">
-              <div className="w-8 h-8 rounded-full border-4 border-[#2F5D3A]/20 border-l-[#2F5D3A] animate-spin" />
+              <div className="w-8 h-8 rounded-full border-4 border-[#2E7D32]/20 border-l-[#2E7D32] animate-spin" />
               <p className="text-sm text-[#6B7280]">Loading scan history...</p>
             </div>
           ) : scans.length === 0 ? (

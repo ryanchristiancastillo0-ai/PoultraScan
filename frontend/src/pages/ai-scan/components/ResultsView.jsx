@@ -71,7 +71,7 @@ export default function ResultsView({ onScanAgain, onSave, detectionData, predic
       {/* Preview with detection boxes */}
       <div
         ref={containerRef}
-        className="relative rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm bg-[#111827] h-[400px]"
+        className="relative rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm bg-[#1B1D1B] h-[400px]"
       >
         {previewUrl && (
           <img
@@ -98,7 +98,7 @@ export default function ResultsView({ onScanAgain, onSave, detectionData, predic
           return (
             <div
               key={d.tracking_id ?? i}
-              className="absolute border-2 border-[#4ADE80] rounded pointer-events-none"
+              className="absolute border-2 border-[#66BB6A] rounded pointer-events-none"
               style={{
                 left: `${left}px`,
                 top: `${top}px`,
@@ -106,13 +106,13 @@ export default function ResultsView({ onScanAgain, onSave, detectionData, predic
                 height: `${boxHeight}px`,
               }}
             >
-              <span className="absolute -top-5 left-0 bg-[#4ADE80] text-[#111827] text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
+              <span className="absolute -top-5 left-0 bg-[#66BB6A] text-[#1B1D1B] text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
                 #{d.tracking_id ?? i + 1}
               </span>
             </div>
           );
         })}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#2F5D3A] text-white">
+        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#2E7D32] text-white">
           <MdCheckCircle className="text-sm" />
           <span className="text-[10px] font-bold uppercase tracking-wider">
             {chickens.length} {chickens.length === 1 ? 'Chicken' : 'Chickens'} Analyzed
@@ -139,15 +139,15 @@ export default function ResultsView({ onScanAgain, onSave, detectionData, predic
       <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mt-6">
         <button
           onClick={onScanAgain}
-          className="group flex items-center justify-center gap-2 w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-3.5 rounded-full sm:rounded-lg bg-white border border-[#E5E7EB] text-[#111827] font-semibold shadow-sm hover:bg-[#F7F8F5] hover:border-[#D1D5DB] hover:shadow-md active:scale-[0.97] transition-all duration-150"
+          className="group flex items-center justify-center gap-2 w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-3.5 rounded-lg bg-white border border-[#E5E7EB] text-[#1B1D1B] font-semibold shadow-sm hover:bg-[#F8FAF7] hover:border-[#D1D5DB] hover:shadow-md active:scale-[0.97] transition-all duration-150"
         >
-          <MdRefresh className="text-lg text-[#2F5D3A] transition-transform duration-300 group-hover:rotate-180" />
+          <MdRefresh className="text-lg text-[#2E7D32] transition-transform duration-300 group-hover:rotate-180" />
           <span>Scan Again</span>
         </button>
 
         <button
           onClick={() => navigate('/scan/history')}
-          className="group flex items-center justify-center gap-2 w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-3.5 rounded-full sm:rounded-lg bg-gradient-to-r from-[#2F5D3A] to-[#3d7a4c] text-white font-semibold shadow-[0_8px_20px_-6px_rgba(47,93,58,0.4)] hover:shadow-[0_10px_24px_-6px_rgba(47,93,58,0.5)] active:scale-[0.97] transition-all duration-150"
+          className="group flex items-center justify-center gap-2 w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-3.5 rounded-lg bg-[#2E7D32] text-white font-semibold shadow-[0_8px_20px_-6px_rgba(46,125,50,0.4)] hover:bg-[#276C2A] hover:shadow-[0_10px_24px_-6px_rgba(46,125,50,0.5)] active:scale-[0.97] transition-all duration-150"
         >
           <MdHistory className="text-lg transition-transform duration-300 group-hover:-translate-x-0.5" />
           <span>Go to History</span>

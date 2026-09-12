@@ -124,7 +124,7 @@ export default function AiScan() {
 
 
   return (
-    <div className="min-h-screen bg-[#F7F8F5] ">
+    <div className="min-h-screen bg-[#F8FAF7] ">
       <TopNav onMenuClick={() => setMobileNavOpen(true)} />
 
         <div className="md:hidden">
@@ -133,18 +133,18 @@ export default function AiScan() {
 
       <main className="px-4 py-8 md:py-12 mt-16 max-w-[1200px] mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-8">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#EAF2EC] text-[#2F5D3A] text-[10px] font-bold uppercase tracking-widest mb-3">
+          <span className="inline-block px-3 py-1 rounded-full bg-[#E8F5E9] text-[#2E7D32] text-[10px] font-bold uppercase tracking-widest mb-3">
             AI-Powered
           </span>
-          <h1 className="text-2xl md:text-3xl font-bold text-[#111827] tracking-tight text-balance">AI Diagnostic Scanner</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-[#1B1D1B] tracking-tight text-balance">AI Diagnostic Scanner</h1>
           <p className="mt-2 text-sm text-[#6B7280] max-w-xl mx-auto leading-relaxed text-pretty">
             Position the camera to clearly capture the flock. The AI will automatically detect chickens and analyze their health status.
           </p>
 
           {farmId && (
-            <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EAF2EC] border border-[#CFE2D4]">
-              <MdInfoOutline className="text-[#2F5D3A] text-sm flex-shrink-0" />
-              <span className="text-xs text-[#2F5D3A] font-medium">
+            <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#E8F5E9] border border-[#CDE3D1]">
+              <MdInfoOutline className="text-[#2E7D32] text-sm flex-shrink-0" />
+              <span className="text-xs text-[#2E7D32] font-medium">
                 Make sure you've created or selected a farm — results are saved to that farm in your account.
               </span>
             </div>

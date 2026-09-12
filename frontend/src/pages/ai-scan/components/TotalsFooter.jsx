@@ -2,9 +2,9 @@ import { GiChicken } from 'react-icons/gi';
 
 export default function TotalsFooter({ chickens, totalWeight, totalOilMl, marketReadyCount }) {
   return (
-    <div className="w-full mt-6 p-5 rounded-xl bg-[#2F5D3A] text-white">
+    <div className="w-full mt-6 p-5 rounded-xl bg-[#2E7D32] text-white">
       <div className="flex items-center gap-2 mb-4">
-        <GiChicken className="text-[#A7D7B4] text-lg" />
+        <GiChicken className="text-[#66BB6A] text-lg" />
         <span className="text-sm font-bold">{chickens.length} Chickens Scanned</span>
       </div>
       <div className="grid grid-cols-3 gap-3">

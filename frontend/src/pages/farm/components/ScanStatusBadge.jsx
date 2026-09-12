@@ -7,9 +7,9 @@ import {
 
 export default function ScanStatusBadge({ status }) {
   const config = {
-    COMPLETED: { icon: MdCheckCircle, bg: '#EEF3EF', color: '#2F5D3A', label: 'Completed' },
-    PROCESSING: { icon: MdHourglassEmpty, bg: '#FEF3C7', color: '#B45309', label: 'Processing' },
-    FAILED: { icon: MdError, bg: '#FEE2E2', color: '#DC2626', label: 'Failed' },
+    COMPLETED: { icon: MdCheckCircle, bg: '#E8F5E9', color: '#2E7D32', label: 'Completed' },
+    PROCESSING: { icon: MdHourglassEmpty, bg: '#FFF0D9', color: '#B45309', label: 'Processing' },
+    FAILED: { icon: MdError, bg: '#FFEBEE', color: '#D32F2F', label: 'Failed' },
   };
   const { icon: Icon, bg, color, label } = config[status] || config.PROCESSING;
 

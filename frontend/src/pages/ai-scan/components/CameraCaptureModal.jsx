@@ -68,8 +68,8 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
   const isPortrait = orientation === 'portrait';
 
   return (
-    <div className="fixed inset-0 z-[60] bg-[#0b1c30]/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="relative w-full max-w-3xl bg-[#0b1c30] rounded-2xl overflow-hidden shadow-2xl">
+    <div className="fixed inset-0 z-[60] bg-[#1B1D1B]/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="relative w-full max-w-3xl bg-[#1B1D1B] rounded-2xl overflow-hidden shadow-2xl">
         <button
           onClick={handleClose}
           aria-label="Close camera"
@@ -105,7 +105,7 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
             }`}
           >
             {error ? (
-              <p className="text-red-300 text-sm px-6 text-center">{error}</p>
+              <p className="text-[#FCA5A5] text-sm px-6 text-center">{error}</p>
             ) : (
               <video
                 ref={videoRef}
@@ -118,11 +118,11 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
           </div>
         </div>
 
-        <div className="flex justify-center py-5 bg-[#0b1c30]">
+        <div className="flex justify-center py-5 bg-[#1B1D1B]">
           <button
             onClick={handleSnap}
             disabled={!ready || !!error}
-            className="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#006948] text-white text-base font-semibold hover:bg-[#00855d] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#2E7D32] text-white text-base font-semibold hover:bg-[#43A047] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <MdCameraAlt className="text-xl" />
             Take Photo

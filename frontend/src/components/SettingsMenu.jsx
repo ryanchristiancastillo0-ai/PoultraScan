@@ -33,7 +33,7 @@ export default function SettingsMenu() {
     <>
       {open && (
         <div
-          className="fixed inset-0 bg-[#0b1c30]/20 backdrop-blur-sm z-40 transition-opacity"
+          className="fixed inset-0 bg-[#1B1D1B]/20 backdrop-blur-sm z-40 transition-opacity"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
@@ -43,15 +43,15 @@ export default function SettingsMenu() {
           onClick={() => setOpen((prev) => !prev)}
           aria-label="Settings"
           aria-expanded={open}
-          className="p-2 rounded-full text-[#565e74] hover:bg-[#f8f9ff] hover:text-[#0b1c30] transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#006948]/40"
+          className="p-2 rounded-full text-[#6B7280] hover:bg-[#F8FAF7] hover:text-[#1B1D1B] transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E7D32]/40"
         >
           <MdSettings className="text-xl" />
         </button>
 
         {open && (
-          <div className="fixed top-[72px] left-4 right-4 sm:absolute sm:top-auto sm:left-auto sm:right-0 sm:mt-2 sm:w-64 bg-white rounded-xl border border-[#e5eeff] shadow-[0_12px_32px_rgba(15,23,42,0.12)] overflow-hidden z-50">
-            <div className="px-4 py-3 border-b border-[#f0f2fa]">
-              <span className="text-sm font-bold text-[#0b1c30]">Settings</span>
+          <div className="fixed top-[72px] left-4 right-4 sm:absolute sm:top-auto sm:left-auto sm:right-0 sm:mt-2 sm:w-64 bg-white rounded-xl border border-[#E8F5E9] shadow-[0_12px_32px_rgba(15,23,42,0.12)] overflow-hidden z-50">
+            <div className="px-4 py-3 border-b border-[#E8F5E9]">
+              <span className="text-sm font-bold text-[#1B1D1B]">Settings</span>
             </div>
             <div className="py-1">
               {settingsItems.map(({ id, label, icon: Icon }) => (
@@ -61,10 +61,10 @@ export default function SettingsMenu() {
                     console.log(`Settings option clicked: ${label}`);
                     setOpen(false);
                   }}
-                  className="w-full flex items-center gap-2.5 px-4 py-2.5 text-left hover:bg-[#f8f9ff] transition-all"
+                  className="w-full flex items-center gap-2.5 px-4 py-2.5 text-left hover:bg-[#F8FAF7] transition-all"
                 >
-                  <Icon className="text-[#565e74] text-base" />
-                  <span className="text-xs font-medium text-[#0b1c30]">{label}</span>
+                  <Icon className="text-[#6B7280] text-base" />
+                  <span className="text-xs font-medium text-[#1B1D1B]">{label}</span>
                 </button>
               ))}
             </div>

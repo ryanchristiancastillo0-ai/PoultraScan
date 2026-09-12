@@ -23,9 +23,9 @@ export default function ScanRow({ scan, onDelete, onView }) {
 
   return (
     <>
-      <tr className="hover:bg-[#F7F8F5] transition-colors group">
+      <tr className="hover:bg-[#F8FAF7] transition-colors group">
         <td className="py-4 pl-2">
-          <div className="w-12 h-12 rounded-lg overflow-hidden border border-[#E5E7EB] bg-[#F7F8F5] flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 rounded-lg overflow-hidden border border-[#E5E7EB] bg-[#F8FAF7] flex items-center justify-center flex-shrink-0">
             {src ? (
               <img className="w-full h-full object-cover" src={src} alt="Scan thumbnail" />
             ) : (
@@ -34,11 +34,11 @@ export default function ScanRow({ scan, onDelete, onView }) {
           </div>
         </td>
         <td className="py-4 px-3 whitespace-nowrap">
-          <p className="font-medium text-[#111827] text-sm">{date}</p>
+          <p className="font-medium text-[#1B1D1B] text-sm">{date}</p>
           <p className="text-xs text-[#9CA3AF]">{time}</p>
         </td>
         <td className="py-4 px-3 max-w-[160px]">
-          <p className="font-medium text-[#111827] text-sm truncate">{scan.farm_name}</p>
+          <p className="font-medium text-[#1B1D1B] text-sm truncate">{scan.farm_name}</p>
           <p className="text-xs text-[#9CA3AF] truncate">{scan.location}</p>
         </td>
         <td className="py-4 px-3">
@@ -55,13 +55,13 @@ export default function ScanRow({ scan, onDelete, onView }) {
             <button
               onClick={() => onView(scan)}
               disabled={scan.status === 'PROCESSING'}
-              className="p-1.5 text-[#6B7280] hover:text-[#2F5D3A] hover:bg-[#EAF2EC] rounded-md transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="p-1.5 text-[#6B7280] hover:text-[#2E7D32] hover:bg-[#E8F5E9] rounded-md transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <MdVisibility className="text-lg" />
             </button>
             <button
               onClick={() => setConfirmOpen(true)}
-              className="p-1.5 text-[#6B7280] hover:text-[#DC2626] hover:bg-[#FBEBEB] rounded-md transition-colors"
+              className="p-1.5 text-[#6B7280] hover:text-[#D32F2F] hover:bg-[#FFEBEE] rounded-md transition-colors"
             >
               <MdDelete className="text-lg" />
             </button>

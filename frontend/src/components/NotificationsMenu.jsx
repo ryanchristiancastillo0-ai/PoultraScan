@@ -50,7 +50,7 @@ export default function NotificationsMenu() {
     <>
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-[#0b1c30]/20 backdrop-blur-sm transition-opacity"
+          className="fixed inset-0 z-40 bg-[#1B1D1B]/20 backdrop-blur-sm transition-opacity"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
@@ -60,11 +60,11 @@ export default function NotificationsMenu() {
           onClick={() => setOpen((prev) => !prev)}
           aria-label="Notifications"
           aria-expanded={open}
-          className="relative rounded-full p-2 text-[#565e74] transition-all hover:bg-[#f8f9ff] hover:text-[#0b1c30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#006948]/40 active:scale-95"
+          className="relative rounded-full p-2 text-[#6B7280] transition-all hover:bg-[#F8FAF7] hover:text-[#1B1D1B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E7D32]/40 active:scale-95"
         >
           <MdNotifications className="text-xl" />
           {unreadCount > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-[#006948] px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
+            <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-[#2E7D32] px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
               {unreadCount > 9 ? '9+' : unreadCount}
             </span>
           )}
@@ -72,15 +72,15 @@ export default function NotificationsMenu() {
 
         {open && (
           <div
-            className="fixed left-4 right-4 top-[72px] bottom-24 z-50 flex flex-col overflow-hidden rounded-2xl border border-[#e5eeff] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.14)] sm:absolute sm:bottom-auto sm:left-auto sm:right-0 sm:top-auto sm:mt-2 sm:h-auto sm:max-h-[26rem] sm:w-80"
+            className="fixed left-4 right-4 top-[72px] bottom-24 z-50 flex flex-col overflow-hidden rounded-2xl border border-[#E8F5E9] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.14)] sm:absolute sm:bottom-auto sm:left-auto sm:right-0 sm:top-auto sm:mt-2 sm:h-auto sm:max-h-[26rem] sm:w-80"
           >
             {/* Header */}
-            <div className="flex flex-shrink-0 items-center justify-between border-b border-[#f0f2fa] px-4 py-3">
-              <span className="text-sm font-bold text-[#0b1c30]">Notifications</span>
+            <div className="flex flex-shrink-0 items-center justify-between border-b border-[#E8F5E9] px-4 py-3">
+              <span className="text-sm font-bold text-[#1B1D1B]">Notifications</span>
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close notifications"
-                className="rounded-full p-1 text-[#8a958e] transition-all hover:bg-[#f8f9ff] hover:text-[#0b1c30]"
+                className="rounded-full p-1 text-[#9CA3AF] transition-all hover:bg-[#F8FAF7] hover:text-[#1B1D1B]"
               >
                 <MdClose className="text-base" />
               </button>
@@ -89,19 +89,19 @@ export default function NotificationsMenu() {
             {/* List */}
             <div className="min-h-0 flex-1 overflow-y-auto">
               {loading && (
-                <div className="px-4 py-10 text-center text-xs text-[#8a958e]">Loading...</div>
+                <div className="px-4 py-10 text-center text-xs text-[#9CA3AF]">Loading...</div>
               )}
 
               {!loading && error && (
-                <div className="px-4 py-10 text-center text-xs text-[#DC2626]">
+                <div className="px-4 py-10 text-center text-xs text-[#D32F2F]">
                   Couldn't load notifications.
                 </div>
               )}
 
               {!loading && !error && notifications.length === 0 && (
                 <div className="flex flex-col items-center justify-center gap-2 px-4 py-10 text-center">
-                  <MdNotificationsNone className="text-2xl text-[#c7cfd8]" />
-                  <span className="text-xs text-[#8a958e]">No notifications yet.</span>
+                  <MdNotificationsNone className="text-2xl text-[#9CA3AF]" />
+                  <span className="text-xs text-[#9CA3AF]">No notifications yet.</span>
                 </div>
               )}
 
@@ -111,23 +111,23 @@ export default function NotificationsMenu() {
                   <button
                     key={n.id}
                     onClick={() => markAsRead(n.id)}
-                    className="flex w-full gap-2.5 border-b border-[#f0f2fa] px-4 py-3 text-left transition-all last:border-0 hover:bg-[#f8f9ff]"
+                    className="flex w-full gap-2.5 border-b border-[#E8F5E9] px-4 py-3 text-left transition-all last:border-0 hover:bg-[#F8FAF7]"
                   >
                     <span
                       className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${
-                        n.is_read ? 'bg-transparent' : 'bg-[#006948]'
+                        n.is_read ? 'bg-transparent' : 'bg-[#2E7D32]'
                       }`}
                     />
                     <div className="flex min-w-0 flex-col gap-0.5">
                       <span
                         className={`text-xs ${
-                          n.is_read ? 'font-medium text-[#565e74]' : 'font-semibold text-[#0b1c30]'
+                          n.is_read ? 'font-medium text-[#6B7280]' : 'font-semibold text-[#1B1D1B]'
                         }`}
                       >
                         {n.title}
                       </span>
-                      <span className="text-[11px] leading-snug text-[#565e74]">{n.message}</span>
-                      <span className="mt-0.5 text-[10px] text-[#8a958e]">{timeAgo(n.created_at)}</span>
+                      <span className="text-[11px] leading-snug text-[#6B7280]">{n.message}</span>
+                      <span className="mt-0.5 text-[10px] text-[#9CA3AF]">{timeAgo(n.created_at)}</span>
                     </div>
                   </button>
                 ))}
@@ -135,7 +135,7 @@ export default function NotificationsMenu() {
               {!loading && !error && hasMore && (
                 <button
                   onClick={() => setExpanded((prev) => !prev)}
-                  className="flex w-full items-center justify-center gap-1.5 border-b border-[#f0f2fa] py-2.5 text-xs font-semibold text-[#006948] transition-all hover:bg-[#f0f9f5]"
+                  className="flex w-full items-center justify-center gap-1.5 border-b border-[#E8F5E9] py-2.5 text-xs font-semibold text-[#2E7D32] transition-all hover:bg-[#E8F5E9]"
                 >
                   {expanded ? (
                     <>
@@ -156,7 +156,7 @@ export default function NotificationsMenu() {
             <button
               onClick={markAllAsRead}
               disabled={unreadCount === 0}
-              className="flex flex-shrink-0 items-center justify-center gap-1.5 border-t border-[#f0f2fa] py-2.5 text-xs font-semibold text-[#006948] transition-all hover:bg-[#f0f9f5] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex flex-shrink-0 items-center justify-center gap-1.5 border-t border-[#E8F5E9] py-2.5 text-xs font-semibold text-[#2E7D32] transition-all hover:bg-[#E8F5E9] disabled:cursor-not-allowed disabled:opacity-40"
             >
               <MdDoneAll className="text-sm" />
               Mark all as read

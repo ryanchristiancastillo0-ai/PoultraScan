@@ -26,7 +26,7 @@ export default function ScanCard({ scan, onDelete, onView }) {
   return (
     <>
       <div className="bg-white rounded-xl border border-[#E5E7EB] p-3 sm:p-4 flex flex-col xs:flex-row gap-3">
-        <div className="w-14 h-14 rounded-lg overflow-hidden border border-[#E5E7EB] bg-[#F7F8F5] flex items-center justify-center flex-shrink-0">
+        <div className="w-14 h-14 rounded-lg overflow-hidden border border-[#E5E7EB] bg-[#F8FAF7] flex items-center justify-center flex-shrink-0">
           {src ? (
             <img className="w-full h-full object-cover" src={src} alt="Scan thumbnail" />
           ) : (
@@ -37,7 +37,7 @@ export default function ScanCard({ scan, onDelete, onView }) {
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap justify-between items-start gap-2 mb-1.5">
             <div className="min-w-0 max-w-full">
-              <p className="font-semibold text-[#111827] text-sm truncate">{scan.farm_name}</p>
+              <p className="font-semibold text-[#1B1D1B] text-sm truncate">{scan.farm_name}</p>
               <p className="text-xs text-[#9CA3AF] truncate">{scan.location} • {date}, {time}</p>
             </div>
             <div className="flex-shrink-0">
@@ -55,13 +55,13 @@ export default function ScanCard({ scan, onDelete, onView }) {
             <button
               onClick={() => onView(scan)}
               disabled={scan.status === 'PROCESSING'}
-              className="flex-1 py-1.5 rounded-lg border border-[#E5E7EB] text-xs font-semibold text-[#2F5D3A] hover:bg-[#EAF2EC] transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1"
+              className="flex-1 py-1.5 rounded-lg border border-[#E5E7EB] text-xs font-semibold text-[#2E7D32] hover:bg-[#E8F5E9] transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1"
             >
               <MdVisibility className="text-sm" /> View
             </button>
             <button
               onClick={() => setConfirmOpen(true)}
-              className="flex-1 py-1.5 rounded-lg border border-[#E5E7EB] text-xs font-semibold text-[#DC2626] hover:bg-[#FBEBEB] transition-colors flex items-center justify-center gap-1"
+              className="flex-1 py-1.5 rounded-lg border border-[#E5E7EB] text-xs font-semibold text-[#D32F2F] hover:bg-[#FFEBEE] transition-colors flex items-center justify-center gap-1"
             >
               <MdDelete className="text-sm" /> Delete
             </button>

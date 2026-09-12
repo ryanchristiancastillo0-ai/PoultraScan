@@ -15,11 +15,11 @@ export default function InfoModal({ isOpen, onClose, title, children }) {
 
       <div className="info-pop relative w-full max-w-lg max-h-[80vh] bg-white rounded-2xl shadow-xl flex flex-col overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#E5E7EB] flex-shrink-0">
-          <h2 className="text-base font-bold text-[#111827]">{title}</h2>
+          <h2 className="text-base font-bold text-[#1B1D1B]">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="p-1.5 rounded-full text-[#9CA3AF] hover:bg-[#F7F8F5] hover:text-[#111827] transition-colors"
+            className="p-1.5 rounded-full text-[#9CA3AF] hover:bg-[#F8FAF7] hover:text-[#1B1D1B] transition-colors"
           >
             <MdClose className="text-lg" />
           </button>

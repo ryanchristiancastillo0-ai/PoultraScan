@@ -11,9 +11,9 @@ export default function ChickenPredictionCard({ chicken }) {
     <div className="border border-[#E5E7EB] rounded-xl overflow-hidden">
       <button
         onClick={() => setExpanded((e) => !e)}
-        className="w-full flex items-center gap-3 p-3 hover:bg-[#F7F8F5] transition-colors text-left"
+        className="w-full flex items-center gap-3 p-3 hover:bg-[#F8FAF7] transition-colors text-left"
       >
-        <div className="w-10 h-10 rounded-lg overflow-hidden border border-[#E5E7EB] bg-[#F7F8F5] flex items-center justify-center flex-shrink-0">
+        <div className="w-10 h-10 rounded-lg overflow-hidden border border-[#E5E7EB] bg-[#F8FAF7] flex items-center justify-center flex-shrink-0">
           {src ? (
             <img src={src} alt="" className="w-full h-full object-cover" />
           ) : (
@@ -22,11 +22,11 @@ export default function ChickenPredictionCard({ chicken }) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-sm font-semibold text-[#111827]">
+            <p className="text-sm font-semibold text-[#1B1D1B]">
               Chicken #{chicken.tracking_id ?? chicken.detected_chicken_id}
             </p>
             <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-              chicken.healthy ? 'bg-[#EAF2EC] text-[#2F5D3A]' : 'bg-[#FBEBEB] text-[#B91C1C]'
+              chicken.healthy ? 'bg-[#E8F5E9] text-[#2E7D32]' : 'bg-[#FFEBEE] text-[#D32F2F]'
             }`}>
               {chicken.disease}
             </span>
@@ -53,21 +53,21 @@ export default function ChickenPredictionCard({ chicken }) {
           </div>
 
           {chicken.care_tips && (
-            <div className="p-3 rounded-lg bg-[#F7F8F5] border border-[#E5E7EB]">
+            <div className="p-3 rounded-lg bg-[#F8FAF7] border border-[#E5E7EB]">
               <p className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280] mb-1">Care Tips</p>
               <p className="text-sm text-[#374151] leading-relaxed">{chicken.care_tips}</p>
             </div>
           )}
 
           {chicken.recommendation && (
-            <div className="p-3 rounded-lg bg-[#EAF2EC] border border-[#D3E4D8]">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-[#2F5D3A] mb-1">Recommendation</p>
+            <div className="p-3 rounded-lg bg-[#E8F5E9] border border-[#E8F5E9]">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-[#2E7D32] mb-1">Recommendation</p>
               <p className="text-sm text-[#374151] leading-relaxed">{chicken.recommendation}</p>
             </div>
           )}
 
           {chicken.prevention_tips && (
-            <div className="p-3 rounded-lg bg-[#FBF4E6] border border-[#F0E2C0]">
+            <div className="p-3 rounded-lg bg-[#FFF6E0] border border-[#F0E2C0]">
               <p className="text-[10px] font-bold uppercase tracking-wider text-[#B45309] mb-1">Prevention Tips</p>
               <p className="text-sm text-[#374151] leading-relaxed">{chicken.prevention_tips}</p>
             </div>

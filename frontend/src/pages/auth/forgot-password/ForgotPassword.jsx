@@ -72,29 +72,29 @@ export default function ForgotPassword() {
   const emailFloated = emailFocused || email.length > 0;
 
   return (
-    <div className="bg-[#f8f9ff] min-h-screen flex items-center justify-center p-4 md:p-6 font-sans antialiased text-[#0b1c30] w-full">
+    <div className="bg-[#F8FAF7] min-h-screen flex items-center justify-center p-4 md:p-6 font-sans antialiased text-[#1B1D1B] w-full">
       <main className="w-full max-w-md mx-auto">
-        <div className="bg-white rounded-[24px] p-8 md:p-12 shadow-[0_20px_50px_-12px_rgba(0,105,72,0.12)] border border-[#e5eeff] flex flex-col items-center text-center">
+        <div className="bg-white rounded-[24px] p-8 md:p-12 shadow-[0_20px_50px_-12px_rgba(0,105,72,0.12)] border border-[#E8F5E9] flex flex-col items-center text-center">
 
           {/* Logo */}
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#006948] to-[#00855d] flex items-center justify-center shadow-[0_8px_20px_rgba(0,105,72,0.35)] mb-4">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#2E7D32] to-[#43A047] flex items-center justify-center shadow-[0_8px_20px_rgba(0,105,72,0.35)] mb-4">
             <FiFeather className="text-white text-3xl" />
           </div>
 
           {isSuccess ? (
             /* Final Success State */
             <div className="w-full flex flex-col items-center animate-[fadeIn_0.3s_ease-out]">
-              <div className="w-16 h-16 bg-[#e6f4ea] text-[#006948] rounded-full flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-[#E8F5E9] text-[#2E7D32] rounded-full flex items-center justify-center mb-6">
                 <FiCheckCircle className="text-3xl" />
               </div>
-              <h1 className="text-2xl font-semibold tracking-tight text-[#0b1c30] mb-3">
+              <h1 className="text-2xl font-semibold tracking-tight text-[#1B1D1B] mb-3">
                 Password Reset Successfully
               </h1>
-              <p className="text-base text-[#565e74] mb-8 leading-relaxed">
+              <p className="text-base text-[#6B7280] mb-8 leading-relaxed">
                 You can now log back in with your new password.
               </p>
               <button
-                className="w-full h-[56px] bg-[#006948] hover:bg-[#00855d] active:scale-[0.98] text-white rounded-lg font-bold text-base transition-all"
+                className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#43A047] active:scale-[0.98] text-white rounded-lg font-bold text-base transition-all"
                 onClick={() => navigate('/login')}
               >
                 Go to Sign In
@@ -104,25 +104,25 @@ export default function ForgotPassword() {
           ) : step === 'request' ? (
             /* Step 1: Enter Email */
             <>
-              <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0b1c30] mb-3">
+              <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#1B1D1B] mb-3">
                 Reset Your Password
               </h1>
-              <p className="text-base text-[#565e74] mb-8 leading-relaxed">
+              <p className="text-base text-[#6B7280] mb-8 leading-relaxed">
                 Enter your email address and we'll send you a 6-character reset code.
               </p>
 
               <form onSubmit={handleRequestCode} className="w-full flex flex-col gap-6">
                 {error && (
-                  <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-2 text-center">
+                  <div className="text-sm text-[#D32F2F] bg-[#FFEBEE] border border-[#F3C9C9] rounded-lg px-4 py-2 text-center">
                     {error}
                   </div>
                 )}
 
                 <div className="relative w-full">
-                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#bccac0] bg-white focus-within:border-[#006948] focus-within:ring-4 focus-within:ring-[#006948]/10 transition-all duration-300 px-5">
-                    <FiMail className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${emailFocused ? 'text-[#006948]' : 'text-[#565e74]'}`} />
+                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
+                    <FiMail className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${emailFocused ? 'text-[#2E7D32]' : 'text-[#6B7280]'}`} />
                     <input
-                      className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#0b1c30] text-base outline-none peer"
+                      className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#1B1D1B] text-base outline-none peer"
                       id="email"
                       name="email"
                       required
@@ -136,8 +136,8 @@ export default function ForgotPassword() {
                       htmlFor="email"
                       className={`absolute left-14 origin-left pointer-events-none transition-all duration-250 ease-[cubic-bezier(0.25,0.8,0.25,1)] ${
                         emailFloated
-                          ? 'top-1.5 scale-[0.82] font-semibold text-[#006948]'
-                          : 'top-1/2 -translate-y-1/2 scale-100 text-[#8a958e]'
+                          ? 'top-1.5 scale-[0.82] font-semibold text-[#2E7D32]'
+                          : 'top-1/2 -translate-y-1/2 scale-100 text-[#9CA3AF]'
                       }`}
                     >
                       Email address
@@ -146,7 +146,7 @@ export default function ForgotPassword() {
                 </div>
 
                 <button
-                  className="w-full h-[56px] bg-[#006948] hover:bg-[#00855d] active:scale-[0.98] text-white rounded-lg font-bold text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] transition-all mt-2 flex justify-center items-center disabled:opacity-50"
+                  className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#43A047] active:scale-[0.98] text-white rounded-lg font-bold text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] transition-all mt-2 flex justify-center items-center disabled:opacity-50"
                   type="submit"
                   disabled={loading}
                 >
@@ -158,29 +158,29 @@ export default function ForgotPassword() {
           ) : (
             /* Step 2: Enter Code + New Password */
             <>
-              <div className="w-16 h-16 bg-[#e6f4ea] text-[#006948] rounded-full flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-[#E8F5E9] text-[#2E7D32] rounded-full flex items-center justify-center mb-6">
                 <FiCheckCircle className="text-3xl" />
               </div>
-              <h1 className="text-2xl font-semibold tracking-tight text-[#0b1c30] mb-3">
+              <h1 className="text-2xl font-semibold tracking-tight text-[#1B1D1B] mb-3">
                 Check Your Email
               </h1>
-              <p className="text-base text-[#565e74] mb-8 leading-relaxed">
-                We've sent a 6-character code to <span className="font-semibold text-[#0b1c30]">{email}</span>. Enter it below with your new password.
+              <p className="text-base text-[#6B7280] mb-8 leading-relaxed">
+                We've sent a 6-character code to <span className="font-semibold text-[#1B1D1B]">{email}</span>. Enter it below with your new password.
               </p>
 
               <form onSubmit={handleResetPassword} className="w-full flex flex-col gap-5">
                 {error && (
-                  <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-2 text-center">
+                  <div className="text-sm text-[#D32F2F] bg-[#FFEBEE] border border-[#F3C9C9] rounded-lg px-4 py-2 text-center">
                     {error}
                   </div>
                 )}
 
                 {/* Code Field */}
                 <div className="relative w-full">
-                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#bccac0] bg-white focus-within:border-[#006948] focus-within:ring-4 focus-within:ring-[#006948]/10 transition-all duration-300 px-5">
-                    <FiHash className="text-xl mr-3 flex-shrink-0 text-[#565e74]" />
+                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
+                    <FiHash className="text-xl mr-3 flex-shrink-0 text-[#6B7280]" />
                     <input
-                      className="w-full h-full bg-transparent border-0 p-0 text-[#0b1c30] text-base outline-none tracking-[0.3em] uppercase font-semibold"
+                      className="w-full h-full bg-transparent border-0 p-0 text-[#1B1D1B] text-base outline-none tracking-[0.3em] uppercase font-semibold"
                       placeholder="XXXXXX"
                       maxLength={6}
                       required
@@ -192,10 +192,10 @@ export default function ForgotPassword() {
 
                 {/* New Password */}
                 <div className="relative w-full">
-                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#bccac0] bg-white focus-within:border-[#006948] focus-within:ring-4 focus-within:ring-[#006948]/10 transition-all duration-300 px-5">
-                    <FiLock className="text-xl mr-3 flex-shrink-0 text-[#565e74]" />
+                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
+                    <FiLock className="text-xl mr-3 flex-shrink-0 text-[#6B7280]" />
                     <input
-                      className="w-full h-full bg-transparent border-0 p-0 text-[#0b1c30] text-base outline-none"
+                      className="w-full h-full bg-transparent border-0 p-0 text-[#1B1D1B] text-base outline-none"
                       type="password"
                       placeholder="New password"
                       required
@@ -207,10 +207,10 @@ export default function ForgotPassword() {
 
                 {/* Confirm Password */}
                 <div className="relative w-full">
-                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#bccac0] bg-white focus-within:border-[#006948] focus-within:ring-4 focus-within:ring-[#006948]/10 transition-all duration-300 px-5">
-                    <FiLock className="text-xl mr-3 flex-shrink-0 text-[#565e74]" />
+                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
+                    <FiLock className="text-xl mr-3 flex-shrink-0 text-[#6B7280]" />
                     <input
-                      className="w-full h-full bg-transparent border-0 p-0 text-[#0b1c30] text-base outline-none"
+                      className="w-full h-full bg-transparent border-0 p-0 text-[#1B1D1B] text-base outline-none"
                       type="password"
                       placeholder="Confirm new password"
                       required
@@ -221,7 +221,7 @@ export default function ForgotPassword() {
                 </div>
 
                 <button
-                  className="w-full h-[56px] bg-[#006948] hover:bg-[#00855d] active:scale-[0.98] text-white rounded-lg font-bold text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] transition-all mt-2 flex justify-center items-center disabled:opacity-50"
+                  className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#43A047] active:scale-[0.98] text-white rounded-lg font-bold text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] transition-all mt-2 flex justify-center items-center disabled:opacity-50"
                   type="submit"
                   disabled={loading}
                 >
@@ -230,7 +230,7 @@ export default function ForgotPassword() {
 
                 <button
                   type="button"
-                  className="text-sm text-[#565e74] hover:text-[#006948] transition-colors"
+                  className="text-sm text-[#6B7280] hover:text-[#2E7D32] transition-colors"
                   onClick={() => setStep('request')}
                 >
                   Didn't get a code? Try again
@@ -242,7 +242,7 @@ export default function ForgotPassword() {
           {/* Back to Login Anchor */}
           <div className="mt-8">
             
-             <a className="text-sm font-semibold text-[#006948] hover:text-[#00855d] transition-colors flex items-center gap-2"
+             <a className="text-sm font-semibold text-[#2E7D32] hover:text-[#43A047] transition-colors flex items-center gap-2"
               href="/login"
             >
               <FiArrowLeft className="text-lg" />

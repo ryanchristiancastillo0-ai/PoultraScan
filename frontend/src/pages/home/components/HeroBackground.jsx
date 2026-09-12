@@ -5,7 +5,7 @@ export default function HeroBackground({ image = HERO_BG_IMAGE }) {
         className="absolute inset-0 scale-110 bg-cover bg-center blur-sm "
         style={{ backgroundImage: `url('${image}')` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#e4e3df] via-[#e4e3df]/20 to-[#e4e3df]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAF7] via-[#F8FAF7]/20 to-[#F8FAF7]" />
     </div>
   );
 }

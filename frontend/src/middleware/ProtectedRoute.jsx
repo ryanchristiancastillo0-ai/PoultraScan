@@ -12,7 +12,7 @@ export default function ProtectedRoute() {
   }, [fetchCurrentUser]);
 
   if (initializing) {
-    return <div className="min-h-[100dvh] flex items-center justify-center text-[#3d4a42]"><LoadingScreen/></div>;
+    return <div className="min-h-[100dvh] flex items-center justify-center text-[#6B7280]"><LoadingScreen/></div>;
   }
 
   if (!user) {

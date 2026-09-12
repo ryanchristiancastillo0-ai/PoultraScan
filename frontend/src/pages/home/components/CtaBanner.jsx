@@ -14,7 +14,7 @@ export default function CtaBanner() {
           style={{ backgroundImage: "url('/img/get_started_logo.png')" }}
         />
         <div className="absolute inset-0 " />
-        <ScanCorners color="#e4e3df" className="opacity-30" />
+        <ScanCorners color="#F8FAF7" className="opacity-30" />
         <h2 className="relative text-3xl md:text-4xl font-bold text-white tracking-tight text-balance">
           Give every bird a checkup, every day.
         </h2>
@@ -23,7 +23,7 @@ export default function CtaBanner() {
         </p>
         <button
           onClick={() => navigate('/register')}
-          className="relative mt-7 bg-white text-[#006F4E] font-semibold px-7 py-3.5 rounded-lg inline-flex items-center gap-2 hover:bg-[#e4e3df] active:scale-95 transition-all duration-150"
+          className="relative mt-7 bg-white text-[#2E7D32] font-semibold px-7 py-3.5 rounded-lg inline-flex items-center gap-2 hover:bg-[#F8FAF7] active:scale-95 transition-all duration-150"
         >
           Get started free
           <MdArrowForward />

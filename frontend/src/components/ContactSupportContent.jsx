@@ -10,14 +10,14 @@ export default function ContactSupportContent() {
 
       
        <a href={`mailto:${SUPPORT_EMAIL}`}
-        className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#EAF2EC] border border-[#CFE2D4] hover:bg-[#DFEDE3] transition-colors"
+        className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#E8F5E9] border border-[#CDE3D1] hover:bg-[#E8F5E9] transition-colors"
       >
-        <span className="w-9 h-9 rounded-full bg-[#2F5D3A] flex items-center justify-center flex-shrink-0">
+        <span className="w-9 h-9 rounded-full bg-[#2E7D32] flex items-center justify-center flex-shrink-0">
           <MdEmail className="text-white text-lg" />
         </span>
         <div className="flex flex-col min-w-0">
           <span className="text-xs text-[#6B7280] font-medium">Email us at</span>
-          <span className="text-sm font-bold text-[#2F5D3A] break-all">{SUPPORT_EMAIL}</span>
+          <span className="text-sm font-bold text-[#2E7D32] break-all">{SUPPORT_EMAIL}</span>
         </div>
       </a>
 

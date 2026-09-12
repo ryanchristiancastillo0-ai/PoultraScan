@@ -3,6 +3,15 @@ Uses Gemini vision to detect and count chickens directly from an image,
 including approximate bounding boxes and per-chicken confidence. Pure
 utility — only talks to Gemini and returns parsed results. No DB writes
 and no business logic here (that stays in detection_service.py).
+
+Model strategy (adaptive):
+  1. Always try FREE_MODELS first (fast, zero-cost, same quality tier
+     for this task on the free quota).
+  2. If every free model fails (rate-limit, quota exhaustion, transient
+     5xx, malformed response), fall back to PAID_MODELS — but only if
+     billing is enabled for this API key.
+  3. If billing is off, fail fast with GeminiCountingError instead of
+     burning time on calls that will 4xx anyway.
 """
 
 import os
@@ -17,12 +26,33 @@ load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-# Same free-tier fallback chain used elsewhere in the project.
+# ---------------------------------------------------------------------------
+# Model tiers
+# ---------------------------------------------------------------------------
+# Free-tier fallback chain. Tried first, always.
 FREE_MODELS = [
     "gemini-2.5-flash",
     "gemini-2.5-flash-lite",
     "gemini-3-flash-preview",
 ]
+
+# Paid-tier fallback chain. Only used when every free model has failed AND
+# billing is enabled on the API key.
+PAID_MODELS = [
+    "gemini-3.8-flash",
+    "gemini-3.7-flash",
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+    "gemini-2.5-pro",
+]
+
+# Billing toggle. Defaults to "enabled" so the system is adaptive out of the
+# box — paid models will simply 4xx quickly and be skipped if billing is not
+# actually on. Set GEMINI_BILLING_ENABLED=false to skip the paid tier entirely
+# (saves a wasted round-trip when you know billing is off).
+BILLING_ENABLED = os.getenv("GEMINI_BILLING_ENABLED", "true").strip().lower() in (
+    "1", "true", "yes", "on",
+)
 
 MIN_REALISTIC_COUNT = 0
 MAX_REALISTIC_COUNT = 500
@@ -72,9 +102,9 @@ is true, return an empty detections array.
 
 
 class GeminiCountingError(Exception):
-    """Raised when every model in FREE_MODELS fails to return a usable result
-    (e.g. API errors, malformed responses). This is an infra/model failure,
-    not a comment on the image content."""
+    """Raised when every model in the active fallback chain fails to return a
+    usable result (e.g. API errors, malformed responses). This is an
+    infra/model failure, not a comment on the image content."""
     pass
 
 
@@ -83,6 +113,22 @@ class ImageQualityError(Exception):
     can't be used — no chicken visible and/or the image is too blurry. This
     is a user-actionable error, distinct from GeminiCountingError."""
     pass
+
+
+def _build_model_chain() -> list[tuple[str, str]]:
+    """
+    Returns the ordered fallback chain as a list of (model_name, tier) tuples.
+
+    Free models are always first (fast + no cost). Paid models are appended
+    only when billing is enabled, so we don't waste a round-trip on calls
+    that will 4xx if the API key isn't billed.
+    """
+    chain: list[tuple[str, str]] = [(m, "free") for m in FREE_MODELS]
+
+    if BILLING_ENABLED:
+        chain.extend((m, "paid") for m in PAID_MODELS)
+
+    return chain
 
 
 def _detect_mime_type(image_bytes: bytes) -> str:
@@ -166,24 +212,35 @@ def count_chickens_with_gemini(image_bytes: bytes) -> dict:
     Asks Gemini to detect and count chickens, with bounding boxes and
     per-chicken confidence, from the full image.
 
-    Tries each model in FREE_MODELS in order until one succeeds.
+    Adaptive model chain:
+        FREE_MODELS first, then PAID_MODELS (if billing is enabled).
+        The first model that returns a usable result wins and we stop.
 
-    Returns a dict with: total_chickens (int), detections (list of
-    {confidence, x, y, width, height}), confidence_note (str),
-    model_used (str), raw_response (dict)
+    Returns a dict with:
+        total_chickens (int)
+        detections (list of {confidence, x, y, width, height})
+        confidence_note (str)
+        model_used (str)
+        model_tier ("free" | "paid")
+        raw_response (dict)
 
     Raises:
         ImageQualityError: if Gemini determines the image is too blurry
             or no chicken is visible. This is a user-fixable issue, so
             it is raised immediately rather than trying the next model.
-        GeminiCountingError: if every model in FREE_MODELS fails to
+        GeminiCountingError: if every model in the active chain fails to
             return a usable response (infra/parsing failure).
     """
     mime_type = _detect_mime_type(image_bytes)
     image_width, image_height = _get_image_dimensions(image_bytes)
 
-    for model_name in FREE_MODELS:
+    model_chain = _build_model_chain()
+    if not BILLING_ENABLED:
+        print("[GEMINI COUNT] Billing disabled — using free models only.")
+
+    for model_name, tier in model_chain:
         try:
+            print(f"[GEMINI COUNT] Trying {tier} model: {model_name}")
             response = client.models.generate_content(
                 model=model_name,
                 contents=[
@@ -213,16 +270,23 @@ def count_chickens_with_gemini(image_bytes: bytes) -> dict:
             # but returned zero usable detections, treat it as a quality issue
             # rather than silently returning a "0 chickens" success result.
             if len(detections) == 0:
-                print(f"[GEMINI COUNT] '{model_name}' reported chicken_visible=True but returned no usable detections.")
+                print(
+                    f"[GEMINI COUNT] '{model_name}' reported chicken_visible=True "
+                    f"but returned no usable detections."
+                )
                 raise ImageQualityError(DEFAULT_IMAGE_QUALITY_MESSAGE)
 
-            print(f"[GEMINI COUNT] Success using model: {model_name} -> {len(detections)} chickens")
+            print(
+                f"[GEMINI COUNT] Success using {tier} model: {model_name} "
+                f"-> {len(detections)} chickens"
+            )
 
             return {
                 "total_chickens": len(detections),
                 "detections": detections,
                 "confidence_note": data.get("confidence_note", ""),
                 "model_used": model_name,
+                "model_tier": tier,
                 "raw_response": data
             }
 
@@ -233,7 +297,9 @@ def count_chickens_with_gemini(image_bytes: bytes) -> dict:
             raise
 
         except Exception as e:
-            print(f"[GEMINI COUNT] Model '{model_name}' failed: {e}. Trying next model...")
+            print(f"[GEMINI COUNT] Model '{model_name}' ({tier}) failed: {e}. Trying next model...")
             continue
 
-    raise GeminiCountingError("All Gemini models failed to return a usable chicken count.")
+    raise GeminiCountingError(
+        "All Gemini models failed to return a usable chicken count."
+    )

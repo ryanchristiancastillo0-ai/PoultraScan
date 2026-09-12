@@ -31,18 +31,18 @@ export default function BottomNav() {
       >
         <span
           className={`flex h-8 w-11 items-center justify-center rounded-full transition-colors duration-200 ${
-            active ? 'bg-[#EAF2EC]' : 'bg-transparent group-active:bg-[#F5F6F4]'
+            active ? 'bg-[#E8F5E9]' : 'bg-transparent group-active:bg-[#F8FAF7]'
           }`}
         >
           <Icon
             className={`text-[20px] transition-colors duration-200 ${
-              active ? 'text-[#2F5D3A]' : 'text-[#9CA3AF] group-active:text-[#6B7280]'
+              active ? 'text-[#2E7D32]' : 'text-[#9CA3AF] group-active:text-[#6B7280]'
             }`}
           />
         </span>
         <span
           className={`h-[3px] w-[3px] rounded-full transition-opacity duration-200 ${
-            active ? 'bg-[#2F5D3A] opacity-100' : 'opacity-0'
+            active ? 'bg-[#2E7D32] opacity-100' : 'opacity-0'
           }`}
         />
       </button>
@@ -63,7 +63,7 @@ export default function BottomNav() {
             <button
               onClick={() => setQuickScanOpen(true)}
               aria-label="Quick scan"
-              className="relative -top-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#2F5D3A] text-white shadow-md shadow-[#2F5D3A]/20 ring-[3px] ring-white transition-transform duration-150 hover:bg-[#254A2E] active:scale-90"
+              className="relative -top-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#2E7D32] text-white shadow-md shadow-[#2E7D32]/20 ring-[3px] ring-white transition-transform duration-150 hover:bg-[#276C2A] active:scale-90"
             >
               <MdAdd className="text-xl" />
             </button>

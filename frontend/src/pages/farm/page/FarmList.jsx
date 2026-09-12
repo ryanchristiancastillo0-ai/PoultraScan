@@ -45,7 +45,7 @@ export default function FarmsList() {
   };
 
   return (
-    <div className="bg-[#F7F8F5] text-[#111827] antialiased min-h-screen mb-10 lg:mb-0 flex flex-col font-['Manrope','Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
+    <div className="bg-[#F8FAF7] text-[#1B1D1B] antialiased min-h-screen mb-10 lg:mb-0 flex flex-col font-['Manrope','Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
           
   <TopNav />
 
@@ -59,7 +59,7 @@ export default function FarmsList() {
         <div className="flex items-center gap-2 text-xs text-[#9CA3AF] mb-4">
           <span>Dashboard</span>
           <span>/</span>
-          <span className="text-[#2F5D3A] font-semibold">Farms</span>
+          <span className="text-[#2E7D32] font-semibold">Farms</span>
         </div>
 
         {/* Header */}
@@ -74,12 +74,12 @@ export default function FarmsList() {
 
         <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-6">
           <div>
-            <h1 className="text-2xl md:text-[28px] font-bold text-[#111827] tracking-tight">My Farms</h1>
+            <h1 className="text-2xl md:text-[28px] font-bold text-[#1B1D1B] tracking-tight">My Farms</h1>
             <p className="text-[#6B7280] text-sm mt-1.5">
               {activeFarm ? (
                 <>
                   Scans will be saved to{' '}
-                  <span className="font-semibold text-[#111827]">{activeFarm.farm_name}</span>.
+                  <span className="font-semibold text-[#1B1D1B]">{activeFarm.farm_name}</span>.
                 </>
               ) : (
                 'Select a farm below to start saving scans to it.'
@@ -88,7 +88,7 @@ export default function FarmsList() {
           </div>
           <button
             onClick={() => setAddOpen(true)}
-            className="bg-[#2F5D3A] text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#274d31] transition-colors active:scale-[0.98] w-full sm:w-auto justify-center shadow-sm"
+            className="bg-[#2E7D32] text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#276C2A] transition-colors active:scale-[0.98] w-full sm:w-auto justify-center shadow-sm"
           >
             <MdAdd className="text-lg" />
             Add New Farm
@@ -106,8 +106,8 @@ export default function FarmsList() {
         {!loading && !error && farms?.length > 0 && (
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
             <div className="flex items-center gap-3">
-              <h2 className="text-[15px] font-semibold text-[#111827]">All Farms</h2>
-              <span className="text-xs font-semibold text-[#2F5D3A] bg-[#EEF3EF] px-2.5 py-1 rounded-full">
+              <h2 className="text-[15px] font-semibold text-[#1B1D1B]">All Farms</h2>
+              <span className="text-xs font-semibold text-[#2E7D32] bg-[#E8F5E9] px-2.5 py-1 rounded-full">
                 {farms.length} total
               </span>
             </div>
@@ -118,7 +118,7 @@ export default function FarmsList() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search farms..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white border border-[#E5E7EB] text-sm text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:border-[#2F5D3A] focus:ring-2 focus:ring-[#2F5D3A]/20 transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white border border-[#E5E7EB] text-sm text-[#1B1D1B] placeholder-[#9CA3AF] focus:outline-none focus:border-[#2E7D32] focus:ring-2 focus:ring-[#2E7D32]/20 transition-colors"
               />
             </div>
           </div>
@@ -129,11 +129,11 @@ export default function FarmsList() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="bg-white rounded-xl border border-[#E5E7EB] overflow-hidden shadow-sm animate-pulse">
-                <div className="aspect-[16/10] bg-[#F7F8F5]" />
+                <div className="aspect-[16/10] bg-[#F8FAF7]" />
                 <div className="p-5 space-y-3">
                   <div className="h-4 bg-[#E5E7EB] rounded w-2/3" />
                   <div className="h-3 bg-[#E5E7EB] rounded w-1/2" />
-                  <div className="h-10 bg-[#F7F8F5] rounded mt-4" />
+                  <div className="h-10 bg-[#F8FAF7] rounded mt-4" />
                 </div>
               </div>
             ))}
@@ -142,8 +142,8 @@ export default function FarmsList() {
 
         {/* Error */}
         {error && !loading && (
-          <div className="text-center py-16 bg-white rounded-xl border border-[#FECACA]">
-            <p className="text-sm text-[#DC2626] font-medium">{error}</p>
+          <div className="text-center py-16 bg-white rounded-xl border border-[#FFEBEE]">
+            <p className="text-sm text-[#D32F2F] font-medium">{error}</p>
           </div>
         )}
 
@@ -166,7 +166,7 @@ export default function FarmsList() {
         {!loading && !error && farms?.length > 0 && filteredFarms?.length === 0 && (
           <div className="text-center py-16 bg-white rounded-xl border border-[#E5E7EB] shadow-sm">
             <p className="text-sm text-[#6B7280]">
-              No farms match <span className="font-semibold text-[#111827]">"{query}"</span>.
+              No farms match <span className="font-semibold text-[#1B1D1B]">"{query}"</span>.
             </p>
           </div>
         )}
@@ -174,16 +174,16 @@ export default function FarmsList() {
         {/* Empty state */}
         {!loading && !error && farms?.length === 0 && (
           <div className="text-center py-20 bg-white rounded-xl border border-dashed border-[#E5E7EB] flex flex-col items-center gap-4 shadow-sm">
-            <div className="w-16 h-16 rounded-xl bg-[#EEF3EF] flex items-center justify-center text-[#2F5D3A]">
+            <div className="w-16 h-16 rounded-xl bg-[#E8F5E9] flex items-center justify-center text-[#2E7D32]">
               <MdGridView className="text-3xl" />
             </div>
             <div>
-              <h3 className="text-[17px] font-bold text-[#111827]">No farms yet</h3>
+              <h3 className="text-[17px] font-bold text-[#1B1D1B]">No farms yet</h3>
               <p className="text-sm text-[#6B7280] mt-1">Get started by adding your first farm location.</p>
             </div>
             <button
               onClick={() => setAddOpen(true)}
-              className="bg-[#2F5D3A] text-white px-6 py-3 rounded-lg text-sm font-semibold hover:bg-[#274d31] transition-colors active:scale-[0.98] flex items-center gap-2 mt-2"
+              className="bg-[#2E7D32] text-white px-6 py-3 rounded-lg text-sm font-semibold hover:bg-[#276C2A] transition-colors active:scale-[0.98] flex items-center gap-2 mt-2"
             >
               <MdAdd className="text-lg" />
               Add Your First Farm

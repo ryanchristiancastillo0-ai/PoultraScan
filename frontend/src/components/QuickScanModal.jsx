@@ -88,11 +88,11 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
 
       <div className="qs-sheet relative w-full sm:max-w-sm bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl p-5 pb-8 sm:pb-5">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-base font-bold text-[#111827]">Quick Scan</h2>
+          <h2 className="text-base font-bold text-[#1B1D1B]">Quick Scan</h2>
           <button
             onClick={handleClose}
             aria-label="Close"
-            className="p-1.5 rounded-full text-[#9CA3AF] hover:bg-[#F7F8F5] hover:text-[#111827] transition-colors"
+            className="p-1.5 rounded-full text-[#9CA3AF] hover:bg-[#F8FAF7] hover:text-[#1B1D1B] transition-colors"
           >
             <MdClose className="text-lg" />
           </button>
@@ -109,15 +109,15 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
         {/* No farm selected — block scanning entirely */}
         {!hasFarm && (
           <div className="flex flex-col items-center gap-3 py-6">
-            <div className="flex items-start gap-2 bg-[#FFF7E6] border border-[#F5D998] rounded-xl p-3 w-full">
-              <MdOutlineAgriculture className="text-[#B7791F] flex-shrink-0 mt-0.5 text-lg" />
-              <p className="text-sm text-[#92600D]">
+            <div className="flex items-start gap-2 bg-[#FFF6E0] border border-[#F0E2C0] rounded-xl p-3 w-full">
+              <MdOutlineAgriculture className="text-[#B45309] flex-shrink-0 mt-0.5 text-lg" />
+              <p className="text-sm text-[#B45309]">
                 Please create a farm first before running a scan.
               </p>
             </div>
             <button
               onClick={handleGoToFarms}
-              className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#2F5D3A] text-white font-semibold hover:bg-[#254A2E] active:scale-[0.98] transition-all shadow-sm w-full"
+              className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#2E7D32] text-white font-semibold hover:bg-[#276C2A] active:scale-[0.98] transition-all shadow-sm w-full"
             >
               Create a Farm
               <MdArrowForward className="text-lg" />
@@ -129,16 +129,16 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={handleCaptureClick}
-              className="flex flex-col items-center gap-2 py-6 rounded-xl bg-[#2F5D3A] text-white font-semibold hover:bg-[#254A2E] active:scale-[0.97] transition-all shadow-sm"
+              className="flex flex-col items-center gap-2 py-6 rounded-xl bg-[#2E7D32] text-white font-semibold hover:bg-[#276C2A] active:scale-[0.97] transition-all shadow-sm"
             >
               <MdCameraAlt className="text-2xl" />
               <span className="text-sm">Capture</span>
             </button>
             <button
               onClick={handleUploadClick}
-              className="flex flex-col items-center gap-2 py-6 rounded-xl bg-white border border-[#E5E7EB] text-[#111827] font-semibold hover:bg-[#F7F8F5] active:scale-[0.97] transition-all"
+              className="flex flex-col items-center gap-2 py-6 rounded-xl bg-white border border-[#E5E7EB] text-[#1B1D1B] font-semibold hover:bg-[#F8FAF7] active:scale-[0.97] transition-all"
             >
-              <MdUpload className="text-2xl text-[#2F5D3A]" />
+              <MdUpload className="text-2xl text-[#2E7D32]" />
               <span className="text-sm">Upload</span>
             </button>
           </div>
@@ -146,20 +146,20 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
 
         {hasFarm && status === 'processing' && (
           <div className="flex flex-col items-center justify-center py-10 gap-3">
-            <div className="w-10 h-10 border-2 border-[#E5E7EB] border-t-[#2F5D3A] rounded-full animate-spin" />
+            <div className="w-10 h-10 border-2 border-[#E5E7EB] border-t-[#2E7D32] rounded-full animate-spin" />
             <p className="text-sm text-[#6B7280] font-medium">Analyzing flock...</p>
           </div>
         )}
 
         {hasFarm && status === 'error' && (
           <div className="flex flex-col items-center gap-3 py-6">
-            <div className="flex items-start gap-2 bg-[#FBEBEB] border border-[#F3C9C9] rounded-xl p-3 w-full">
-              <MdWarningAmber className="text-[#DC2626] flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-[#B91C1C]">{error}</p>
+            <div className="flex items-start gap-2 bg-[#FFEBEE] border border-[#F3C9C9] rounded-xl p-3 w-full">
+              <MdWarningAmber className="text-[#D32F2F] flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-[#D32F2F]">{error}</p>
             </div>
             <button
               onClick={reset}
-              className="text-sm font-semibold text-[#2F5D3A] hover:underline"
+              className="text-sm font-semibold text-[#2E7D32] hover:underline"
             >
               Try again
             </button>
@@ -168,9 +168,9 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
 
         {hasFarm && status === 'done' && summary && (
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EAF2EC] border border-[#CFE2D4]">
-              <MdCheckCircle className="text-[#2F5D3A] text-lg flex-shrink-0" />
-              <span className="text-sm font-semibold text-[#2F5D3A]">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#E8F5E9] border border-[#CDE3D1]">
+              <MdCheckCircle className="text-[#2E7D32] text-lg flex-shrink-0" />
+              <span className="text-sm font-semibold text-[#2E7D32]">
                 {summary.chickenCount} {summary.chickenCount === 1 ? 'chicken' : 'chickens'} scanned · {summary.healthyCount}/{summary.chickenCount} healthy
               </span>
             </div>
@@ -192,7 +192,7 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
 
             <button
               onClick={handleMoreInfo}
-              className="flex items-center justify-center gap-2 py-3 rounded-lg bg-[#2F5D3A] text-white font-semibold hover:bg-[#254A2E] active:scale-[0.98] transition-all shadow-sm"
+              className="flex items-center justify-center gap-2 py-3 rounded-lg bg-[#2E7D32] text-white font-semibold hover:bg-[#276C2A] active:scale-[0.98] transition-all shadow-sm"
             >
               More Info
               <MdArrowForward className="text-lg" />

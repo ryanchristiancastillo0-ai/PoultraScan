@@ -73,7 +73,7 @@ export default function Testimonial() {
 
   return (
     <section id="results" className="scroll-mt-20 max-w-[1200px] mx-auto px-4 md:px-8 py-20 md:py-28">
-      <Reveal className="bg-[#2C3E50] rounded-2xl px-6 py-14 md:px-16 md:py-16 text-center">
+      <Reveal className="bg-[#1B1D1B] rounded-2xl px-6 py-14 md:px-16 md:py-16 text-center">
         <p className="text-xl md:text-2xl font-medium text-white leading-relaxed max-w-2xl mx-auto text-balance">
           "{current.quote}"
         </p>

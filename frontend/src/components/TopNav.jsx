@@ -28,13 +28,13 @@ function TopNav() {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-[#F0E9D8]">
+    <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-[#E8F5E9]">
       <div className="flex justify-between items-center px-4 md:px-8 h-16 max-w-[1200px] mx-auto w-full">
         <div className="flex items-center gap-2.5">
-          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 via-green-600 to-teal-700 flex items-center justify-center text-white shadow-md">
+          <span className="w-8 h-8 rounded-lg bg-[#2E7D32] flex items-center justify-center text-white shadow-sm ring-1 ring-black/5">
   <MdBiotech className="text-lg" />
 </span>
-          <span className="hidden lg:inline text-[17px] font-bold text-[#2C3E50] tracking-tight">PoultraScan AI</span>
+          <span className="hidden lg:inline text-[17px] font-bold text-[#1B1D1B] tracking-tight">PoultraScan AI</span>
         </div>
 
         <nav className="hidden md:flex gap-8 items-center h-full">
@@ -44,8 +44,8 @@ function TopNav() {
               onClick={() => handleNavClick(link)}
               className={`text-sm h-full flex items-center border-b-2 transition-colors ${
                 active === link.label
-                  ? 'text-[#00A86B] font-semibold border-[#00A86B]'
-                  : 'text-[#6B7280] hover:text-[#2C3E50] font-medium border-transparent'
+                  ? 'text-[#2E7D32] font-semibold border-[#2E7D32]'
+                  : 'text-[#6B7280] hover:text-[#1B1D1B] font-medium border-transparent'
               }`}
             >
               {link.label}
