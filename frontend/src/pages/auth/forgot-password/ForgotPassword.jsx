@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FiMail, FiArrowLeft, FiCheckCircle, FiFeather } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../api/auth';
+import { AppModal } from '../../../components';
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [notFoundModal, setNotFoundModal] = useState(null);
 
   const handleRequestCode = async (e) => {
     e.preventDefault();
@@ -21,7 +23,11 @@ export default function ForgotPassword() {
       await forgotPassword(email);
       setIsSuccess(true);
     } catch (err) {
-      setError(err.message);
+      if (err.status === 404) {
+        setNotFoundModal(email);
+      } else {
+        setError(err.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -143,6 +149,24 @@ export default function ForgotPassword() {
 
         </div>
       </main>
+
+      <AppModal
+        isOpen={!!notFoundModal}
+        onClose={() => setNotFoundModal(null)}
+        variant="error"
+        title="User Not Found"
+        message={
+          <>
+            We couldn't find an account for{' '}
+            <span className="font-semibold text-[#1B1D1B]">{notFoundModal}</span>. Please check
+            the spelling or{' '}
+            <span className="font-semibold text-[#2E7D32]">create an account</span> before
+            requesting a reset code.
+          </>
+        }
+        onConfirm={() => setNotFoundModal(null)}
+        confirmText="Got It"
+      />
     </div>
   );
 }

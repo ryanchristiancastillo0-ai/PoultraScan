@@ -95,13 +95,18 @@ class AuthController:
 
     @staticmethod
     def forgot_password(payload: ForgotPasswordSchema, db: Session):
+        if not UserService.find_by_email(db, payload.email):
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User not found",
+            )
+
         token = UserService.create_reset_token(db, payload.email)
 
         if token:
             # Email the code directly from the backend. If the send actually fails
             # (provider/config problem), surface a clean 502 instead of silently
-            # telling the user the email was sent. The "email doesn't exist" case
-            # still returns the generic 200 so the field can't be enumerated.
+            # telling the user the email was sent.
             try:
                 EmailService.send_reset_password_code(payload.email, token)
             except HTTPException:

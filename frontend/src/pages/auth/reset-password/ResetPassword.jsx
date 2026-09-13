@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import { FiLock, FiShield, FiEye, FiEyeOff, FiCheckCircle, FiArrowLeft, FiFeather } from 'react-icons/fi';
 import { resetPassword } from '../api/auth';
+import { AppModal } from '../../../components';
 
 export default function ResetPassword() {
   const [searchParams] = useSearchParams();
@@ -21,6 +22,7 @@ export default function ResetPassword() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
+  const [validationAlert, setValidationAlert] = useState(null);
 
   // Form Label float calculation
   const passwordFloated = passwordFocused || password.length > 0;
@@ -56,11 +58,17 @@ export default function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!passwordsMatch) {
-      alert("Passwords do not match!");
+      setValidationAlert({
+        title: 'Passwords do not match',
+        message: 'Please make sure both password fields contain the same password.',
+      });
       return;
     }
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long.");
+      setValidationAlert({
+        title: 'Password too short',
+        message: 'Your password must be at least 8 characters long.',
+      });
       return;
     }
     if (!token) {
@@ -285,6 +293,15 @@ export default function ResetPassword() {
         </div>
       </footer>
 
+      <AppModal
+        isOpen={!!validationAlert}
+        onClose={() => setValidationAlert(null)}
+        variant="error"
+        title={validationAlert?.title}
+        message={validationAlert?.message}
+        onConfirm={() => setValidationAlert(null)}
+        confirmText="Got It"
+      />
     </div>
   );
 }
