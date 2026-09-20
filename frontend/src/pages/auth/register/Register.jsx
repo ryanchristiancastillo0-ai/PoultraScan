@@ -137,9 +137,6 @@ export default function Register() {
     className="absolute inset-0 w-full h-full object-cover object-top scale-110 blur-xs opacity-60"
   />
 
-  {/* Deep green gradient overlay */}
-  <div className="absolute inset-0 bg-gradient-to-br from-[#052E16]/95 via-[#14532D]/85 to-[#166534]/80" />
-  <div className="ps-grid-overlay absolute inset-0 opacity-50" />
 
   {/* Decorative blurred blobs for depth */}
   <div className="absolute -top-16 -left-16 w-72 h-72 bg-[#10B981]/25 rounded-full blur-3xl" />
@@ -157,7 +154,7 @@ export default function Register() {
 
   {/* Bottom overlay text */}
   <div className="absolute bottom-0 left-0 right-0 p-10 z-10">
-    <div className="bg-gradient-to-t from-[#052E16]/80 via-[#052E16]/30 to-transparent pt-6">
+    <div className=" from-[#052E16]/80 via-[#052E16]/30 to-transparent pt-6">
       <h2 className="text-white text-2xl font-semibold tracking-tight mb-2 drop-shadow-sm">
         Smarter poultry health, in real time.
       </h2>

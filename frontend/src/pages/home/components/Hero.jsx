@@ -44,7 +44,6 @@ export default function Hero() {
           </div>
         </Reveal>
 
-        <HeroVisual />
 
       </div>
     </section>

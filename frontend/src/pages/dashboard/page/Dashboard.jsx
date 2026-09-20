@@ -100,38 +100,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Decorative scan-panel visual */}
-            <div className="hidden lg:block shrink-0 w-[280px] relative aspect-[4/3] rounded-2xl bg-[#052E16] ring-1 ring-white/10 overflow-hidden shadow-[0_18px_44px_-16px_rgba(5,46,22,0.7)]">
-              <img
-                src="/img/hero1.png"
-                alt=""
-                aria-hidden="true"
-                className="absolute inset-0 h-full w-full object-cover opacity-70"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#052E16]/70 via-transparent to-[#052E16]/80" />
-              <div
-                className="absolute inset-0 opacity-[0.12]"
-                style={{
-                  backgroundImage:
-                    'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-                  backgroundSize: '26px 26px',
-                }}
-              />
-              <div className="pointer-events-none absolute inset-4">
-                <span className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-[#FACC15] rounded-tl-lg" />
-                <span className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-[#FACC15] rounded-tr-lg" />
-                <span className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-[#FACC15] rounded-bl-lg" />
-                <span className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-[#FACC15] rounded-br-lg" />
-              </div>
-              <span className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#10B981] to-transparent animate-scan-line shadow-[0_0_12px_2px_rgba(16,185,129,0.45)]" />
-              <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-white/70">Analyzing frame…</span>
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#FACC15]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#FACC15] animate-pulse" />
-                  CV model
-                </span>
-              </div>
-            </div>
           </div>
         </section>
 
