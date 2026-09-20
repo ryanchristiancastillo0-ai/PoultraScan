@@ -10,7 +10,7 @@ export default function MiniAvatar({ fullname, avatarUrl, sizeClass }) {
     const { Icon } = AVATAR_ICONS[iconKey];
     return (
       <div
-        className={`${sizeClass} rounded-full bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center font-semibold overflow-hidden flex-shrink-0`}
+        className={`${sizeClass} rounded-full bg-[#E9F4EE] text-[#14532D] flex items-center justify-center font-semibold overflow-hidden flex-shrink-0`}
       >
         <Icon className="w-[70%] h-[70%]" />
       </div>
@@ -21,7 +21,7 @@ export default function MiniAvatar({ fullname, avatarUrl, sizeClass }) {
 
   return (
     <div
-      className={`${sizeClass} rounded-full bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center font-semibold overflow-hidden flex-shrink-0`}
+      className={`${sizeClass} rounded-full bg-[#E9F4EE] text-[#14532D] flex items-center justify-center font-semibold overflow-hidden flex-shrink-0`}
     >
       {src ? (
         <img

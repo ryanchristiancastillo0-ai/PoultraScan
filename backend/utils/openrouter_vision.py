@@ -22,10 +22,11 @@ from openai import OpenAI
 from utils.gemini_disease_classifier import (
     DISEASE_PROMPT,
     DEFAULT_IMAGE_QUALITY_MESSAGE,
+    _apply_healthy_confidence_floor,
     _sanitize_confidence,
     _sanitize_disease_name,
 )
-from utils.gemini_client import _sanitize_weight
+from utils.gemini_client import _sanitize_weight, _compute_oil_ml
 
 load_dotenv()
 
@@ -132,9 +133,12 @@ following the single-chicken JSON format described above.
                     })
                     continue
 
+                disease_name = _sanitize_disease_name(item.get("disease", ""))
+                confidence_score = round(_sanitize_confidence(item.get("confidence", 0)), 2)
+
                 results.append({
-                    "disease_name": _sanitize_disease_name(item.get("disease", "")),
-                    "confidence_score": round(_sanitize_confidence(item.get("confidence", 0)), 2),
+                    "disease_name": disease_name,
+                    "confidence_score": _apply_healthy_confidence_floor(disease_name, confidence_score),
                     "reasoning": item.get("reasoning", ""),
                     "model_used": f"openrouter:{model_name}",
                 })
@@ -193,9 +197,11 @@ this exact format:
 {{
   "tips": "2-4 sentences of practical care/treatment advice for this condition",
   "estimated_weight": <number in kg, based on that chicken's visible size>,
-  "estimated_oil_ml": <number in ml, rough estimated oil yield if processed, as a float>,
   "market_ready": <true or false>
 }}
+
+Note: oil yield is NOT requested here — the app computes it from each
+estimated_weight using its own formula, so do not invent an oil number.
 
 If a chicken's disease is HEALTHY, market_ready should lean true and tips
 should be general maintenance advice. If COCCIDIOSIS, FOWL_POX, or
@@ -227,10 +233,11 @@ treatment/isolation.
 
             results = []
             for entry in data:
+                weight = _sanitize_weight(entry.get("estimated_weight", 0.0))
                 results.append({
                     "tips": entry.get("tips", "No specific advice available."),
-                    "estimated_weight": _sanitize_weight(entry.get("estimated_weight", 0.0)),
-                    "estimated_oil_ml": float(entry.get("estimated_oil_ml", 0.0)),
+                    "estimated_weight": weight,
+                    "estimated_oil_ml": _compute_oil_ml(weight),
                     "market_ready": bool(entry.get("market_ready", False)),
                 })
 

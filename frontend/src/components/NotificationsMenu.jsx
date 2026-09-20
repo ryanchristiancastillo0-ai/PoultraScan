@@ -8,6 +8,7 @@ import {
   MdExpandLess,
 } from 'react-icons/md';
 import { useNotifications } from '../hooks/useNotification';
+import {PoultraScanLoader} from './ui';
 
 const VISIBLE_LIMIT = 5;
 
@@ -50,7 +51,7 @@ export default function NotificationsMenu() {
     <>
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-[#1B1D1B]/20 backdrop-blur-sm transition-opacity"
+          className="fixed inset-0 z-40 bg-[#10231A]/20 backdrop-blur-sm transition-opacity"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
@@ -60,11 +61,11 @@ export default function NotificationsMenu() {
           onClick={() => setOpen((prev) => !prev)}
           aria-label="Notifications"
           aria-expanded={open}
-          className="relative rounded-full p-2 text-[#6B7280] transition-all hover:bg-[#F8FAF7] hover:text-[#1B1D1B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E7D32]/40 active:scale-95"
+          className="relative rounded-full p-2 text-[#4B6357] transition-all hover:bg-[#F7FAF8] hover:text-[#10231A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#14532D]/40 active:scale-95"
         >
           <MdNotifications className="text-xl" />
           {unreadCount > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-[#2E7D32] px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
+            <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-[#14532D] px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
               {unreadCount > 9 ? '9+' : unreadCount}
             </span>
           )}
@@ -72,15 +73,15 @@ export default function NotificationsMenu() {
 
         {open && (
           <div
-            className="fixed left-4 right-4 top-[72px] bottom-24 z-50 flex flex-col overflow-hidden rounded-2xl border border-[#E8F5E9] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.14)] sm:absolute sm:bottom-auto sm:left-auto sm:right-0 sm:top-auto sm:mt-2 sm:h-auto sm:max-h-[26rem] sm:w-80"
+            className="fixed left-4 right-4 top-[72px] bottom-24 z-50 flex flex-col overflow-hidden rounded-2xl border border-[#E9F4EE] bg-white shadow-[0_16px_40px_rgba(16, 35, 26,0.14)] sm:absolute sm:bottom-auto sm:left-auto sm:right-0 sm:top-auto sm:mt-2 sm:h-auto sm:max-h-[26rem] sm:w-80"
           >
             {/* Header */}
-            <div className="flex flex-shrink-0 items-center justify-between border-b border-[#E8F5E9] px-4 py-3">
-              <span className="text-sm font-bold text-[#1B1D1B]">Notifications</span>
+            <div className="flex flex-shrink-0 items-center justify-between border-b border-[#E9F4EE] px-4 py-3">
+              <span className="text-sm font-bold text-[#10231A]">Notifications</span>
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close notifications"
-                className="rounded-full p-1 text-[#9CA3AF] transition-all hover:bg-[#F8FAF7] hover:text-[#1B1D1B]"
+                className="rounded-full p-1 text-[#718279] transition-all hover:bg-[#F7FAF8] hover:text-[#10231A]"
               >
                 <MdClose className="text-base" />
               </button>
@@ -89,19 +90,21 @@ export default function NotificationsMenu() {
             {/* List */}
             <div className="min-h-0 flex-1 overflow-y-auto">
               {loading && (
-                <div className="px-4 py-10 text-center text-xs text-[#9CA3AF]">Loading...</div>
+                <div className="px-4 py-8">
+                  <PoultraScanLoader size={32} label="Loading..." />
+                </div>
               )}
 
               {!loading && error && (
-                <div className="px-4 py-10 text-center text-xs text-[#D32F2F]">
+                <div className="px-4 py-10 text-center text-xs text-[#EF4444]">
                   Couldn't load notifications.
                 </div>
               )}
 
               {!loading && !error && notifications.length === 0 && (
                 <div className="flex flex-col items-center justify-center gap-2 px-4 py-10 text-center">
-                  <MdNotificationsNone className="text-2xl text-[#9CA3AF]" />
-                  <span className="text-xs text-[#9CA3AF]">No notifications yet.</span>
+                  <MdNotificationsNone className="text-2xl text-[#718279]" />
+                  <span className="text-xs text-[#718279]">No notifications yet.</span>
                 </div>
               )}
 
@@ -111,23 +114,23 @@ export default function NotificationsMenu() {
                   <button
                     key={n.id}
                     onClick={() => markAsRead(n.id)}
-                    className="flex w-full gap-2.5 border-b border-[#E8F5E9] px-4 py-3 text-left transition-all last:border-0 hover:bg-[#F8FAF7]"
+                    className="flex w-full gap-2.5 border-b border-[#E9F4EE] px-4 py-3 text-left transition-all last:border-0 hover:bg-[#F7FAF8]"
                   >
                     <span
                       className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${
-                        n.is_read ? 'bg-transparent' : 'bg-[#2E7D32]'
+                        n.is_read ? 'bg-transparent' : 'bg-[#14532D]'
                       }`}
                     />
                     <div className="flex min-w-0 flex-col gap-0.5">
                       <span
                         className={`text-xs ${
-                          n.is_read ? 'font-medium text-[#6B7280]' : 'font-semibold text-[#1B1D1B]'
+                          n.is_read ? 'font-medium text-[#4B6357]' : 'font-semibold text-[#10231A]'
                         }`}
                       >
                         {n.title}
                       </span>
-                      <span className="text-[11px] leading-snug text-[#6B7280]">{n.message}</span>
-                      <span className="mt-0.5 text-[10px] text-[#9CA3AF]">{timeAgo(n.created_at)}</span>
+                      <span className="text-[11px] leading-snug text-[#4B6357]">{n.message}</span>
+                      <span className="mt-0.5 text-[10px] text-[#718279]">{timeAgo(n.created_at)}</span>
                     </div>
                   </button>
                 ))}
@@ -135,7 +138,7 @@ export default function NotificationsMenu() {
               {!loading && !error && hasMore && (
                 <button
                   onClick={() => setExpanded((prev) => !prev)}
-                  className="flex w-full items-center justify-center gap-1.5 border-b border-[#E8F5E9] py-2.5 text-xs font-semibold text-[#2E7D32] transition-all hover:bg-[#E8F5E9]"
+                  className="flex w-full items-center justify-center gap-1.5 border-b border-[#E9F4EE] py-2.5 text-xs font-semibold text-[#14532D] transition-all hover:bg-[#E9F4EE]"
                 >
                   {expanded ? (
                     <>
@@ -156,7 +159,7 @@ export default function NotificationsMenu() {
             <button
               onClick={markAllAsRead}
               disabled={unreadCount === 0}
-              className="flex flex-shrink-0 items-center justify-center gap-1.5 border-t border-[#E8F5E9] py-2.5 text-xs font-semibold text-[#2E7D32] transition-all hover:bg-[#E8F5E9] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex flex-shrink-0 items-center justify-center gap-1.5 border-t border-[#E9F4EE] py-2.5 text-xs font-semibold text-[#14532D] transition-all hover:bg-[#E9F4EE] disabled:cursor-not-allowed disabled:opacity-40"
             >
               <MdDoneAll className="text-sm" />
               Mark all as read

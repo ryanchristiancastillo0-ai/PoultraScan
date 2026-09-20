@@ -31,18 +31,18 @@ export default function BottomNav() {
       >
         <span
           className={`flex h-8 w-11 items-center justify-center rounded-full transition-colors duration-200 ${
-            active ? 'bg-[#E8F5E9]' : 'bg-transparent group-active:bg-[#F8FAF7]'
+            active ? 'bg-[#E9F4EE]' : 'bg-transparent group-active:bg-[#F7FAF8]'
           }`}
         >
           <Icon
             className={`text-[20px] transition-colors duration-200 ${
-              active ? 'text-[#2E7D32]' : 'text-[#9CA3AF] group-active:text-[#6B7280]'
+              active ? 'text-[#14532D]' : 'text-[#718279] group-active:text-[#4B6357]'
             }`}
           />
         </span>
         <span
           className={`h-[3px] w-[3px] rounded-full transition-opacity duration-200 ${
-            active ? 'bg-[#2E7D32] opacity-100' : 'opacity-0'
+            active ? 'bg-[#14532D] opacity-100' : 'opacity-0'
           }`}
         />
       </button>
@@ -51,19 +51,19 @@ export default function BottomNav() {
 
   return (
     <>
-      <nav className="fixed bottom-0 left-0 z-50 w-full border-t border-[#E5E7EB] bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-1px_10px_rgba(0,0,0,0.05)] backdrop-blur-md">
+      <nav className="fixed bottom-0 left-0 z-50 w-full border-t border-[#E4ECE7] bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-1px_10px_rgba(0,0,0,0.05)] backdrop-blur-md">
         <div className="relative mx-auto flex max-w-[480px] items-center px-1">
           {/* left links */}
           <div className="flex flex-1 items-center justify-around">
             {navLinks.map(renderLink)}
           </div>
 
-          {/* center FAB — reserved slot keeps left/right links from crowding it */}
+          {/* center FAB â€” reserved slot keeps left/right links from crowding it */}
           <div className="flex w-16 shrink-0 justify-center">
             <button
               onClick={() => setQuickScanOpen(true)}
               aria-label="Quick scan"
-              className="relative -top-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#2E7D32] text-white shadow-md shadow-[#2E7D32]/20 ring-[3px] ring-white transition-transform duration-150 hover:bg-[#276C2A] active:scale-90"
+              className="relative -top-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#14532D] via-[#166534] to-[#10B981] text-white shadow-lg shadow-[#14532D]/30 ring-[3px] ring-white transition-all duration-150 hover:from-[#14532D] hover:via-[#166534] hover:to-[#052E16] active:scale-90"
             >
               <MdAdd className="text-xl" />
             </button>

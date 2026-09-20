@@ -32,6 +32,12 @@ DEFAULT_IMAGE_QUALITY_MESSAGE = (
     "Please align the camera on the chicken and hold steady, then try again."
 )
 
+# When a bird is classified as HEALTHY, never report a confidence below
+# this floor. A low confidence on a genuinely healthy chicken reads to the
+# farmer as "the AI isn't sure it's healthy", which is exactly what was
+# making clean birds look suspicious. Sick birds are unaffected.
+MIN_HEALTHY_CONFIDENCE = 70.0
+
 CACHE_FILE = os.path.join("static", "cache", "disease_classifications.json")
 os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
 
@@ -41,9 +47,13 @@ _cache_lock = threading.Lock()
 DISEASE_PROMPT = """
 You are an expert poultry veterinary assistant analyzing a photo of a chicken
 for a farm monitoring app. Farmers rely on this assessment to catch disease
-early, so missing a real symptom is much more costly than a false alarm.
-Do NOT default to HEALTHY just because you are uncertain — only choose
-HEALTHY if you have positively confirmed the specific signs listed below.
+early, so flag any CONCRETE sign of illness you can actually see in the image.
+Equally important: healthy chickens are common and must not be over-flagged.
+When the evidence for illness is mild, vague, or ambiguous, choose HEALTHY —
+a healthy bird can look scruffy, be camera-shy, or be in poor lighting.
+Judge the bird honestly based on the visual evidence — do not default to a
+disease or to UNKNOWN just because you are uncertain, and do not default to
+HEALTHY if real, definite symptoms are present either.
 
 STEP 1 — Image quality check:
 - Is the image too blurry, out of focus, too dark, or otherwise unusable?
@@ -53,6 +63,17 @@ STEP 2 — ONLY IF a chicken is clearly visible and the image is usable,
 inspect every visible part of the bird systematically for signs of illness:
 comb and wattle color/texture, eyes, nostrils/beak, feather condition,
 posture and gait, visible skin, and droppings if visible in frame.
+
+Normal anatomy is NOT disease — do not flag these:
+- Comb and wattle color naturally ranges from bright red to pale pink and
+  shifts with breed, age, temperature, and lighting. A paler comb alone,
+  especially in a hen or a young bird, is not evidence of illness.
+- The face, eye-ring, and other featherless areas around the head simply
+  look different from feathered skin. That is normal — do not mistake it
+  for a lesion, sore, or discoloration.
+- A bird looking toward the camera, closing its eyes, or being photographed
+  from an awkward angle does not by itself indicate disease. Assess the
+  whole bird (posture, feathers, droppings if visible) before deciding.
 
 You are NOT limited to a fixed list of diseases. Identify the single most
 likely condition based on what you actually observe, which may include (but
@@ -84,10 +105,12 @@ only after ruling out the conditions above. If you observe ANY concrete signs
 of illness, do not classify as HEALTHY even if you're unsure exactly which
 disease it is — use UNKNOWN in that case instead.
 
-HEALTHY — only choose this if you positively observe: bright red upright
-comb and wattles, smooth clean feathers, alert posture, clear eyes, normal
-stance, and no lesions, discoloration, abnormal droppings, or other signs
-from any category above.
+HEALTHY — choose this when the bird shows NO concrete sign of illness:
+reasonably upright/alert posture, feathers that are not severely ruffled or
+damaged, clear eyes, and no visible lesions, swelling, discharge, or abnormal
+droppings. Do not require a storybook-perfect bird — minor cosmetic variation,
+a paler comb, or an imperfect camera angle are all normal. When you choose
+HEALTHY, report a confident score of roughly 70-85%.
 
 Respond ONLY with valid JSON, no markdown, no code fences, in this exact format:
 {
@@ -95,7 +118,7 @@ Respond ONLY with valid JSON, no markdown, no code fences, in this exact format:
   "is_blurry": <true or false>,
   "quality_note": "<one short sentence explaining the issue if chicken_visible is false or is_blurry is true, otherwise empty string>",
   "disease": "<disease name in UPPER_SNAKE_CASE, e.g. COCCIDIOSIS, NEWCASTLE_DISEASE, HEALTHY, UNKNOWN, or another specific disease name if clearly applicable>",
-  "confidence": <integer 0-100, how confident you are in this classification>,
+  "confidence": <integer 0-100, how confident you are in this classification; for HEALTHY this must be at least 70>,
   "reasoning": "<one or two sentences citing the SPECIFIC visual evidence observed that led to this classification>"
 }
 
@@ -117,6 +140,17 @@ def _sanitize_confidence(raw_confidence) -> float:
     except (TypeError, ValueError):
         return 0.0
     return max(0.0, min(conf, 100.0))
+
+
+def _apply_healthy_confidence_floor(disease_name: str, confidence_score: float) -> float:
+    """
+    Keeps a HEALTHY classification from being reported below
+    MIN_HEALTHY_CONFIDENCE so a clean bird never looks suspicious.
+    Non-healthy labels are returned unchanged.
+    """
+    if disease_name == "HEALTHY" and confidence_score < MIN_HEALTHY_CONFIDENCE:
+        return MIN_HEALTHY_CONFIDENCE
+    return confidence_score
 
 
 def _sanitize_disease_name(raw_name) -> str:
@@ -221,6 +255,7 @@ def classify_disease_with_gemini(image_bytes: bytes) -> dict:
 
             disease_name = _sanitize_disease_name(data.get("disease", ""))
             confidence_score = round(_sanitize_confidence(data.get("confidence", 0)), 2)
+            confidence_score = _apply_healthy_confidence_floor(disease_name, confidence_score)
 
             print(f"[DISEASE DEBUG] Success using model: {model_name} -> {disease_name} ({confidence_score}%)")
 
@@ -305,9 +340,12 @@ following the single-chicken JSON format described above.
                     })
                     continue
 
+                disease_name = _sanitize_disease_name(item.get("disease", ""))
+                confidence_score = round(_sanitize_confidence(item.get("confidence", 0)), 2)
+
                 results.append({
-                    "disease_name": _sanitize_disease_name(item.get("disease", "")),
-                    "confidence_score": round(_sanitize_confidence(item.get("confidence", 0)), 2),
+                    "disease_name": disease_name,
+                    "confidence_score": _apply_healthy_confidence_floor(disease_name, confidence_score),
                     "reasoning": item.get("reasoning", ""),
                     "model_used": model_name,
                 })

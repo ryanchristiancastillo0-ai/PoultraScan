@@ -3,24 +3,52 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  /* PoultraScan AgriTech palette */
-  --color-primary: #2e7d32;
-  --color-primary-dark: #276c2a;
-  --color-primary-light: #66bb6a;
-  --color-primary-lighter: #e8f5e9;
-  --color-canvas: #f8faf7;
-  --color-ink: #1b1d1b;
-  --color-warn: #f9a825;
-  --color-critical: #d32f2f;
-  --color-info: #1976d2;
+  /* PoultraScan AI brand palette — Deep Forest Green + Emerald + Gold on a soft green canvas */
+  --color-brand-50: #F2F8F4;
+  --color-brand-100: #E3F0E8;
+  --color-brand-200: #C7E2D2;
+  --color-brand-300: #9CCFB0;
+  --color-brand-400: #34B97C;
+  --color-brand-500: #10B981;
+  --color-brand-600: #166534;
+  --color-brand-700: #14532D;
+  --color-brand-800: #0E3D21;
+  --color-brand-900: #052E16;
+
+  --color-accent: #FACC15;
+  --color-accent-soft: #FFF9DB;
+  --color-accent-deep: #EAB308;
+
+  --color-primary: #14532D;
+  --color-primary-dark: #052E16;
+  --color-primary-light: #FACC15;
+  --color-primary-lighter: #E9F4EE;
+
+  --color-canvas: #F7FAF8;
+  --color-ink: #10231A;
+  --color-soft: #4B6357;
+  --color-muted: #718279;
+  --color-line: #E4ECE7;
+
+  --color-warn: #F59E0B;
+  --color-critical: #EF4444;
+  --color-success: #10B981;
+  --color-info: #166534;
+
+  --shadow-card: 0 1px 2px 0 rgb(16 35 26 / 0.04), 0 1px 3px 0 rgb(16 35 26 / 0.06);
+  --shadow-card-hover: 0 10px 26px -8px rgb(16 35 26 / 0.14);
+  --shadow-pop: 0 12px 32px -8px rgb(16 35 26 / 0.16);
+  --shadow-modal: 0 24px 48px -12px rgb(5 46 22 / 0.28);
+
+  --radius-xl2: 1.25rem;
 }
 
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
-  background-color: #f8faf7;
-  color: #1b1d1b;
+  background-color: #F7FAF8;
+  color: #10231A;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -37,39 +65,44 @@ textarea {
 }
 
 ::selection {
-  background-color: #e8f5e9;
-  color: #1b1d1b;
+  background-color: #C7E2D2;
+  color: #052E16;
 }
 
+/* The app styles inputs with explicit Tailwind classes; keep focus chrome clean.
+   Add a gentle brand border so every field reacts consistently on focus. */
 input:focus,
 input:focus-visible,
-input:active {
+input:active,
+select:focus,
+textarea:focus {
   outline: none !important;
   box-shadow: none !important;
   --tw-ring-shadow: 0 0 #0000 !important;
   --tw-ring-offset-shadow: 0 0 #0000 !important;
+  border-color: #9CCFB0;
 }
 
 :focus-visible {
-  outline: 2px solid rgba(46, 125, 50, 0.5);
+  outline: 2px solid rgba(20, 83, 45, 0.5);
   outline-offset: 2px;
 }
 
 /* Subtle native scrollbars that match the theme */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #cfe2d4 transparent;
+  scrollbar-color: #C5D6CC transparent;
 }
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 *::-webkit-scrollbar-thumb {
-  background: #cfe2d4;
+  background: #C5D6CC;
   border-radius: 8px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: #66bb6a;
+  background: #718279;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -78,6 +111,178 @@ input:active {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ---------- Design-system primitives ---------- */
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--color-line);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  padding: 0.625rem 1rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.1s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.btn-primary {
+  background-image: linear-gradient(135deg, #14532D 0%, #166534 55%, #10B981 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-card);
+}
+.btn-primary:hover {
+  background-image: linear-gradient(135deg, #052E16 0%, #14532D 55%, #166534 100%);
+}
+.btn-primary:focus-visible {
+  outline-color: var(--color-accent);
+}
+.btn-secondary {
+  background-color: #ffffff;
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+}
+.btn-secondary:hover {
+  background-color: var(--color-canvas);
+  border-color: var(--color-brand-500);
+  color: var(--color-primary-dark);
+}
+.btn-ghost {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--color-soft);
+}
+.btn-ghost:hover {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+}
+.btn-danger {
+  background-color: var(--color-critical);
+  color: #ffffff;
+}
+.btn-danger:hover {
+  background-color: #DC2626;
+}
+
+.input-field {
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  color: var(--color-ink);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input-field::placeholder {
+  color: var(--color-muted);
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 3px rgb(16 101 52 / 0.14);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1rem;
+}
+
+.page-container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) {
+  .page-container {
+    padding-inline: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .page-container {
+    padding-inline: 2rem;
+  }
+}
+
+.text-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.skeleton {
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, #E3F0E8 25%, #F4F9F6 50%, #E3F0E8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+/* ---------- PoultraScan gradient helpers ---------- */
+
+.bg-brand-gradient {
+  background-image: linear-gradient(135deg, #052E16 0%, #14532D 50%, #166534 100%);
+}
+
+.bg-green-emerald-gradient {
+  background-image: linear-gradient(135deg, #14532D 0%, #166534 55%, #10B981 100%);
+}
+
+/* Subtle technical grid texture for dark gradient sections */
+.ps-grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes modal-in {
@@ -119,6 +324,22 @@ input:active {
 }
 .animate-scan-line {
   animation: scan-line 2s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
 }
 
 @keyframes qs-backdrop {

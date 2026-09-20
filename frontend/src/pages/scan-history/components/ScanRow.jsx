@@ -23,23 +23,23 @@ export default function ScanRow({ scan, onDelete, onView }) {
 
   return (
     <>
-      <tr className="hover:bg-[#F8FAF7] transition-colors group">
+      <tr className="hover:bg-[#F7FAF8] transition-colors group">
         <td className="py-4 pl-2">
-          <div className="w-12 h-12 rounded-lg overflow-hidden border border-[#E5E7EB] bg-[#F8FAF7] flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 rounded-lg overflow-hidden border border-[#E4ECE7] bg-[#F7FAF8] flex items-center justify-center flex-shrink-0">
             {src ? (
               <img className="w-full h-full object-cover" src={src} alt="Scan thumbnail" />
             ) : (
-              <MdHourglassEmpty className="text-[#9CA3AF] text-lg animate-pulse" />
+              <MdHourglassEmpty className="text-[#718279] text-lg animate-pulse" />
             )}
           </div>
         </td>
         <td className="py-4 px-3 whitespace-nowrap">
-          <p className="font-medium text-[#1B1D1B] text-sm">{date}</p>
-          <p className="text-xs text-[#9CA3AF]">{time}</p>
+          <p className="font-medium text-[#10231A] text-sm">{date}</p>
+          <p className="text-xs text-[#718279]">{time}</p>
         </td>
         <td className="py-4 px-3 max-w-[160px]">
-          <p className="font-medium text-[#1B1D1B] text-sm truncate">{scan.farm_name}</p>
-          <p className="text-xs text-[#9CA3AF] truncate">{scan.location}</p>
+          <p className="font-medium text-[#10231A] text-sm truncate">{scan.farm_name}</p>
+          <p className="text-xs text-[#718279] truncate">{scan.location}</p>
         </td>
         <td className="py-4 px-3">
           <HealthBreakdown healthy={scan.healthy_count} diseased={scan.diseased_count} total={scan.total_detected} />
@@ -55,13 +55,13 @@ export default function ScanRow({ scan, onDelete, onView }) {
             <button
               onClick={() => onView(scan)}
               disabled={scan.status === 'PROCESSING'}
-              className="p-1.5 text-[#6B7280] hover:text-[#2E7D32] hover:bg-[#E8F5E9] rounded-md transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="p-1.5 text-[#4B6357] hover:text-[#14532D] hover:bg-[#E9F4EE] rounded-md transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <MdVisibility className="text-lg" />
             </button>
             <button
               onClick={() => setConfirmOpen(true)}
-              className="p-1.5 text-[#6B7280] hover:text-[#D32F2F] hover:bg-[#FFEBEE] rounded-md transition-colors"
+              className="p-1.5 text-[#4B6357] hover:text-[#EF4444] hover:bg-[#FEF2F2] rounded-md transition-colors"
             >
               <MdDelete className="text-lg" />
             </button>

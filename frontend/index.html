@@ -4,13 +4,34 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/icons/icon-192.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <title>frontend</title>
+    <meta name="description" content="PoultraScan — AI-powered poultry health scanning, detection, and farm monitoring." />
+    <meta name="theme-color" content="#14532D" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>PoultraScan</title>
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Kill any stale service worker left by a previous project/dev build.
+      // A rogue SW intercepts module/asset requests and answers with
+      // index.html, causing "Failed to load module script ... MIME type
+      // text/html" errors and a broken layout. Runs before the app module.
+      try {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function (regs) {
+            regs.forEach(function (reg) { reg.unregister(); });
+          });
+        }
+        if (window.caches) {
+          caches.keys().then(function (keys) {
+            keys.forEach(function (key) { caches.delete(key); });
+          });
+        }
+      } catch (e) { /* ignore */ }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,10 +1,11 @@
 import { MdClose, MdInfo, MdCheckCircle, MdWarning, MdError } from 'react-icons/md';
+import {PoultraScanLoader} from './ui';
 
 const variantConfig = {
-  info: { Icon: MdInfo, iconBg: 'bg-[#E3F2FD]', iconColor: 'text-[#1976D2]' },
-  success: { Icon: MdCheckCircle, iconBg: 'bg-[#E8F5E9]', iconColor: 'text-[#2E7D32]' },
-  warning: { Icon: MdWarning, iconBg: 'bg-[#FFF8E1]', iconColor: 'text-[#F9A825]' },
-  error: { Icon: MdError, iconBg: 'bg-[#FFEBEE]', iconColor: 'text-[#D32F2F]' },
+  info: { Icon: MdInfo, iconBg: 'bg-[#E9F4EE]', iconColor: 'text-[#14532D]' },
+  success: { Icon: MdCheckCircle, iconBg: 'bg-[#D1FAE5]', iconColor: 'text-[#10B981]' },
+  warning: { Icon: MdWarning, iconBg: 'bg-[#FEF3C7]', iconColor: 'text-[#F59E0B]' },
+  error: { Icon: MdError, iconBg: 'bg-[#FEF2F2]', iconColor: 'text-[#EF4444]' },
 };
 
 const sizeConfig = {
@@ -41,12 +42,12 @@ export default function AppModal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`relative w-full ${sizeConfig[size] || sizeConfig.sm} bg-white rounded-2xl shadow-xl animate-modal-in overflow-hidden`}
+        className={`relative w-full ${sizeConfig[size] || sizeConfig.sm} bg-white rounded-2xl shadow-modal animate-modal-in overflow-hidden`}
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-3 right-3 z-10 p-1.5 rounded-full text-[#9CA3AF] hover:bg-[#F8FAF7] hover:text-[#1B1D1B] transition-colors"
+          className="absolute top-3 right-3 z-10 p-1.5 rounded-full text-[#718279] hover:bg-[#F7FAF8] hover:text-[#10231A] transition-colors"
         >
           <MdClose className="text-lg" />
         </button>
@@ -56,10 +57,10 @@ export default function AppModal({
             <Icon className={`text-2xl ${config.iconColor}`} />
           </div>
 
-          <h2 className="text-base font-bold text-[#1B1D1B]">{title}</h2>
+          <h2 className="text-base font-bold text-[#10231A]">{title}</h2>
 
           {(message || children) && (
-            <div className="text-sm text-[#6B7280] leading-relaxed">
+            <div className="text-sm text-[#4B6357] leading-relaxed">
               {message || children}
             </div>
           )}
@@ -73,7 +74,7 @@ export default function AppModal({
               <>
                 <button
                   onClick={onClose}
-                  className="flex-1 py-2.5 rounded-lg border border-[#E5E7EB] text-sm font-semibold text-[#1B1D1B] hover:bg-[#F8FAF7] transition-colors"
+                  className="flex-1 py-2.5 rounded-lg border border-[#E4ECE7] text-sm font-semibold text-[#10231A] hover:bg-[#F7FAF8] transition-colors"
                 >
                   {cancelText}
                 </button>
@@ -81,11 +82,11 @@ export default function AppModal({
                   onClick={onConfirm}
                   disabled={loading}
                   className={`flex-1 py-2.5 rounded-lg text-sm font-semibold text-white transition-colors disabled:opacity-50 flex items-center justify-center gap-2 ${
-                    confirmClassName || 'bg-[#2E7D32] hover:bg-[#276C2A]'
+                    confirmClassName || 'bg-gradient-to-r from-[#14532D] to-[#166534] hover:from-[#166534] hover:to-[#052E16]'
                   }`}
                 >
                   {loading ? (
-                    <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                    <PoultraScanLoader size={18} label={null} className="gap-0" />
                   ) : (
                     confirmText
                   )}

@@ -13,7 +13,7 @@ import { useSaveFarm } from '../hooks/useCreateFarm';
 
 import { deleteFarm } from '../api/farmApi';
 import {EditFarmModal,DeleteFarmModal,FarmInfoCard,RecentScansTable,} from '../components/index';
-import {TopNav,Footer,BottomNav} from '../../../components/index'
+import {TopNav,Footer,BottomNav,PoultraScanLoader} from '../../../components/index'
 
 
 
@@ -59,7 +59,7 @@ export default function FarmDetails() {
   };
 
   return (
-    <div className="bg-[#F8FAF7] text-[#1B1D1B] antialiased min-h-screen flex flex-col font-['Manrope','Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
+    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-screen flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
      
   <TopNav />
 
@@ -69,12 +69,12 @@ export default function FarmDetails() {
 
       <main className="flex-grow pt-10 lg:pt-24 pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-[#9CA3AF] mb-4">
-          <button onClick={() => navigate('/farm')} className="hover:text-[#2E7D32] transition-colors">
+        <div className="flex items-center gap-2 text-xs text-[#718279] mb-4">
+          <button onClick={() => navigate('/farm')} className="hover:text-[#14532D] transition-colors">
             Farms
           </button>
           <span>/</span>
-          <span className="text-[#2E7D32] font-semibold">
+          <span className="text-[#14532D] font-semibold">
             {farm?.farm_name || 'Details'}
           </span>
         </div>
@@ -85,19 +85,19 @@ export default function FarmDetails() {
             <button
               onClick={() => navigate('/farm')}
               aria-label="Back to farms"
-              className="mt-0.5 w-9 h-9 rounded-lg border border-[#E5E7EB] bg-white flex items-center justify-center text-[#6B7280] hover:text-[#2E7D32] hover:border-[#D1D5DB] transition-colors flex-shrink-0"
+              className="mt-0.5 w-9 h-9 rounded-lg border border-[#E4ECE7] bg-white flex items-center justify-center text-[#4B6357] hover:text-[#14532D] hover:border-[#C5D6CC] transition-colors flex-shrink-0"
             >
               <MdArrowBack className="text-lg" />
             </button>
             <div>
-              <h1 className="text-2xl md:text-[28px] font-bold text-[#1B1D1B] tracking-tight">Farm Details</h1>
-              <p className="text-[#6B7280] text-sm mt-1.5">Manage operations and monitor flock health metrics.</p>
+              <h1 className="text-2xl md:text-[28px] font-bold text-[#10231A] tracking-tight">Farm Details</h1>
+              <p className="text-[#4B6357] text-sm mt-1.5">Manage operations and monitor flock health metrics.</p>
             </div>
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
             <button
               onClick={handleOpenModal}
-              className="flex-1 sm:flex-none bg-[#2E7D32] text-white px-4 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#276C2A] transition-colors active:scale-[0.98] justify-center"
+              className="flex-1 sm:flex-none bg-gradient-to-br from-[#14532D] to-[#166534] text-white px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 hover:from-[#166534] hover:to-[#052E16] transition-all active:scale-[0.98] justify-center shadow-md shadow-[#14532D]/25"
             >
               <MdEdit className="text-lg" />
               {farm ? 'Edit Farm' : 'Add Farm'}
@@ -105,7 +105,7 @@ export default function FarmDetails() {
             {farm && (
               <button
                 onClick={() => setDeleteOpen(true)}
-                className="flex-1 sm:flex-none bg-white border border-[#E5E7EB] text-[#D32F2F] px-4 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#FFEBEE] hover:border-[#FFEBEE] transition-colors active:scale-[0.98] justify-center"
+                className="flex-1 sm:flex-none bg-white border border-[#E4ECE7] text-[#EF4444] px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 hover:bg-[#FEF2F2] hover:border-[#FECACA] transition-colors active:scale-[0.98] justify-center"
               >
                 <MdDelete className="text-lg" />
                 Delete
@@ -115,14 +115,14 @@ export default function FarmDetails() {
         </div>
 
         {loading && (
-          <div className="text-center py-16 bg-white rounded-xl border border-[#E5E7EB] shadow-sm">
-            <p className="text-sm text-[#6B7280]">Loading farm details...</p>
+          <div className="text-center py-16 bg-white rounded-2xl border border-[#E4ECE7] shadow-card">
+            <PoultraScanLoader size={48} label="Loading farm details..." />
           </div>
         )}
 
         {error && !loading && (
-          <div className="text-center py-16 bg-white rounded-xl border border-[#FFEBEE]">
-            <p className="text-sm text-[#D32F2F] font-medium">{error}</p>
+          <div className="text-center py-16 bg-white rounded-2xl border border-[#FECACA] shadow-card">
+            <p className="text-sm text-[#EF4444] font-medium">{error}</p>
           </div>
         )}
 
@@ -137,8 +137,8 @@ export default function FarmDetails() {
        
 
             <div className="lg:col-span-12">
-              <div className="text-center py-8 bg-white rounded-xl border border-dashed border-[#E5E7EB] shadow-sm">
-                <p className="text-sm text-[#6B7280]">Flock stats will appear once scan data is available.</p>
+              <div className="text-center py-8 bg-white rounded-2xl border border-dashed border-[#E4ECE7] shadow-card">
+                <p className="text-sm text-[#4B6357]">Flock stats will appear once scan data is available.</p>
               </div>
             </div>
 
@@ -147,17 +147,17 @@ export default function FarmDetails() {
         )}
 
         {!loading && !error && !farm && (
-          <div className="text-center py-20 bg-white rounded-xl border border-dashed border-[#E5E7EB] shadow-sm flex flex-col items-center gap-4">
-            <div className="w-16 h-16 rounded-xl bg-[#E8F5E9] flex items-center justify-center text-[#2E7D32]">
+          <div className="text-center py-20 bg-white rounded-2xl border border-dashed border-[#E4ECE7] shadow-card flex flex-col items-center gap-4">
+            <div className="w-16 h-16 rounded-2xl bg-[#E9F4EE] flex items-center justify-center text-[#14532D]">
               <MdGridView className="text-3xl" />
             </div>
             <div>
-              <h3 className="text-[17px] font-bold text-[#1B1D1B]">No farm added yet</h3>
-              <p className="text-sm text-[#6B7280] mt-1">Add a farm to start tracking its flock health.</p>
+              <h3 className="text-[17px] font-bold text-[#10231A]">No farm added yet</h3>
+              <p className="text-sm text-[#4B6357] mt-1">Add a farm to start tracking its flock health.</p>
             </div>
             <button
               onClick={handleOpenModal}
-              className="bg-[#2E7D32] text-white px-6 py-3 rounded-lg text-sm font-semibold hover:bg-[#276C2A] transition-colors active:scale-[0.98] mt-2"
+              className="bg-gradient-to-br from-[#14532D] to-[#166534] text-white px-6 py-3 rounded-xl text-sm font-semibold hover:from-[#166534] hover:to-[#052E16] transition-all active:scale-[0.98] mt-2 shadow-md shadow-[#14532D]/25"
             >
               Add Your Farm
             </button>

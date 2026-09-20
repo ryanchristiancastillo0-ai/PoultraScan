@@ -42,22 +42,22 @@ export default function EntryFormModal({ initialData, onClose, onSubmit, saving 
             to bottom,
             transparent,
             transparent 27px,
-            #E5E7EB 28px
+            #E4ECE7 28px
           );
           background-position: 0 4px;
         }
       `}</style>
 
-      <div className="absolute inset-0 bg-[#1B1D1B]/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-[#10231A]/60 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="modal-rise relative w-full max-w-xl bg-white rounded-2xl shadow-[0_24px_64px_-12px_rgba(27,29,27,0.2)] overflow-hidden border border-[#E5E7EB]">
+      <div className="modal-rise relative w-full max-w-xl bg-white rounded-2xl shadow-[0_24px_64px_-12px_rgba(16, 35, 26,0.3)] overflow-hidden border border-[#E4ECE7]">
         <div className="flex items-center justify-between px-6 pt-5">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#9CA3AF]">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#718279]">
             {isEdit ? 'Editing entry' : today}
           </span>
           <button
             onClick={onClose}
-            className="p-2 -mr-2 rounded-full text-[#9CA3AF] hover:text-[#1B1D1B] hover:bg-[#F8FAF7] transition-colors"
+            className="p-2 -mr-2 rounded-full text-[#718279] hover:text-[#10231A] hover:bg-[#F7FAF8] transition-colors"
             aria-label="Close"
           >
             <MdClose className="text-xl" />
@@ -71,7 +71,7 @@ export default function EntryFormModal({ initialData, onClose, onSubmit, saving 
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Untitled entry"
             autoFocus
-            className="font-journal w-full text-2xl font-semibold text-[#1B1D1B] placeholder-[#9CA3AF] outline-none bg-transparent border-b-2 border-transparent focus:border-[#2E7D32]/40 pb-2 mb-4 transition-colors"
+            className="font-journal w-full text-2xl font-semibold text-[#10231A] placeholder-[#718279] outline-none bg-transparent border-b-2 border-transparent focus:border-[#14532D]/40 pb-2 mb-4 transition-colors"
           />
 
           <textarea
@@ -79,28 +79,28 @@ export default function EntryFormModal({ initialData, onClose, onSubmit, saving 
             onChange={(e) => setContent(e.target.value)}
             placeholder="Describe your observation, decision, or insight..."
             rows={7}
-            className="ruled-paper w-full px-0 text-sm text-[#1B1D1B] placeholder-[#9CA3AF] outline-none bg-transparent resize-none leading-[28px]"
+            className="ruled-paper w-full px-0 text-sm text-[#10231A] placeholder-[#718279] outline-none bg-transparent resize-none leading-[28px]"
           />
 
           {formError && (
-            <div className="flex items-center gap-2 px-3.5 py-3 rounded-xl bg-[#FFEBEE] border border-[#F3C9C9] mt-2">
-              <MdErrorOutline className="text-[#D32F2F] text-base flex-shrink-0" />
-              <p className="text-sm text-[#D32F2F]">{formError}</p>
+            <div className="flex items-center gap-2 px-3.5 py-3 rounded-xl bg-[#FEF2F2] border border-[#FECACA] mt-2">
+              <MdErrorOutline className="text-[#EF4444] text-base flex-shrink-0" />
+              <p className="text-sm text-[#EF4444]">{formError}</p>
             </div>
           )}
         </div>
 
-        <div className="flex gap-3 px-6 pb-6 pt-2 border-t border-[#E5E7EB]">
+        <div className="flex gap-3 px-6 pb-6 pt-2 border-t border-[#E4ECE7]">
           <button
             onClick={onClose}
-            className="flex-1 h-11 rounded-xl border-2 border-[#E5E7EB] bg-white text-sm font-semibold text-[#1B1D1B] hover:bg-[#F8FAF7] active:scale-[0.98] transition-all"
+            className="flex-1 h-11 rounded-xl border-2 border-[#E4ECE7] bg-white text-sm font-semibold text-[#10231A] hover:bg-[#F7FAF8] active:scale-[0.98] transition-all"
           >
             Cancel
           </button>
           <button
             onClick={handleSubmit}
             disabled={saving}
-            className="flex-1 h-11 rounded-xl bg-[#2E7D32] text-sm font-semibold text-white shadow-[0_8px_20px_-4px_rgba(46,125,50,0.35)] hover:bg-[#276C2A] hover:shadow-[0_12px_24px_-4px_rgba(46,125,50,0.45)] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+            className="flex-1 h-11 rounded-xl bg-gradient-to-r from-[#14532D] to-[#166534] text-sm font-semibold text-white shadow-[0_8px_20px_-4px_rgba(20, 83, 45,0.35)] hover:from-[#166534] hover:shadow-[0_12px_24px_-4px_rgba(20, 83, 45,0.45)] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
           >
             {saving ? 'Saving...' : isEdit ? 'Save Changes' : 'Create Entry'}
           </button>

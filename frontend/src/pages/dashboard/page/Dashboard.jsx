@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   MdAdd,
@@ -6,25 +6,34 @@ import {
   MdCheckCircle,
   MdWarning,
   MdHomeWork,
+  MdArrowForward,
+  MdRadar,
 } from 'react-icons/md';
 
 import { useDashboardStats } from '../hooks/useDashboard';
+import { useAuth } from '../../../middleware/AuthContext';
 
-import { TopNav, Footer, BottomNav } from '../../../components/index';
+import { TopNav, Footer, BottomNav, PoultraScanLoader } from '../../../components/index';
 import { AlertFeed, AnomalyChart, FarmHealthChart, MetricCard, ScanSummary } from '../components/index';
 
-// ---------- Dashboard (default export) ----------
-export default function Dashboard() {
+function getFirstName(name) {
+  if (!name) return '';
+  return String(name).trim().split(' ')[0];
+}
 
+export default function Dashboard() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { stats, loading, error } = useDashboardStats();
 
   const handleNewScan = () => {
     navigate('/scan');
   };
 
+  const firstName = getFirstName(user?.fullname);
+
   return (
-    <div className="bg-[#F8FAF7] text-[#1B1D1B] antialiased min-h-screen flex flex-col font-['Manrope','Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
+    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-screen flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
 
       <TopNav />
 
@@ -33,36 +42,103 @@ export default function Dashboard() {
       </div>
 
       <main className="flex-grow pt-24 pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-          <div>
-            <h1 className="text-2xl md:text-[28px] font-bold text-[#1B1D1B] tracking-tight">Overview</h1>
-            <p className="text-[#6B7280] text-sm mt-1.5">Today's system metrics and diagnostics.</p>
-          </div>
-          <button
-            onClick={handleNewScan}
-            className="bg-[#2E7D32] text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-[#276C2A] transition-colors active:scale-[0.98] w-full sm:w-auto justify-center"
-          >
-            <MdAdd className="text-lg" />
-            New Scan
-          </button>
-        </div>
+        {/* ---------- Hero ---------- */}
+        <section className="relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-br from-[#052E16] via-[#14532D] to-[#166534] shadow-card-hover mb-8">
+          {/* texture + glows */}
+          <div className="ps-grid-overlay absolute inset-0 opacity-60" />
+          <div className="pointer-events-none absolute -top-20 -right-16 h-64 w-64 rounded-full bg-[#10B981]/25 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -left-12 h-64 w-64 rounded-full bg-[#FACC15]/15 blur-3xl" />
 
+          <div className="relative px-6 py-8 md:px-10 md:py-10 flex flex-col lg:flex-row items-start lg:items-center gap-8">
+            <div className="flex-1 min-w-0">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm ring-1 ring-white/15 text-white text-[10px] font-bold uppercase tracking-widest">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FACC15] animate-pulse" />
+                AI Flock Diagnostics
+              </span>
+
+              <h1 className="mt-4 text-[26px] md:text-[34px] font-bold text-white tracking-tight text-balance">
+                {firstName ? (
+                  <>Welcome back, <span className="text-[#FACC15]">{firstName}</span>.</>
+                ) : (
+                  'Welcome to PoultraScan.'
+                )}
+              </h1>
+              <p className="mt-2 text-white/75 text-sm md:text-[15px] max-w-lg leading-relaxed">
+                Monitor flock health with computer vision — scan, detect, and track
+                every bird from one dashboard.
+              </p>
+
+              <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                <button
+                  onClick={handleNewScan}
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#FACC15] to-[#EAB308] text-[#052E16] px-5 py-3 rounded-xl text-sm font-bold shadow-lg shadow-[#FACC15]/25 hover:shadow-[#FACC15]/40 hover:brightness-105 active:scale-[0.98] transition-all"
+                >
+                  <MdAdd className="text-lg" />
+                  Scan Poultry
+                  <MdArrowForward className="text-base" />
+                </button>
+                <button
+                  onClick={() => navigate('/scan/history')}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white bg-white/10 ring-1 ring-white/20 backdrop-blur-sm hover:bg-white/20 active:scale-[0.98] transition-all"
+                >
+                  <MdRadar className="text-base text-[#FACC15]" />
+                  View Scan History
+                </button>
+              </div>
+            </div>
+
+            {/* Decorative scan-panel visual */}
+            <div className="hidden lg:block shrink-0 w-[280px] relative aspect-[4/3] rounded-2xl bg-[#052E16]/70 ring-1 ring-white/10 overflow-hidden shadow-[0_18px_44px_-16px_rgba(5,46,22,0.7)]">
+              <div
+                className="absolute inset-0 opacity-[0.14]"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+                  backgroundSize: '26px 26px',
+                }}
+              />
+              <div className="pointer-events-none absolute inset-4">
+                <span className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-[#FACC15] rounded-tl-lg" />
+                <span className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-[#FACC15] rounded-tr-lg" />
+                <span className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-[#FACC15] rounded-bl-lg" />
+                <span className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-[#FACC15] rounded-br-lg" />
+              </div>
+              <span className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#10B981] to-transparent animate-scan-line shadow-[0_0_12px_2px_rgba(16,185,129,0.45)]" />
+              <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-white/50">Analyzing frame…</span>
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#FACC15]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FACC15] animate-pulse" />
+                  CV model
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- Loading ---------- */}
         {loading && (
-          <div className="flex flex-col items-center justify-center py-20 gap-3">
-            <div className="w-8 h-8 border-4 border-[#E5E7EB] border-t-[#2E7D32] rounded-full animate-spin" />
-            <p className="text-sm text-[#6B7280] animate-pulse">Loading dashboard...</p>
+          <div className="py-20">
+            <PoultraScanLoader label="Loading dashboard..." />
           </div>
         )}
 
+        {/* ---------- Error ---------- */}
         {error && !loading && (
-          <div className="text-center py-16 bg-white rounded-xl border border-[#FFEBEE]">
-            <p className="text-sm text-[#D32F2F] font-medium">Couldn't load dashboard — {error}</p>
+          <div className="text-center py-16 bg-white rounded-2xl border border-[#FECACA] shadow-card">
+            <p className="text-sm text-[#EF4444] font-medium">Couldn't load dashboard — {error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-4 text-sm font-semibold text-[#14532D] hover:underline"
+            >
+              Try again
+            </button>
           </div>
         )}
 
+        {/* ---------- Content ---------- */}
         {!loading && !error && stats && (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-12 grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <div className="md:col-span-12 grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
               <MetricCard
                 icon={MdHomeWork}
                 label="Total Farms"

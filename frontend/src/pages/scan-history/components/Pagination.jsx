@@ -5,23 +5,23 @@ import {
 
 export default function Pagination({ page, hasMore, onPrev, onNext, count }) {
   return (
-    <div className="mt-5  pt-4 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-3">
-      <span className="text-[#9CA3AF] text-xs">Page {page} • {count} results</span>
+    <div className="mt-5  pt-4 border-t border-[#E4ECE7] flex flex-col sm:flex-row items-center justify-between gap-3">
+      <span className="text-[#718279] text-xs">Page {page} â€¢ {count} results</span>
       <div className="flex items-center gap-1.5">
         <button
           onClick={onPrev}
           disabled={page === 1}
-          className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#E5E7EB] text-[#6B7280] hover:bg-[#F8FAF7] transition-colors disabled:opacity-40"
+          className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#E4ECE7] text-[#4B6357] hover:bg-[#F7FAF8] transition-colors disabled:opacity-40"
         >
           <MdChevronLeft className="text-lg" />
         </button>
-        <span className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#2E7D32] text-white text-xs font-semibold">
+        <span className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#14532D] text-white text-xs font-semibold">
           {page}
         </span>
         <button
           onClick={onNext}
           disabled={!hasMore}
-          className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#E5E7EB] text-[#6B7280] hover:bg-[#F8FAF7] transition-colors disabled:opacity-40"
+          className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#E4ECE7] text-[#4B6357] hover:bg-[#F7FAF8] transition-colors disabled:opacity-40"
         >
           <MdChevronRight className="text-lg" />
         </button>

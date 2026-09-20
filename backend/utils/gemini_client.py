@@ -26,6 +26,29 @@ FREE_MODELS = [
 MIN_REALISTIC_WEIGHT_KG = 0.1
 MAX_REALISTIC_WEIGHT_KG = 8.0
 
+# Oil yield is COMPUTED from real weight using a fixed rendering model, never
+# guessed by the AI. Formula (all constants named so the math is auditable):
+#   edible fat (g)   = weight_kg * 1000 * OIL_FAT_RATIO * OIL_RENDERING_EFFICIENCY
+#   oil (ml)         = edible fat (g) / OIL_DENSITY_G_PER_ML
+#   => ml per kg     = 1000 * 0.10 * 0.80 / 0.90 = 88.89 ml/kg
+OIL_FAT_RATIO = 0.10
+OIL_RENDERING_EFFICIENCY = 0.80
+OIL_DENSITY_G_PER_ML = 0.90
+MAX_REALISTIC_OIL_ML = 900.0
+OIL_YIELD_ML_PER_KG = (1000 * OIL_FAT_RATIO * OIL_RENDERING_EFFICIENCY) / OIL_DENSITY_G_PER_ML
+
+
+def _compute_oil_ml(weight_kg: float) -> float:
+    """
+    Computes oil yield from an already-sanitized weight (kg) using the fixed
+    rendering formula above (~88.89 ml per kg). Returns 0.0 when the weight
+    is unusable so a failed weight never produces a fabricated oil number.
+    Rounded to the nearest whole millilitre.
+    """
+    if not weight_kg or weight_kg <= 0:
+        return 0.0
+    return round(min(weight_kg * OIL_YIELD_ML_PER_KG, MAX_REALISTIC_OIL_ML))
+
 
 class GeminiInsightsError(Exception):
     """Raised when every model in FREE_MODELS fails to return a usable
@@ -52,9 +75,11 @@ Respond ONLY with valid JSON, no markdown, no code fences, in this exact format:
 {{
   "tips": "2-4 sentences of practical care/treatment advice for this condition",
   "estimated_weight": <number in kg, based on the chicken's visible size in the photo, realistic broiler range>,
-  "estimated_oil_ml": <number in ml, rough estimated oil yield if processed, as a float>,
   "market_ready": <true or false, whether this chicken would be safe/ready for market>
 }}
+
+Note: oil yield is NOT requested here — the app computes it from the
+estimated_weight using its own formula, so do not invent an oil number.
 
 If disease is HEALTHY, market_ready should lean true and tips should be general maintenance advice.
 If disease is COCCIDIOSIS, FOWL_POX, or NEWCASTLE, market_ready should be false and tips should focus on treatment/isolation.
@@ -110,10 +135,12 @@ def get_disease_insights(disease: str, confidence: float, image_bytes: bytes) ->
 
             print(f"Gemini insight generated successfully using model: {model_name}")
 
+            weight = _sanitize_weight(data.get("estimated_weight", 0.0))
+
             return {
                 "tips": data.get("tips", "No specific advice available."),
-                "estimated_weight": _sanitize_weight(data.get("estimated_weight", 0.0)),
-                "estimated_oil_ml": float(data.get("estimated_oil_ml", 0.0)),
+                "estimated_weight": weight,
+                "estimated_oil_ml": _compute_oil_ml(weight),
                 "market_ready": bool(data.get("market_ready", False))
             }
 
@@ -178,9 +205,11 @@ this exact format:
 {{
   "tips": "2-4 sentences of practical care/treatment advice for this condition",
   "estimated_weight": <number in kg, based on that chicken's visible size>,
-  "estimated_oil_ml": <number in ml, rough estimated oil yield if processed, as a float>,
   "market_ready": <true or false>
 }}
+
+Note: oil yield is NOT requested here — the app computes it from each
+estimated_weight using its own formula, so do not invent an oil number.
 
 If a chicken's disease is HEALTHY, market_ready should lean true and tips
 should be general maintenance advice. If COCCIDIOSIS, FOWL_POX, or
@@ -205,10 +234,11 @@ treatment/isolation.
 
             results = []
             for entry in data:
+                weight = _sanitize_weight(entry.get("estimated_weight", 0.0))
                 results.append({
                     "tips": entry.get("tips", "No specific advice available."),
-                    "estimated_weight": _sanitize_weight(entry.get("estimated_weight", 0.0)),
-                    "estimated_oil_ml": float(entry.get("estimated_oil_ml", 0.0)),
+                    "estimated_weight": weight,
+                    "estimated_oil_ml": _compute_oil_ml(weight),
                     "market_ready": bool(entry.get("market_ready", False)),
                 })
 

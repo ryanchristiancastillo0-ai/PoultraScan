@@ -68,8 +68,8 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
   const isPortrait = orientation === 'portrait';
 
   return (
-    <div className="fixed inset-0 z-[60] bg-[#1B1D1B]/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="relative w-full max-w-3xl bg-[#1B1D1B] rounded-2xl overflow-hidden shadow-2xl">
+    <div className="fixed inset-0 z-[60] bg-[#10231A]/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="relative w-full max-w-3xl bg-[#10231A] rounded-2xl overflow-hidden shadow-2xl">
         <button
           onClick={handleClose}
           aria-label="Close camera"
@@ -92,7 +92,7 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
         </button>
 
         {/*
-          Only this container changes size/aspect-ratio when toggling —
+          Only this container changes size/aspect-ratio when toggling â€”
           everything else (modal shell, button bar, backdrop) stays fixed.
           Using a max-h so portrait mode doesn't blow past the viewport.
         */}
@@ -118,11 +118,11 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
           </div>
         </div>
 
-        <div className="flex justify-center py-5 bg-[#1B1D1B]">
+        <div className="flex justify-center py-5 bg-[#10231A]">
           <button
             onClick={handleSnap}
             disabled={!ready || !!error}
-            className="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#2E7D32] text-white text-base font-semibold hover:bg-[#43A047] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#14532D] to-[#166534] text-white text-base font-semibold hover:from-[#166534] hover:to-[#052E16] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <MdCameraAlt className="text-xl" />
             Take Photo

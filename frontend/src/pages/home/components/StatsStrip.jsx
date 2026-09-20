@@ -9,7 +9,7 @@ export default function StatsStrip() {
   ];
 
   return (
-    <section className="bg-[#2E7D32]">
+    <section className="bg-gradient-to-r from-[#052E16] via-[#14532D] to-[#166534]">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
         {stats.map((s, i) => (
           <Reveal key={s.label} delay={i * 80} className="text-center md:text-left">

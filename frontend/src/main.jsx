@@ -7,6 +7,18 @@ import { AuthProvider } from './middleware/AuthContext.jsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { registerSW } from "virtual:pwa-register";
 
+// Clean up any service worker left registered by a previous dev run or a
+// production build. A stale SW intercepts Vite's module requests in dev and
+// causes "Failed to load module script ... MIME type text/html" errors.
+if (import.meta.env.DEV && "serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    registrations.forEach((registration) => registration.unregister());
+  });
+  if (window.caches) {
+    caches.keys().then((keys) => keys.forEach((key) => caches.delete(key)));
+  }
+}
+
 registerSW({
   immediate: true,
   onNeedRefresh() {

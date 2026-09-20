@@ -14,16 +14,20 @@ export default defineConfig({
       manifestFilename: "manifest.json",
 
       devOptions: {
-        enabled: true,
-        type: "module",
+        // Keep the service worker OUT of development. A dev-registered SW
+        // intercepts Vite's module requests and can serve index.html for
+        // .js/.jsx paths, which triggers the "Expected a JavaScript module
+        // script but ... MIME type text/html" error. Test PWA via
+        // `npm run build && npm run preview` instead.
+        enabled: false,
       },
 
       manifest: {
-        name: "Poultry Scanner",
-        short_name: "Poultry",
+        name: "PoultraScan",
+        short_name: "PoultraScan",
         description: "AI-powered poultry health monitoring system",
-        theme_color: "#2E7D32",
-        background_color: "#ffffff",
+        theme_color: "#14532D",
+        background_color: "#F7FAF8",
         display: "standalone",
         orientation: "portrait",
         start_url: "/",

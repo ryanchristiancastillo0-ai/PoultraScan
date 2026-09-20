@@ -5,7 +5,7 @@ export default function HowItWorks() {
     {
       index: '01',
       title: 'Capture',
-      description: "Snap a photo or short clip of the coop — from your phone, no special equipment needed.",
+      description: "Snap a photo or short clip of the coop â€” from your phone, no special equipment needed.",
     },
     {
       index: '02',
@@ -22,10 +22,10 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="scroll-mt-20 max-w-[1200px] mx-auto px-4 md:px-8 py-20 md:py-28">
       <Reveal className="max-w-xl mb-12">
-        <span className="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#2E7D32]">
+        <span className="font-mono text-[11px] font-semibold uppercase tracking-widest text-[#14532D]">
           How it works
         </span>
-        <h2 className="text-3xl md:text-4xl font-bold text-[#1B1D1B] mt-3 tracking-tight">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#10231A] mt-3 tracking-tight">
           Three steps, most of it automatic.
         </h2>
       </Reveal>

@@ -23,18 +23,18 @@ function SuccessModal({ onDone }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-[#1B1D1B]/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-[#10231A]/60 backdrop-blur-sm" />
 
-      <div className="relative w-full max-w-sm bg-white rounded-2xl shadow-[0_24px_64px_-12px_rgba(11,28,48,0.35)] p-8 flex flex-col items-center text-center">
+      <div className="relative w-full max-w-sm bg-white rounded-2xl shadow-[0_24px_64px_-12px_rgba(5, 46, 22,0.35)] p-8 flex flex-col items-center text-center">
         <div className="relative w-20 h-20 mb-5">
           <svg className="w-20 h-20" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="36" fill="none" stroke="#E8F5E9" strokeWidth="4" />
+            <circle cx="40" cy="40" r="36" fill="none" stroke="#E9F4EE" strokeWidth="4" />
             <circle
               cx="40"
               cy="40"
               r="36"
               fill="none"
-              stroke="#2E7D32"
+              stroke="#14532D"
               strokeWidth="4"
               strokeLinecap="round"
               strokeDasharray="226.19"
@@ -50,14 +50,14 @@ function SuccessModal({ onDone }) {
             className="absolute inset-0 flex items-center justify-center"
             style={{ animation: 'checkPop 0.4s ease-out 0.5s both' }}
           >
-            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#2E7D32] to-[#43A047] flex items-center justify-center shadow-[0_8px_20px_rgba(0,105,72,0.35)]">
+            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#14532D] to-[#166534] flex items-center justify-center shadow-[0_8px_20px_rgba(20, 83, 45,0.35)]">
               <FiCheck className="text-white text-2xl" strokeWidth={3} />
             </div>
           </div>
         </div>
 
-        <h2 className="text-xl font-bold text-[#1B1D1B]">Account Created!</h2>
-        <p className="text-sm text-[#6B7280] mt-2">
+        <h2 className="text-xl font-bold text-[#10231A]">Account Created!</h2>
+        <p className="text-sm text-[#4B6357] mt-2">
           Your PoultraScan AI account is ready. Redirecting you to login in {countdown}...
         </p>
 
@@ -126,66 +126,72 @@ export default function Register() {
   };
 
   return (
-    <div className="bg-[#F8FAF7] min-h-screen flex text-[#1B1D1B] antialiased w-full">
+    <div className="bg-[#F7FAF8] min-h-screen flex text-[#10231A] antialiased w-full">
       <div className="flex w-full min-h-screen">
 
-       <div className="hidden md:flex md:w-1/2 h-full min-h-screen bg-[#DFEBE1] relative overflow-hidden">
+       <div className="hidden md:flex md:w-1/2 h-full min-h-screen relative overflow-hidden">
   {/* Base Image - blurred */}
   <img
     src="/img/left-hero.png"
     alt=""
-    className="absolute inset-0 w-full h-full object-cover object-top scale-110 blur-xs opacity-90"
+    className="absolute inset-0 w-full h-full object-cover object-top scale-110 blur-xs opacity-60"
   />
 
+  {/* Deep green gradient overlay */}
+  <div className="absolute inset-0 bg-gradient-to-br from-[#052E16]/95 via-[#14532D]/85 to-[#166534]/80" />
+  <div className="ps-grid-overlay absolute inset-0 opacity-50" />
+
   {/* Decorative blurred blobs for depth */}
-  <div className="absolute -top-16 -left-16 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
-  <div className="absolute bottom-0 -right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
+  <div className="absolute -top-16 -left-16 w-72 h-72 bg-[#10B981]/25 rounded-full blur-3xl" />
+  <div className="absolute bottom-0 -right-10 w-80 h-80 bg-[#FACC15]/15 rounded-full blur-3xl" />
 
   {/* Top-left brand mark */}
   <div className="absolute top-8 left-8 flex items-center gap-2 z-10">
     <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg">
-      <FiFeather className="text-white text-xl" />
+      <FiFeather className="text-[#FACC15] text-xl" />
     </div>
     <span className="text-white font-semibold tracking-wide text-lg drop-shadow-sm">
-      PoultraScan AI
+      PoultraScan <span className="text-[#FACC15]">AI</span>
     </span>
   </div>
 
   {/* Bottom overlay text */}
-  <div className="absolute bottom-0 left-0 right-0 p-10 z-10 bg-gradient-to-t from-[#1B1D1B]/70 via-[#1B1D1B]/20 to-transparent">
-    <h2 className="text-white text-2xl font-semibold tracking-tight mb-2 drop-shadow-sm">
-      Smarter poultry health, in real time.
-    </h2>
-    <p className="text-white/80 text-sm max-w-sm">
-      AI-powered scans help you catch issues early and keep your flock thriving.
-    </p>
+  <div className="absolute bottom-0 left-0 right-0 p-10 z-10">
+    <div className="bg-gradient-to-t from-[#052E16]/80 via-[#052E16]/30 to-transparent pt-6">
+      <h2 className="text-white text-2xl font-semibold tracking-tight mb-2 drop-shadow-sm">
+        Smarter poultry health, in real time.
+      </h2>
+      <p className="text-white/80 text-sm max-w-sm">
+        AI-powered scans help you catch issues early and keep your flock thriving.
+      </p>
+    </div>
   </div>
 </div>
 
-        <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-16 bg-[#F8FAF7]">
-          <div className="w-full max-w-[480px] bg-white rounded-2xl p-6 md:p-10 shadow-[0_4px_12px_rgba(15,23,42,0.04)] border border-[#E8F5E9]">
+        <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-16 bg-[#F7FAF8]">
+          <div className="w-full max-w-[460px] bg-white rounded-2xl p-6 md:p-10 shadow-card border border-[#E4ECE7]">
 
             <div className="flex flex-col items-center mb-10">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#2E7D32] to-[#43A047] flex items-center justify-center shadow-[0_8px_20px_rgba(0,105,72,0.35)] mb-4">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#14532D] to-[#166534] flex items-center justify-center shadow-[0_8px_20px_rgba(20, 83, 45,0.35)] mb-4">
                 <FiFeather className="text-white text-3xl" />
               </div>
-              <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#1B1D1B]">Create Your Account</h1>
-              <p className="text-base text-[#6B7280] mt-1 text-center">Join PoultraScan AI to start monitoring your flock.</p>
+              <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#10231A]">Create Your Account</h1>
+              <p className="text-base text-[#4B6357] mt-1 text-center">Join PoultraScan AI to start monitoring your flock.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
 
               {(formError || error) && (
-                <div className="text-sm text-[#D32F2F] bg-[#FFEBEE] border border-[#F3C9C9] rounded-lg px-4 py-2 text-center">
+                <div className="text-sm text-[#EF4444] bg-[#FEF2F2] border border-[#FECACA] rounded-lg px-4 py-2 text-center">
                   {formError || error}
                 </div>
               )}
 
               <div className="relative">
-                <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
-                  <FiUser className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${fullNameFocused ? 'text-[#2E7D32]' : 'text-[#6B7280]'}`} />
+                <div className="relative flex items-center h-[52px] rounded-xl border border-[#E4ECE7] bg-white focus-within:border-[#14532D] focus-within:ring-4 focus-within:ring-[#14532D]/10 transition-all duration-300 px-5">
+                  <FiUser className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${fullNameFocused ? 'text-[#14532D]' : 'text-[#4B6357]'}`} />
                   <input
-                    className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#1B1D1B] text-base outline-none peer"
+                    className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#10231A] text-base outline-none peer"
                     id="fullName"
                     name="fullName"
                     required
@@ -199,8 +205,8 @@ export default function Register() {
                     htmlFor="fullName"
                     className={`absolute left-14 origin-left pointer-events-none transition-all duration-250 ease-[cubic-bezier(0.25,0.8,0.25,1)] ${
                       fullNameFloated
-                        ? 'top-1.5 scale-[0.82] font-semibold text-[#2E7D32]'
-                        : 'top-1/2 -translate-y-1/2 scale-100 text-[#9CA3AF]'
+                        ? 'top-1.5 scale-[0.82] font-semibold text-[#14532D]'
+                        : 'top-1/2 -translate-y-1/2 scale-100 text-[#718279]'
                     }`}
                   >
                     Full Name
@@ -209,10 +215,10 @@ export default function Register() {
               </div>
 
               <div className="relative">
-                <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
-                  <FiMail className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${emailFocused ? 'text-[#2E7D32]' : 'text-[#6B7280]'}`} />
+                <div className="relative flex items-center h-[52px] rounded-xl border border-[#E4ECE7] bg-white focus-within:border-[#14532D] focus-within:ring-4 focus-within:ring-[#14532D]/10 transition-all duration-300 px-5">
+                  <FiMail className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${emailFocused ? 'text-[#14532D]' : 'text-[#4B6357]'}`} />
                   <input
-                    className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#1B1D1B] text-base outline-none peer"
+                    className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#10231A] text-base outline-none peer"
                     id="email"
                     name="email"
                     required
@@ -226,8 +232,8 @@ export default function Register() {
                     htmlFor="email"
                     className={`absolute left-14 origin-left pointer-events-none transition-all duration-250 ease-[cubic-bezier(0.25,0.8,0.25,1)] ${
                       emailFloated
-                        ? 'top-1.5 scale-[0.82] font-semibold text-[#2E7D32]'
-                        : 'top-1/2 -translate-y-1/2 scale-100 text-[#9CA3AF]'
+                        ? 'top-1.5 scale-[0.82] font-semibold text-[#14532D]'
+                        : 'top-1/2 -translate-y-1/2 scale-100 text-[#718279]'
                     }`}
                   >
                     Email Address
@@ -236,10 +242,10 @@ export default function Register() {
               </div>
 
               <div className="relative">
-                <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
-                  <FiLock className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${passwordFocused ? 'text-[#2E7D32]' : 'text-[#6B7280]'}`} />
+                <div className="relative flex items-center h-[52px] rounded-xl border border-[#E4ECE7] bg-white focus-within:border-[#14532D] focus-within:ring-4 focus-within:ring-[#14532D]/10 transition-all duration-300 px-5">
+                  <FiLock className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${passwordFocused ? 'text-[#14532D]' : 'text-[#4B6357]'}`} />
                   <input
-                    className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#1B1D1B] text-base outline-none peer"
+                    className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#10231A] text-base outline-none peer"
                     id="password"
                     name="password"
                     required
@@ -253,14 +259,14 @@ export default function Register() {
                     htmlFor="password"
                     className={`absolute left-14 origin-left pointer-events-none transition-all duration-250 ease-[cubic-bezier(0.25,0.8,0.25,1)] ${
                       passwordFloated
-                        ? 'top-1.5 scale-[0.82] font-semibold text-[#2E7D32]'
-                        : 'top-1/2 -translate-y-1/2 scale-100 text-[#9CA3AF]'
+                        ? 'top-1.5 scale-[0.82] font-semibold text-[#14532D]'
+                        : 'top-1/2 -translate-y-1/2 scale-100 text-[#718279]'
                     }`}
                   >
                     Password
                   </label>
                   <button
-                    className="text-[#6B7280] hover:text-[#2E7D32] transition-colors focus:outline-none flex-shrink-0 ml-2"
+                    className="text-[#4B6357] hover:text-[#14532D] transition-colors focus:outline-none flex-shrink-0 ml-2"
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                   >
@@ -270,10 +276,10 @@ export default function Register() {
               </div>
 
               <div className="relative">
-                <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
-                  <FiShield className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${confirmPasswordFocused ? 'text-[#2E7D32]' : 'text-[#6B7280]'}`} />
+                <div className="relative flex items-center h-[52px] rounded-xl border border-[#E4ECE7] bg-white focus-within:border-[#14532D] focus-within:ring-4 focus-within:ring-[#14532D]/10 transition-all duration-300 px-5">
+                  <FiShield className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${confirmPasswordFocused ? 'text-[#14532D]' : 'text-[#4B6357]'}`} />
                   <input
-                    className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#1B1D1B] text-base outline-none peer"
+                    className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#10231A] text-base outline-none peer"
                     id="confirmPassword"
                     name="confirmPassword"
                     required
@@ -287,14 +293,14 @@ export default function Register() {
                     htmlFor="confirmPassword"
                     className={`absolute left-14 origin-left pointer-events-none transition-all duration-250 ease-[cubic-bezier(0.25,0.8,0.25,1)] ${
                       confirmPasswordFloated
-                        ? 'top-1.5 scale-[0.82] font-semibold text-[#2E7D32]'
-                        : 'top-1/2 -translate-y-1/2 scale-100 text-[#9CA3AF]'
+                        ? 'top-1.5 scale-[0.82] font-semibold text-[#14532D]'
+                        : 'top-1/2 -translate-y-1/2 scale-100 text-[#718279]'
                     }`}
                   >
                     Confirm Password
                   </label>
                   <button
-                    className="text-[#6B7280] hover:text-[#2E7D32] transition-colors focus:outline-none flex-shrink-0 ml-2"
+                    className="text-[#4B6357] hover:text-[#14532D] transition-colors focus:outline-none flex-shrink-0 ml-2"
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
@@ -306,7 +312,7 @@ export default function Register() {
               <div className="flex items-start py-2">
                 <div className="flex items-center h-5">
                   <input
-                    className="w-4 h-4 text-[#2E7D32] bg-white border-[#D8E3DA] rounded focus:ring-[#2E7D32] focus:ring-2 cursor-pointer"
+                    className="w-4 h-4 text-[#14532D] bg-white border-[#E4ECE7] rounded focus:ring-[#14532D] focus:ring-2 cursor-pointer"
                     id="terms"
                     name="terms"
                     required
@@ -316,14 +322,14 @@ export default function Register() {
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label className="text-[#6B7280] cursor-pointer" htmlFor="terms">
-                    I agree to the <a className="text-[#2E7D32] hover:underline font-bold" href="#">Terms &amp; Conditions</a> and Privacy Policy.
+                  <label className="text-[#4B6357] cursor-pointer" htmlFor="terms">
+                    I agree to the <a className="text-[#14532D] hover:underline font-bold" href="#">Terms &amp; Conditions</a> and Privacy Policy.
                   </label>
                 </div>
               </div>
 
               <button
-                className="w-full h-[56px] bg-[#2E7D32] text-white rounded-lg text-base font-bold hover:bg-[#43A047] active:scale-[0.98] transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] mt-6 disabled:opacity-50"
+                className="w-full h-[52px] bg-gradient-to-r from-[#14532D] via-[#166534] to-[#10B981] text-white rounded-xl text-base font-semibold hover:from-[#052E16] hover:via-[#14532D] hover:to-[#166534] active:scale-[0.98] transition-all shadow-md shadow-[#14532D]/30 mt-6 disabled:opacity-50"
                 type="submit"
                 disabled={loading}
               >
@@ -332,9 +338,9 @@ export default function Register() {
             </form>
 
             <div className="mt-8 text-center">
-              <p className="text-base text-[#6B7280]">
+              <p className="text-base text-[#4B6357]">
                 Already have an account?{' '}
-                <a className="text-[#2E7D32] hover:underline font-bold transition-colors" href="/login">Login</a>
+                <a className="text-[#14532D] hover:underline font-bold transition-colors" href="/login">Login</a>
               </p>
             </div>
 

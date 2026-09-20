@@ -124,7 +124,7 @@ export default function AiScan() {
 
 
   return (
-    <div className="min-h-screen bg-[#F8FAF7] ">
+    <div className="min-h-screen bg-[#F7FAF8] ">
       <TopNav onMenuClick={() => setMobileNavOpen(true)} />
 
         <div className="md:hidden">
@@ -133,19 +133,20 @@ export default function AiScan() {
 
       <main className="px-4 py-8 md:py-12 mt-16 max-w-[1200px] mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-8">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#E8F5E9] text-[#2E7D32] text-[10px] font-bold uppercase tracking-widest mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E9F4EE] text-[#14532D] text-[10px] font-bold uppercase tracking-widest mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FACC15]" />
             AI-Powered
           </span>
-          <h1 className="text-2xl md:text-3xl font-bold text-[#1B1D1B] tracking-tight text-balance">AI Diagnostic Scanner</h1>
-          <p className="mt-2 text-sm text-[#6B7280] max-w-xl mx-auto leading-relaxed text-pretty">
+          <h1 className="text-2xl md:text-3xl font-bold text-[#10231A] tracking-tight text-balance">AI Diagnostic Scanner</h1>
+          <p className="mt-2 text-sm text-[#4B6357] max-w-xl mx-auto leading-relaxed text-pretty">
             Position the camera to clearly capture the flock. The AI will automatically detect chickens and analyze their health status.
           </p>
 
           {farmId && (
-            <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#E8F5E9] border border-[#CDE3D1]">
-              <MdInfoOutline className="text-[#2E7D32] text-sm flex-shrink-0" />
-              <span className="text-xs text-[#2E7D32] font-medium">
-                Make sure you've created or selected a farm — results are saved to that farm in your account.
+            <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#E9F4EE] border border-[#DCF0E5]">
+              <MdInfoOutline className="text-[#14532D] text-sm flex-shrink-0" />
+              <span className="text-xs text-[#14532D] font-medium">
+                Make sure you've created or selected a farm â€” results are saved to that farm in your account.
               </span>
             </div>
           )}

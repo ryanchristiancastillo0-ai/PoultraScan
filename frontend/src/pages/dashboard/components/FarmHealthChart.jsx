@@ -11,19 +11,19 @@ export default function FarmHealthChart({ farmHealthIndex }) {
   }, [farmHealthIndex]);
 
   const getColor = (pct) => {
-    if (pct >= 90) return '#2E7D32';
-    if (pct >= 70) return '#F9A825';
-    return '#D32F2F';
+    if (pct >= 90) return '#14532D';
+    if (pct >= 70) return '#F59E0B';
+    return '#EF4444';
   };
 
   return (
-    <div className="md:col-span-6 bg-white rounded-xl p-4 sm:p-6 border border-[#E5E7EB] flex flex-col shadow-sm">
+    <div className="md:col-span-6 bg-white rounded-2xl p-4 sm:p-6 border border-[#E4ECE7] flex flex-col shadow-card">
       <div className="flex flex-col xs:flex-row sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
-        <h3 className="text-[15px] font-semibold text-[#1B1D1B]">Health Index by Farm</h3>
+        <h3 className="text-[15px] font-semibold text-[#10231A]">Health Index by Farm</h3>
         <select
           value={range}
           onChange={(e) => setRange(e.target.value)}
-          className="bg-white border border-[#E5E7EB] text-sm font-medium rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#2E7D32]/20 focus:border-[#2E7D32] text-[#1B1D1B] outline-none cursor-pointer transition-colors w-full sm:w-auto"
+          className="bg-white border border-[#E4ECE7] text-sm font-medium rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#14532D]/20 focus:border-[#14532D] text-[#10231A] outline-none cursor-pointer transition-colors w-full sm:w-auto"
         >
           <option value="7">Last 7 Days</option>
           <option value="30">Last 30 Days</option>
@@ -32,7 +32,7 @@ export default function FarmHealthChart({ farmHealthIndex }) {
 
       {farmHealthIndex.length === 0 ? (
         <div className="flex-1 min-h-[200px] flex items-center justify-center">
-          <p className="text-sm text-[#6B7280]">No farm scan data yet.</p>
+          <p className="text-sm text-[#4B6357]">No farm scan data yet.</p>
         </div>
       ) : (
         <div className="flex-1 overflow-x-auto -mx-1 px-1">
@@ -53,7 +53,7 @@ export default function FarmHealthChart({ farmHealthIndex }) {
                       transition: `height 700ms cubic-bezier(0.16, 1, 0.3, 1) ${index * 70}ms, opacity 200ms`,
                     }}
                   >
-                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#1B1D1B] text-white text-xs font-semibold px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                    <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#10231A] text-white text-xs font-semibold px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                       {farm.health_percentage}%
                     </div>
                   </div>
@@ -62,10 +62,10 @@ export default function FarmHealthChart({ farmHealthIndex }) {
                     style={{
                       color:
                         farm.health_percentage < 70
-                          ? '#D32F2F'
+                          ? '#EF4444'
                           : farm.health_percentage >= 90
-                          ? '#2E7D32'
-                          : '#6B7280',
+                          ? '#14532D'
+                          : '#4B6357',
                     }}
                   >
                     {farm.farm_name}

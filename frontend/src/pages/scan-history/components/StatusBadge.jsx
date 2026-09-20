@@ -5,9 +5,9 @@ import {
 
 export default function StatusBadge({ status }) {
   const styles = {
-    COMPLETED: 'bg-[#E8F5E9] text-[#2E7D32]',
-    PROCESSING: 'bg-[#FFF6E0] text-[#B45309]',
-    FAILED: 'bg-[#FFEBEE] text-[#D32F2F]',
+    COMPLETED: 'bg-[#D1FAE5] text-[#059669]',
+    PROCESSING: 'bg-[#FEF3C7] text-[#D97706]',
+    FAILED: 'bg-[#FEF2F2] text-[#EF4444]',
   };
   const labels = { COMPLETED: 'Completed', PROCESSING: 'Processing', FAILED: 'Failed' };
 

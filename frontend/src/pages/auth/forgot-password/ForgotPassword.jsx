@@ -36,36 +36,36 @@ export default function ForgotPassword() {
   const emailFloated = emailFocused || email.length > 0;
 
   return (
-    <div className="bg-[#F8FAF7] min-h-screen flex items-center justify-center p-4 md:p-6 font-sans antialiased text-[#1B1D1B] w-full">
+    <div className="bg-[#F7FAF8] min-h-screen flex items-center justify-center p-4 md:p-6 font-sans antialiased text-[#10231A] w-full">
       <main className="w-full max-w-md mx-auto">
-        <div className="bg-white rounded-[24px] p-8 md:p-12 shadow-[0_20px_50px_-12px_rgba(0,105,72,0.12)] border border-[#E8F5E9] flex flex-col items-center text-center">
+        <div className="bg-white rounded-2xl p-8 md:p-10 shadow-card border border-[#E4ECE7] flex flex-col items-center text-center">
 
           {/* Logo */}
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#2E7D32] to-[#43A047] flex items-center justify-center shadow-[0_8px_20px_rgba(0,105,72,0.35)] mb-4">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#14532D] to-[#166534] flex items-center justify-center shadow-[0_8px_20px_rgba(20, 83, 45,0.35)] mb-4">
             <FiFeather className="text-white text-3xl" />
           </div>
 
           {isSuccess ? (
-            /* Success: code was emailed — move on to the code page */
+            /* Success: code was emailed Ã¢â‚¬â€ move on to the code page */
             <div className="w-full flex flex-col items-center animate-[fadeIn_0.3s_ease-out]">
-              <div className="w-16 h-16 bg-[#E8F5E9] text-[#2E7D32] rounded-full flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-[#D1FAE5] text-[#059669] rounded-full flex items-center justify-center mb-6">
                 <FiCheckCircle className="text-3xl" />
               </div>
-              <h1 className="text-2xl font-semibold tracking-tight text-[#1B1D1B] mb-3">
+              <h1 className="text-2xl font-semibold tracking-tight text-[#10231A] mb-3">
                 Check Your Email
               </h1>
-              <p className="text-base text-[#6B7280] mb-8 leading-relaxed">
-                We've sent a 6-character code to <span className="font-semibold text-[#1B1D1B]">{email}</span>. Enter it on the next page to reset your password.
+              <p className="text-base text-[#4B6357] mb-8 leading-relaxed">
+                We've sent a 6-character code to <span className="font-semibold text-[#10231A]">{email}</span>. Enter it on the next page to reset your password.
               </p>
               <button
-                className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#276C2A] active:scale-[0.98] text-white rounded-lg font-bold text-base transition-all"
+                className="w-full h-[52px] bg-gradient-to-r from-[#14532D] via-[#166534] to-[#10B981] hover:from-[#052E16] hover:via-[#14532D] hover:to-[#166534] active:scale-[0.98] text-white rounded-xl font-semibold text-base transition-all shadow-md shadow-[#14532D]/25"
                 onClick={() => navigate('/verify-reset-code', { state: { email } })}
               >
-                I Have a Code — Continue
+                I Have a Code Ã¢â‚¬â€ Continue
               </button>
               <button
                 type="button"
-                className="mt-4 text-sm text-[#6B7280] hover:text-[#2E7D32] transition-colors"
+                className="mt-4 text-sm text-[#4B6357] hover:text-[#14532D] transition-colors"
                 onClick={async () => {
                   setError(null);
                   setLoading(true);
@@ -85,25 +85,25 @@ export default function ForgotPassword() {
           ) : (
             /* Step 1: Enter Email */
             <>
-              <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#1B1D1B] mb-3">
+              <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#10231A] mb-3">
                 Reset Your Password
               </h1>
-              <p className="text-base text-[#6B7280] mb-8 leading-relaxed">
+              <p className="text-base text-[#4B6357] mb-8 leading-relaxed">
                 Enter your email address and we'll send you a 6-character reset code.
               </p>
 
               <form onSubmit={handleRequestCode} className="w-full flex flex-col gap-6">
                 {error && (
-                  <div className="text-sm text-[#D32F2F] bg-[#FFEBEE] border border-[#F3C9C9] rounded-lg px-4 py-2 text-center">
+                  <div className="text-sm text-[#EF4444] bg-[#FEF2F2] border border-[#FECACA] rounded-lg px-4 py-2 text-center">
                     {error}
                   </div>
                 )}
 
                 <div className="relative w-full">
-                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#D8E3DA] bg-white focus-within:border-[#2E7D32] focus-within:ring-4 focus-within:ring-[#2E7D32]/10 transition-all duration-300 px-5">
-                    <FiMail className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${emailFocused ? 'text-[#2E7D32]' : 'text-[#6B7280]'}`} />
+                  <div className="relative flex items-center h-[58px] rounded-xl border border-[#E4ECE7] bg-white focus-within:border-[#14532D] focus-within:ring-4 focus-within:ring-[#14532D]/10 transition-all duration-300 px-5">
+                    <FiMail className={`text-xl mr-3 flex-shrink-0 transition-colors duration-200 ${emailFocused ? 'text-[#14532D]' : 'text-[#4B6357]'}`} />
                     <input
-                      className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#1B1D1B] text-base outline-none peer"
+                      className="w-full h-full bg-transparent border-0 p-0 pt-3.5 focus:ring-0 text-[#10231A] text-base outline-none peer"
                       id="email"
                       name="email"
                       required
@@ -117,8 +117,8 @@ export default function ForgotPassword() {
                       htmlFor="email"
                       className={`absolute left-14 origin-left pointer-events-none transition-all duration-250 ease-[cubic-bezier(0.25,0.8,0.25,1)] ${
                         emailFloated
-                          ? 'top-1.5 scale-[0.82] font-semibold text-[#2E7D32]'
-                          : 'top-1/2 -translate-y-1/2 scale-100 text-[#9CA3AF]'
+                          ? 'top-1.5 scale-[0.82] font-semibold text-[#14532D]'
+                          : 'top-1/2 -translate-y-1/2 scale-100 text-[#718279]'
                       }`}
                     >
                       Email address
@@ -127,7 +127,7 @@ export default function ForgotPassword() {
                 </div>
 
                 <button
-                  className="w-full h-[56px] bg-[#2E7D32] hover:bg-[#276C2A] active:scale-[0.98] text-white rounded-lg font-bold text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] transition-all mt-2 flex justify-center items-center disabled:opacity-50"
+                  className="w-full h-[52px] bg-gradient-to-r from-[#14532D] via-[#166534] to-[#10B981] hover:from-[#052E16] hover:via-[#14532D] hover:to-[#166534] active:scale-[0.98] text-white rounded-xl font-semibold text-base shadow-md shadow-[#14532D]/25 transition-all mt-2 flex justify-center items-center disabled:opacity-50"
                   type="submit"
                   disabled={loading}
                 >
@@ -139,7 +139,7 @@ export default function ForgotPassword() {
 
           {/* Back to Login Anchor */}
           <div className="mt-8">
-            <a className="text-sm font-semibold text-[#2E7D32] hover:text-[#43A047] transition-colors flex items-center gap-2"
+            <a className="text-sm font-semibold text-[#14532D] hover:text-[#166534] transition-colors flex items-center gap-2"
               href="/login"
             >
               <FiArrowLeft className="text-lg" />
@@ -158,9 +158,9 @@ export default function ForgotPassword() {
         message={
           <>
             We couldn't find an account for{' '}
-            <span className="font-semibold text-[#1B1D1B]">{notFoundModal}</span>. Please check
+            <span className="font-semibold text-[#10231A]">{notFoundModal}</span>. Please check
             the spelling or{' '}
-            <span className="font-semibold text-[#2E7D32]">create an account</span> before
+            <span className="font-semibold text-[#14532D]">create an account</span> before
             requesting a reset code.
           </>
         }

@@ -57,7 +57,7 @@ export default function ProfileMenu() {
     <>
       {open && (
         <div
-          className="fixed inset-0 bg-[#1B1D1B]/20 backdrop-blur-sm z-40 transition-opacity"
+          className="fixed inset-0 bg-[#10231A]/20 backdrop-blur-sm z-40 transition-opacity"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
@@ -68,18 +68,18 @@ export default function ProfileMenu() {
           aria-label="Profile menu"
           aria-expanded={open}
           disabled={loggingOut}
-          className="w-8 h-8 rounded-full border-2 border-white ring-1 ring-[#E8F5E9] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E7D32]/40 disabled:opacity-60"
+          className="w-8 h-8 rounded-full border-2 border-white ring-1 ring-[#E9F4EE] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#14532D]/40 disabled:opacity-60"
         >
           <MiniAvatar fullname={user?.fullname} avatarUrl={user?.avatar_url} sizeClass="w-full h-full" />
         </button>
 
         {open && (
-          <div className="fixed top-[72px] left-4 right-4 sm:absolute sm:top-auto sm:left-auto sm:right-0 sm:mt-2 sm:w-56 bg-white rounded-xl border border-[#E8F5E9] shadow-[0_12px_32px_rgba(15,23,42,0.12)] overflow-hidden z-50">
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-[#E8F5E9]">
-              <MiniAvatar fullname={user?.fullname} avatarUrl={user?.avatar_url} sizeClass="w-9 h-9 border-2 border-white ring-1 ring-[#E8F5E9]" />
+          <div className="fixed top-[72px] left-4 right-4 sm:absolute sm:top-auto sm:left-auto sm:right-0 sm:mt-2 sm:w-56 bg-white rounded-xl border border-[#E9F4EE] shadow-[0_12px_32px_rgba(16, 35, 26,0.12)] overflow-hidden z-50">
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-[#E9F4EE]">
+              <MiniAvatar fullname={user?.fullname} avatarUrl={user?.avatar_url} sizeClass="w-9 h-9 border-2 border-white ring-1 ring-[#E9F4EE]" />
               <div className="flex flex-col leading-tight min-w-0">
-                <span className="text-xs font-bold text-[#1B1D1B] truncate">{displayName}</span>
-                <span className="text-[10px] text-[#9CA3AF] truncate">{displayEmail}</span>
+                <span className="text-xs font-bold text-[#10231A] truncate">{displayName}</span>
+                <span className="text-[10px] text-[#718279] truncate">{displayEmail}</span>
               </div>
             </div>
             <div className="py-1">
@@ -88,10 +88,10 @@ export default function ProfileMenu() {
                   key={id}
                   onClick={onClick}
                   disabled={loggingOut}
-                  className="w-full flex items-center gap-2.5 px-4 py-2.5 text-left hover:bg-[#F8FAF7] transition-all disabled:opacity-60"
+                  className="w-full flex items-center gap-2.5 px-4 py-2.5 text-left hover:bg-[#F7FAF8] transition-all disabled:opacity-60"
                 >
-                  <Icon className="text-[#6B7280] text-base" />
-                  <span className="text-xs font-medium text-[#1B1D1B]">
+                  <Icon className="text-[#4B6357] text-base" />
+                  <span className="text-xs font-medium text-[#10231A]">
                     {id === 'logout' && loggingOut ? 'Logging out...' : label}
                   </span>
                 </button>
