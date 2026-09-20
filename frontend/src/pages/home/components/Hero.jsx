@@ -20,7 +20,7 @@ export default function Hero() {
           </h1>
           <p className="mt-5 text-base md:text-lg text-[#10231A]/70 max-w-lg leading-relaxed text-pretty">
             Point a camera at the coop. PoultraScan AI reads posture, feathering,
-            and movement to flag sick birds in seconds Ã¢â‚¬â€ so you catch outbreaks
+            and movement to flag sick birds in seconds — so you catch outbreaks
             while they're still one or two birds, not the whole house.
           </p>
 
@@ -40,7 +40,7 @@ export default function Hero() {
 
           <div className="mt-8 flex items-center gap-2 text-sm text-[#10231A]/60">
             <MdCheckCircle className="text-[#FACC15]" />
-            No hardware to install Ã¢â‚¬â€ works from any phone camera
+            No hardware to install — works from any phone camera
           </div>
         </Reveal>
 

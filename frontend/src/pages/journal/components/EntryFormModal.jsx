@@ -50,7 +50,7 @@ export default function EntryFormModal({ initialData, onClose, onSubmit, saving 
 
       <div className="absolute inset-0 bg-[#10231A]/60 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="modal-rise relative w-full max-w-xl bg-white rounded-2xl shadow-[0_24px_64px_-12px_rgba(16, 35, 26,0.3)] overflow-hidden border border-[#E4ECE7]">
+      <div className="modal-rise relative w-full max-w-xl max-h-[90dvh] overflow-y-auto no-scrollbar bg-white rounded-2xl shadow-[0_24px_64px_-12px_rgba(16, 35, 26,0.3)] border border-[#E4ECE7]">
         <div className="flex items-center justify-between px-6 pt-5">
           <span className="text-[11px] font-bold uppercase tracking-wider text-[#718279]">
             {isEdit ? 'Editing entry' : today}

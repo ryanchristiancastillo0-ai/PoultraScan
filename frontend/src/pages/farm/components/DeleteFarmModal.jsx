@@ -6,7 +6,7 @@ import {
 export default function DeleteFarmModal({ farmName, onClose, onConfirm, deleting, error }) {
   return (
     <div className="fixed inset-0 z-[60] bg-[#10231A]/50 flex items-center justify-center p-4">
-      <div className="w-full max-w-sm bg-white rounded-2xl shadow-modal overflow-hidden border border-[#E4ECE7]">
+      <div className="w-full max-w-sm max-h-[90dvh] overflow-y-auto no-scrollbar bg-white rounded-2xl shadow-modal border border-[#E4ECE7]">
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#E4ECE7]">
           <h3 className="text-[15px] font-bold text-[#10231A]">Delete Farm</h3>
           <button

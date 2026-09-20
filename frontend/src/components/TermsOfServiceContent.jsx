@@ -109,8 +109,8 @@ export default function TermsOfServiceContent() {
         <h3 className="text-sm font-bold text-[#10231A] mb-1">9. Limitation of Liability</h3>
         <p>
           To the maximum extent permitted by law, PoultraScan AI and its developers shall not be
-          liable for any indirect, incidental, special, or consequential damages â€” including loss of
-          livestock, revenue, or business opportunity â€” arising from your use of, or inability to
+          liable for any indirect, incidental, special, or consequential damages — including loss of
+          livestock, revenue, or business opportunity — arising from your use of, or inability to
           use, the Service, including reliance on AI-generated diagnostic results.
         </p>
       </section>

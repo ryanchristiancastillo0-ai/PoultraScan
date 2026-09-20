@@ -7,11 +7,11 @@ import { thumbnailSrc } from '../../../utils/thumbnailSrc'
 
 export default function FarmInfoCard({ farmName, location, capacity, imageUrl }) {
   const details = [
-    { icon: MdLocationOn, label: 'Location', value: location || 'â€”' },
+    { icon: MdLocationOn, label: 'Location', value: location || '—' },
     {
       icon: MdGridView,
       label: 'Capacity',
-      value: capacity != null ? `${Number(capacity).toLocaleString()} Chickens` : 'â€”',
+      value: capacity != null ? `${Number(capacity).toLocaleString()} Chickens` : '—',
     },
   ];
 

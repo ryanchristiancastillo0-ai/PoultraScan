@@ -36,7 +36,7 @@ export default function ForgotPassword() {
   const emailFloated = emailFocused || email.length > 0;
 
   return (
-    <div className="bg-[#F7FAF8] min-h-screen flex items-center justify-center p-4 md:p-6 font-sans antialiased text-[#10231A] w-full">
+    <div className="bg-[#F7FAF8] min-h-dvh flex items-center justify-center p-4 md:p-6 font-sans antialiased text-[#10231A] w-full">
       <main className="w-full max-w-md mx-auto">
         <div className="bg-white rounded-2xl p-8 md:p-10 shadow-card border border-[#E4ECE7] flex flex-col items-center text-center">
 
@@ -46,7 +46,7 @@ export default function ForgotPassword() {
           </div>
 
           {isSuccess ? (
-            /* Success: code was emailed Ã¢â‚¬â€ move on to the code page */
+            /* Success: code was emailed — move on to the code page */
             <div className="w-full flex flex-col items-center animate-[fadeIn_0.3s_ease-out]">
               <div className="w-16 h-16 bg-[#D1FAE5] text-[#059669] rounded-full flex items-center justify-center mb-6">
                 <FiCheckCircle className="text-3xl" />
@@ -61,7 +61,7 @@ export default function ForgotPassword() {
                 className="w-full h-[52px] bg-gradient-to-r from-[#14532D] via-[#166534] to-[#10B981] hover:from-[#052E16] hover:via-[#14532D] hover:to-[#166534] active:scale-[0.98] text-white rounded-xl font-semibold text-base transition-all shadow-md shadow-[#14532D]/25"
                 onClick={() => navigate('/verify-reset-code', { state: { email } })}
               >
-                I Have a Code Ã¢â‚¬â€ Continue
+                I Have a Code — Continue
               </button>
               <button
                 type="button"

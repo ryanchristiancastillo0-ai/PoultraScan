@@ -40,7 +40,7 @@ export default function AlertFeed({ recentEvents }) {
                 <div>
                   <p className="text-sm font-semibold text-[#10231A] leading-snug">{alert.title}</p>
                   <p className="text-xs text-[#4B6357] mt-1">
-                    {alert.farm_name} â€¢ {timeAgo(alert.created_at)}
+                    {alert.farm_name} • {timeAgo(alert.created_at)}
                   </p>
                 </div>
               </li>

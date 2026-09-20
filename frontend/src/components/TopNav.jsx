@@ -6,14 +6,18 @@ import { NotificationsMenu, ProfileMenu } from './index';
 const navLinks = [
   { label: 'Dashboard', path: '/dashboard' },
   { label: 'Scans', path: '/scan' },
+  { label: 'History', path: '/scan/history' },
   { label: 'Farms', path: '/farm' },
   { label: 'Journal', path: '/journal' },
 ];
 
 function getActiveFromPath(pathname) {
-  // matches '/farm' and also nested routes like '/farm/123'
+  // exact path match first, so '/scan/history' highlights History not Scans
+  const exact = navLinks.find((l) => pathname === l.path);
+  if (exact) return exact.label;
+  // then match nested routes like '/farm/123'
   const match = navLinks.find(
-    (l) => pathname === l.path || pathname.startsWith(`${l.path}/`)
+    (l) => pathname.startsWith(`${l.path}/`)
   );
   return match ? match.label : null;
 }
@@ -29,7 +33,7 @@ function TopNav() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white/85 border-b border-[#E4ECE7]/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/75">
-      <div className="flex justify-between items-center px-4 md:px-8 h-16 max-w-[1200px] mx-auto w-full">
+      <div className="flex justify-between items-center px-4 md:px-8 min-h-16 max-w-[1200px] mx-auto w-full pt-[env(safe-area-inset-top)]">
         <button
           type="button"
           onClick={() => handleNavClick({ path: '/dashboard' })}

@@ -59,7 +59,7 @@ export default function FarmDetails() {
   };
 
   return (
-    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-screen flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
+    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-dvh flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
      
   <TopNav />
 
@@ -67,7 +67,7 @@ export default function FarmDetails() {
   <BottomNav />
 </div>
 
-      <main className="flex-grow pt-10 lg:pt-24 pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
+      <main className="flex-grow pt-[calc(env(safe-area-inset-top)+2.5rem)] lg:pt-24 pb-[calc(env(safe-area-inset-bottom)+5.5rem)] md:pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-[#718279] mb-4">
           <button onClick={() => navigate('/farm')} className="hover:text-[#14532D] transition-colors">

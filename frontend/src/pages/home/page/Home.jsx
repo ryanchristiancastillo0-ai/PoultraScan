@@ -3,7 +3,7 @@ import {NavBar,Hero,StatsStrip,HowItWorks,FeatureGrid,Testimonial,CtaBanner,Foot
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#F7FAF8]">
+    <div className="min-h-dvh bg-[#F7FAF8]">
       <PageStyles />
       <NavBar />
       <Hero />

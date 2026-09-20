@@ -70,7 +70,7 @@ export default function VerifyResetCode() {
               </div>
             )}
 
-            {/* Code Input Ã¢â‚¬â€ focus ring removed, only subtle border shift */}
+            {/* Code Input — focus ring removed, only subtle border shift */}
             <div className="relative w-full">
               <div className="relative flex items-center h-[60px] rounded-xl border-2 border-[#E4ECE7]/70 bg-[#F7FAF8]/60 focus-within:border-[#14532D] focus-within:bg-white transition-all duration-300 px-5">
                 <FiHash className="text-xl mr-3 flex-shrink-0 text-[#4B6357]" />

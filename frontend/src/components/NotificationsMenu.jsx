@@ -72,9 +72,7 @@ export default function NotificationsMenu() {
         </button>
 
         {open && (
-          <div
-            className="fixed left-4 right-4 top-[72px] bottom-24 z-50 flex flex-col overflow-hidden rounded-2xl border border-[#E9F4EE] bg-white shadow-[0_16px_40px_rgba(16, 35, 26,0.14)] sm:absolute sm:bottom-auto sm:left-auto sm:right-0 sm:top-auto sm:mt-2 sm:h-auto sm:max-h-[26rem] sm:w-80"
-          >
+          <div className="fixed left-3 right-3 top-[calc(env(safe-area-inset-top)+4.25rem)] max-h-[min(70vh,calc(100dvh-9.5rem))] z-50 flex flex-col overflow-hidden rounded-2xl border border-[#E9F4EE] bg-white shadow-[0_16px_40px_rgba(16,35,26,0.14)] animate-menu-pop sm:absolute sm:left-auto sm:right-0 sm:top-auto sm:mt-2 sm:max-h-[26rem] sm:w-80">
             {/* Header */}
             <div className="flex flex-shrink-0 items-center justify-between border-b border-[#E9F4EE] px-4 py-3">
               <span className="text-sm font-bold text-[#10231A]">Notifications</span>

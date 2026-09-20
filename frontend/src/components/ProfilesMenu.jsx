@@ -74,7 +74,7 @@ export default function ProfileMenu() {
         </button>
 
         {open && (
-          <div className="fixed top-[72px] left-4 right-4 sm:absolute sm:top-auto sm:left-auto sm:right-0 sm:mt-2 sm:w-56 bg-white rounded-xl border border-[#E9F4EE] shadow-[0_12px_32px_rgba(16, 35, 26,0.12)] overflow-hidden z-50">
+          <div className="fixed top-[calc(env(safe-area-inset-top)+4.25rem)] left-3 right-3 max-h-[calc(100dvh-6rem)] overflow-y-auto sm:absolute sm:top-auto sm:left-auto sm:right-0 sm:mt-2 sm:w-56 sm:max-h-none bg-white rounded-xl border border-[#E9F4EE] shadow-[0_12px_32px_rgba(16, 35, 26,0.12)] z-50 animate-menu-pop">
             <div className="flex items-center gap-3 px-4 py-3 border-b border-[#E9F4EE]">
               <MiniAvatar fullname={user?.fullname} avatarUrl={user?.avatar_url} sizeClass="w-9 h-9 border-2 border-white ring-1 ring-[#E9F4EE]" />
               <div className="flex flex-col leading-tight min-w-0">

@@ -38,7 +38,7 @@ export default function ScanCard({ scan, onDelete, onView }) {
           <div className="flex flex-wrap justify-between items-start gap-2 mb-1.5">
             <div className="min-w-0 max-w-full">
               <p className="font-semibold text-[#10231A] text-sm truncate">{scan.farm_name}</p>
-              <p className="text-xs text-[#718279] truncate">{scan.location} â€¢ {date}, {time}</p>
+              <p className="text-xs text-[#718279] truncate">{scan.location} • {date}, {time}</p>
             </div>
             <div className="flex-shrink-0">
               <StatusBadge status={scan.status} />

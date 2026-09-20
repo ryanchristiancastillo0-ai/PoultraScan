@@ -25,7 +25,7 @@ export default function PrivacyPolicyContent() {
         <p className="mb-2">
           <strong>Farm and Scan Data.</strong> We collect information you provide about your farms,
           including farm names and optional farm images. We also collect the images you capture or
-          upload during a scan, along with the AI-generated results derived from them â€” including
+          upload during a scan, along with the AI-generated results derived from them — including
           chicken counts, detected bounding boxes, disease classifications, severity levels,
           estimated weight, estimated oil yield, and market-readiness status.
         </p>

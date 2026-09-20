@@ -25,7 +25,7 @@ function SuccessModal({ onDone }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-[#10231A]/60 backdrop-blur-sm" />
 
-      <div className="relative w-full max-w-sm bg-white rounded-2xl shadow-[0_24px_64px_-12px_rgba(5, 46, 22,0.35)] p-8 flex flex-col items-center text-center">
+      <div className="relative w-full max-w-sm max-h-[90dvh] overflow-y-auto no-scrollbar bg-white rounded-2xl shadow-[0_24px_64px_-12px_rgba(5, 46, 22,0.35)] p-8 flex flex-col items-center text-center">
         <div className="relative w-20 h-20 mb-5">
           <svg className="w-20 h-20" viewBox="0 0 80 80">
             <circle cx="40" cy="40" r="36" fill="none" stroke="#E9F4EE" strokeWidth="4" />
@@ -126,10 +126,10 @@ export default function Register() {
   };
 
   return (
-    <div className="bg-[#F7FAF8] min-h-screen flex text-[#10231A] antialiased w-full">
-      <div className="flex w-full min-h-screen">
+    <div className="bg-[#F7FAF8] min-h-dvh flex text-[#10231A] antialiased w-full">
+      <div className="flex w-full min-h-dvh">
 
-       <div className="hidden md:flex md:w-1/2 h-full min-h-screen relative overflow-hidden">
+       <div className="hidden md:flex md:w-1/2 h-full min-h-dvh relative overflow-hidden">
   {/* Base Image - blurred */}
   <img
     src="/img/left-hero.png"

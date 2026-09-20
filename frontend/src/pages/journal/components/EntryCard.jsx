@@ -11,7 +11,7 @@ export default function EntryCard({ entry, onEdit, onDelete }) {
 
   return (
     <>
-      {/* Date tab â€” sits on the timeline, to the left of the card */}
+      {/* Date tab — sits on the timeline, to the left of the card */}
       <div className="absolute -left-14 sm:-left-[72px] top-3 w-11 sm:w-14 flex flex-col items-center">
         <div className="w-11 sm:w-14 rounded-xl bg-white border border-[#E4ECE7] shadow-[0_2px_8px_rgba(16, 35, 26,0.05)] flex flex-col items-center py-1.5 sm:py-2">
           <span className="font-journal text-lg sm:text-xl font-semibold text-[#10231A] leading-none">
@@ -33,7 +33,7 @@ export default function EntryCard({ entry, onEdit, onDelete }) {
               </h3>
               <p className="text-[11px] text-[#718279] mt-1 font-medium uppercase tracking-wide">
                 {time}
-                {wasEdited && <span className="text-[#718279] normal-case"> Â· edited</span>}
+                {wasEdited && <span className="text-[#718279] normal-case"> · edited</span>}
               </p>
             </div>
             <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">

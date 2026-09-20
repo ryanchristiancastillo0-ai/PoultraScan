@@ -8,13 +8,13 @@ export default function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-screen flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
+    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-dvh flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
       <TopNav />
       <div className="md:hidden">
         <BottomNav />
       </div>
 
-      <main className="flex-grow pt-24 pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full flex items-center justify-center">
+      <main className="flex-grow pt-[calc(env(safe-area-inset-top)+6rem)] md:pt-24 pb-[calc(env(safe-area-inset-bottom)+5.5rem)] md:pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full flex items-center justify-center">
         <div className="w-full max-w-md bg-white rounded-2xl border border-[#E4ECE7] shadow-card p-8 sm:p-10 flex flex-col items-center text-center">
           <span className="text-[64px] leading-none font-bold tracking-tight bg-gradient-to-br from-[#14532D] to-[#166534] bg-clip-text text-transparent">
             404

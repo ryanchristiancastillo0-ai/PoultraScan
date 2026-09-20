@@ -6,7 +6,7 @@ import {
 export default function Pagination({ page, hasMore, onPrev, onNext, count }) {
   return (
     <div className="mt-5  pt-4 border-t border-[#E4ECE7] flex flex-col sm:flex-row items-center justify-between gap-3">
-      <span className="text-[#718279] text-xs">Page {page} â€¢ {count} results</span>
+      <span className="text-[#718279] text-xs">Page {page} • {count} results</span>
       <div className="flex items-center gap-1.5">
         <button
           onClick={onPrev}

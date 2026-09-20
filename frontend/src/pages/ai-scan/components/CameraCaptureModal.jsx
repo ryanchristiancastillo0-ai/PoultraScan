@@ -92,7 +92,7 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
         </button>
 
         {/*
-          Only this container changes size/aspect-ratio when toggling â€”
+          Only this container changes size/aspect-ratio when toggling —
           everything else (modal shell, button bar, backdrop) stays fixed.
           Using a max-h so portrait mode doesn't blow past the viewport.
         */}
@@ -100,8 +100,8 @@ export default function CameraCaptureModal({ onCapture, onClose }) {
           <div
             className={`relative bg-black flex items-center justify-center transition-all duration-300 ease-out overflow-hidden rounded-xl ${
               isPortrait
-                ? 'aspect-[3/4] h-[65vh] max-h-[600px] w-auto'
-                : 'aspect-video w-full max-h-[70vh]'
+                ? 'aspect-[3/4] h-[55dvh] max-h-[600px] w-auto'
+                : 'aspect-video w-full max-h-[62dvh]'
             }`}
           >
             {error ? (

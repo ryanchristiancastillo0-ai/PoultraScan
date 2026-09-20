@@ -21,14 +21,14 @@ export default function HeroVisual() {
         {/* Detection region 1 */}
         <div className="absolute left-[11%] top-[26%] w-[46%] h-[40%] rounded-lg border-2 border-[#FACC15]">
           <span className="absolute -top-[22px] left-0 whitespace-nowrap text-[9px] font-semibold text-[#10231A] bg-[#FACC15] px-1.5 py-0.5 rounded">
-            Chicken 01 Â· Healthy
+            Chicken 01 · Healthy
           </span>
         </div>
 
         {/* Detection region 2 */}
         <div className="absolute right-[9%] bottom-[24%] w-[40%] h-[34%] rounded-lg border-2 border-[#10B981]">
           <span className="absolute -top-[22px] left-0 whitespace-nowrap text-[9px] font-semibold text-white bg-[#10B981] px-1.5 py-0.5 rounded">
-            Chicken 02 Â· Healthy
+            Chicken 02 · Healthy
           </span>
         </div>
 
@@ -40,7 +40,7 @@ export default function HeroVisual() {
         {/* Live readout strip */}
         <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
           <span className="font-mono text-[10px] tracking-wider uppercase text-white/50">
-            Analyzing frameâ€¦
+            Analyzing frame…
           </span>
           <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#FACC15]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FACC15] animate-pulse" />

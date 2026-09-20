@@ -69,7 +69,7 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
 
   const sev = SEVERITY_STYLES[summary?.topSeverity?.toUpperCase()] || SEVERITY_STYLES.UNKNOWN;
 
-  // While the camera is open, render ONLY the camera modal â€” hide the
+  // While the camera is open, render ONLY the camera modal — hide the
   // sheet + backdrop entirely instead of stacking both overlays, which
   // was causing the blur bleed-through and squeezed-camera-view bug.
   if (cameraOpen) {
@@ -87,7 +87,7 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
 
       <div className="qs-backdrop absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleClose} />
 
-      <div className="qs-sheet relative w-full sm:max-w-sm bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl p-5 pb-8 sm:pb-5">
+      <div className="qs-sheet relative w-full sm:max-w-sm max-h-[92dvh] sm:max-h-[85vh] bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl p-5 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] sm:pb-5 overflow-y-auto no-scrollbar">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-base font-bold text-[#10231A]">Quick Scan</h2>
           <button
@@ -107,7 +107,7 @@ export default function QuickScanModal({ isOpen, onClose, farmId }) {
           className="hidden"
         />
 
-        {/* No farm selected â€” block scanning entirely */}
+        {/* No farm selected — block scanning entirely */}
         {!hasFarm && (
           <div className="flex flex-col items-center gap-3 py-6">
             <div className="flex items-start gap-2 bg-[#FEF3C7] border border-[#FDE68A] rounded-xl p-3 w-full">

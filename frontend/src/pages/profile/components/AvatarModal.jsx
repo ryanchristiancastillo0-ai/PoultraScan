@@ -37,7 +37,7 @@ export default function AvatarModal({ currentAvatarUrl, onSaveFile, onSaveIcon, 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-[#10231A]/50 backdrop-blur-sm" onClick={saving ? undefined : onCancel} />
-      <div className="relative bg-white rounded-2xl shadow-modal w-full max-w-sm p-6 flex flex-col items-center">
+      <div className="relative bg-white rounded-2xl shadow-modal w-full max-w-sm p-6 flex flex-col items-center max-h-[90dvh] overflow-y-auto no-scrollbar">
         <button
           onClick={onCancel}
           disabled={saving}

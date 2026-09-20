@@ -7,7 +7,7 @@ export default function FarmRequiredModal({ onClose, onNavigate }) {
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative bg-white rounded-2xl border border-[#E4ECE7] shadow-xl max-w-sm w-full p-6 text-center">
+      <div className="relative bg-white rounded-2xl border border-[#E4ECE7] shadow-xl max-w-sm w-full p-6 text-center max-h-[90dvh] overflow-y-auto no-scrollbar">
         <button
           onClick={onClose}
           className="absolute top-3 right-3 p-1 rounded-full text-[#718279] hover:bg-[#F7FAF8] hover:text-[#10231A] transition-colors"
@@ -22,7 +22,7 @@ export default function FarmRequiredModal({ onClose, onNavigate }) {
 
         <h2 className="text-lg font-bold text-[#10231A]">Please select a farm</h2>
         <p className="text-sm text-[#4B6357] mt-1.5 leading-relaxed">
-          This farm couldn't be found â€” it may have been removed. Please select an existing farm
+          This farm couldn't be found — it may have been removed. Please select an existing farm
           or create a new one before scanning.
         </p>
 

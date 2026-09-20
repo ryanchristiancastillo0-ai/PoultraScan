@@ -39,7 +39,7 @@ export default function Profile() {
   }, [user]);
 
   const formatDate = (value) => {
-    if (!value) return 'â€”';
+    if (!value) return '—';
     return new Date(value).toLocaleDateString(undefined, {
       year: 'numeric',
       month: 'long',
@@ -122,13 +122,13 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7FAF8] flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
+    <div className="min-h-dvh bg-[#F7FAF8] flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
       <TopNav />
       <div className="md:hidden">
         <BottomNav />
       </div>
 
-      <main className="flex-grow pt-24 pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
+      <main className="flex-grow pt-[calc(env(safe-area-inset-top)+6rem)] md:pt-24 pb-[calc(env(safe-area-inset-bottom)+5.5rem)] md:pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E9F4EE] text-[#14532D] text-[10px] font-bold uppercase tracking-widest mb-2">
@@ -156,7 +156,7 @@ export default function Profile() {
 
         {error && !loading && (
           <div className="text-center py-16 bg-white rounded-2xl border border-[#FECACA] shadow-card">
-            <p className="text-sm text-[#EF4444] font-medium">Couldn't load profile â€” {error}</p>
+            <p className="text-sm text-[#EF4444] font-medium">Couldn't load profile — {error}</p>
           </div>
         )}
 

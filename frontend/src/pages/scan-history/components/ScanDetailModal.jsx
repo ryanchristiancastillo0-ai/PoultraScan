@@ -41,7 +41,7 @@ export default function ScanDetailModal({ scan, onClose }) {
     <div className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-4">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
 
-      <div className="relative w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto no-scrollbar bg-white rounded-t-2xl sm:rounded-2xl border border-[#E4ECE7] shadow-xl animate-modal-in">
+      <div className="relative w-full max-w-2xl max-h-[92dvh] sm:max-h-[90dvh] overflow-y-auto no-scrollbar bg-white rounded-t-2xl sm:rounded-2xl border border-[#E4ECE7] shadow-xl animate-modal-in">
         {/* Header strip */}
         <div className="sticky top-0 z-10 rounded-t-2xl bg-[#14532D] px-4 py-4 sm:px-6 sm:py-5 flex items-start justify-between gap-3 sm:gap-4">
           <div className="min-w-0">
@@ -142,7 +142,7 @@ export default function ScanDetailModal({ scan, onClose }) {
           </div>
         </div>
 
-        <div className="px-4 pb-4 sm:px-6 sm:pb-6">
+        <div className="px-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] sm:px-6 sm:pb-6">
           <button
             onClick={onClose}
             className="w-full py-3 rounded-lg bg-gradient-to-r from-[#14532D] to-[#166534] text-white text-sm font-semibold hover:from-[#166534] hover:to-[#052E16] transition-all active:scale-95"

@@ -6,7 +6,7 @@ export default function RecentScansTable({ farmId }) {
   const { scans, loading, error } = useRecentScans(farmId);
 
   const formatDate = (value) => {
-    if (!value) return 'â€”';
+    if (!value) return '—';
     return new Date(value).toLocaleString(undefined, {
       month: 'short',
       day: 'numeric',

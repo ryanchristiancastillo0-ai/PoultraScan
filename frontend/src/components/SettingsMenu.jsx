@@ -49,7 +49,7 @@ export default function SettingsMenu() {
         </button>
 
         {open && (
-          <div className="fixed top-[72px] left-4 right-4 sm:absolute sm:top-auto sm:left-auto sm:right-0 sm:mt-2 sm:w-64 bg-white rounded-xl border border-[#E9F4EE] shadow-[0_12px_32px_rgba(16, 35, 26,0.12)] overflow-hidden z-50">
+          <div className="fixed top-[calc(env(safe-area-inset-top)+4.25rem)] left-3 right-3 max-h-[calc(100dvh-6rem)] overflow-y-auto sm:absolute sm:top-auto sm:left-auto sm:right-0 sm:mt-2 sm:w-64 sm:max-h-none bg-white rounded-xl border border-[#E9F4EE] shadow-[0_12px_32px_rgba(16, 35, 26,0.12)] z-50 animate-menu-pop">
             <div className="px-4 py-3 border-b border-[#E9F4EE]">
               <span className="text-sm font-bold text-[#10231A]">Settings</span>
             </div>

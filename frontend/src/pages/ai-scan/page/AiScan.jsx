@@ -124,14 +124,14 @@ export default function AiScan() {
 
 
   return (
-    <div className="min-h-screen bg-[#F7FAF8] ">
+    <div className="min-h-dvh bg-[#F7FAF8] ">
       <TopNav onMenuClick={() => setMobileNavOpen(true)} />
 
         <div className="md:hidden">
   <BottomNav />
 </div>
 
-      <main className="px-4 py-8 md:py-12 mt-16 max-w-[1200px] mx-auto">
+      <main className="px-4 py-8 md:py-12 mt-[calc(env(safe-area-inset-top)+4rem)] md:mt-16 pb-[calc(env(safe-area-inset-bottom)+5rem)] md:pb-12 max-w-[1200px] mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-8">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E9F4EE] text-[#14532D] text-[10px] font-bold uppercase tracking-widest mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FACC15]" />
@@ -146,7 +146,7 @@ export default function AiScan() {
             <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#E9F4EE] border border-[#DCF0E5]">
               <MdInfoOutline className="text-[#14532D] text-sm flex-shrink-0" />
               <span className="text-xs text-[#14532D] font-medium">
-                Make sure you've created or selected a farm â€” results are saved to that farm in your account.
+                Make sure you've created or selected a farm — results are saved to that farm in your account.
               </span>
             </div>
           )}

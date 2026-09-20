@@ -27,7 +27,7 @@ export default function FeatureGrid() {
     {
       icon: MdOutlineFolderShared,
       title: 'Multi-farm management',
-      description: 'Switch between farms and coops from one account â€” built for operations, not just one shed.',
+      description: 'Switch between farms and coops from one account — built for operations, not just one shed.',
     },
   ];
 

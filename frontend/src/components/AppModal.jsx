@@ -42,7 +42,7 @@ export default function AppModal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`relative w-full ${sizeConfig[size] || sizeConfig.sm} bg-white rounded-2xl shadow-modal animate-modal-in overflow-hidden`}
+        className={`relative w-full ${sizeConfig[size] || sizeConfig.sm} max-h-[90dvh] overflow-y-auto no-scrollbar bg-white rounded-2xl shadow-modal animate-modal-in`}
       >
         <button
           onClick={onClose}

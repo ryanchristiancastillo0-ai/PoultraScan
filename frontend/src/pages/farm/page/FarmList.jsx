@@ -45,7 +45,7 @@ export default function FarmsList() {
   };
 
   return (
-    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-screen mb-10 lg:mb-0 flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
+    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-dvh mb-10 lg:mb-0 flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
           
   <TopNav />
 
@@ -54,7 +54,7 @@ export default function FarmsList() {
 </div>
   
 
-      <main className="flex-grow pt-24 pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
+      <main className="flex-grow pt-[calc(env(safe-area-inset-top)+6rem)] md:pt-24 pb-[calc(env(safe-area-inset-bottom)+5.5rem)] md:pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-[#718279] mb-4">
           <span>Dashboard</span>
@@ -64,6 +64,18 @@ export default function FarmsList() {
 
         {/* Header */}
      <div className="relative overflow-hidden rounded-2xl mb-6 bg-gradient-to-br from-[#14532D] to-[#166534] shadow-lg shadow-[#14532D]/20">
+        {/* background photo */}
+        <img
+          src="/img/hero.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-35"
+          style={{
+            maskImage: 'linear-gradient(to right, transparent 0%, transparent 35%, black 80%)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, transparent 35%, black 80%)',
+          }}
+        />
+     
         {/* decorative glows */}
         <div className="pointer-events-none absolute -top-16 -right-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
         <div className="pointer-events-none absolute -bottom-20 left-24 h-44 w-44 rounded-full bg-[#FACC15]/20 blur-3xl" />

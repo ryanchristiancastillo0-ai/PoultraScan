@@ -41,7 +41,7 @@ export default function Journal() {
   };
 
   return (
-    <div className="bg-[#F7FAF8] min-h-screen">
+    <div className="bg-[#F7FAF8] min-h-dvh">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
         .font-journal { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; }
@@ -60,7 +60,7 @@ export default function Journal() {
         <BottomNav />
       </div>
 
-      <main className="pt-24 pb-16 px-4 md:px-8 max-w-3xl mx-auto">
+      <main className="pt-[calc(env(safe-area-inset-top)+6rem)] md:pt-24 pb-[calc(env(safe-area-inset-bottom)+5.5rem)] md:pb-16 px-4 md:px-8 max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-9 flex items-start gap-4">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#14532D] to-[#166534] flex items-center justify-center shadow-[0_8px_20px_-6px_rgba(20, 83, 45,0.35)] flex-shrink-0">

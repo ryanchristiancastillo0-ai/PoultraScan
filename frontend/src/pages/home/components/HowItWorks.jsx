@@ -5,7 +5,7 @@ export default function HowItWorks() {
     {
       index: '01',
       title: 'Capture',
-      description: "Snap a photo or short clip of the coop â€” from your phone, no special equipment needed.",
+      description: "Snap a photo or short clip of the coop — from your phone, no special equipment needed.",
     },
     {
       index: '02',

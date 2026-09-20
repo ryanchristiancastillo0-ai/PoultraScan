@@ -43,7 +43,7 @@ export default function FeedbackModal({ isOpen, onClose }) {
       <div className="absolute inset-0 bg-[#10231A]/50" onClick={handleClose} />
 
       {/* Modal */}
-      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-xl border border-[#E4ECE7] p-6 sm:p-8 animate-[fadeIn_0.2s_ease-out]">
+      <div className="relative w-full max-w-md max-h-[90dvh] overflow-y-auto no-scrollbar bg-white rounded-2xl shadow-xl border border-[#E4ECE7] p-6 sm:p-8 animate-[fadeIn_0.2s_ease-out]">
         <button
           onClick={handleClose}
           className="absolute top-4 right-4 p-1.5 rounded-lg text-[#4B6357] hover:bg-[#F7FAF8] hover:text-[#10231A] transition-colors"

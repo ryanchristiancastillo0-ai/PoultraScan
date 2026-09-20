@@ -28,7 +28,7 @@ export default function EditFarmModal({ farm, onClose, onSave, saving, error }) 
 
   return (
     <div className="fixed inset-0 z-[60] bg-[#10231A]/50 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-modal overflow-hidden">
+      <div className="w-full max-w-md max-h-[90dvh] overflow-y-auto no-scrollbar bg-white rounded-2xl shadow-modal">
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#E4ECE7]">
           <h3 className="text-sm font-bold text-[#10231A]">{farm ? 'Edit Farm' : 'Add Farm'}</h3>
           <button onClick={onClose} aria-label="Close" className="p-1.5 rounded-full hover:bg-[#F7FAF8] text-[#4B6357] transition-colors">

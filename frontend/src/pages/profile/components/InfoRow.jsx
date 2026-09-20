@@ -6,7 +6,7 @@ export default function InfoRow({ icon: Icon, label, value }) {
       </span>
       <div className="min-w-0 flex-1">
         <p className="text-xs font-medium text-[#4B6357]">{label}</p>
-        <p className="text-sm font-medium text-[#10231A] mt-0.5 truncate">{value || 'â€”'}</p>
+        <p className="text-sm font-medium text-[#10231A] mt-0.5 truncate">{value || '—'}</p>
       </div>
     </div>
   );

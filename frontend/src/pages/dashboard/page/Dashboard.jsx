@@ -33,7 +33,7 @@ export default function Dashboard() {
   const firstName = getFirstName(user?.fullname);
 
   return (
-    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-screen flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
+    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-dvh flex flex-col font-['Plus_Jakarta_Sans',ui-sans-serif,system-ui,sans-serif]">
 
       <TopNav />
 
@@ -41,13 +41,26 @@ export default function Dashboard() {
         <BottomNav />
       </div>
 
-      <main className="flex-grow pt-24 pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
+      <main className="flex-grow pt-[calc(env(safe-area-inset-top)+6rem)] md:pt-24 pb-[calc(env(safe-area-inset-bottom)+5.5rem)] md:pb-12 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
         {/* ---------- Hero ---------- */}
-        <section className="relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-br from-[#052E16] via-[#14532D] to-[#166534] shadow-card-hover mb-8">
-          {/* texture + glows */}
-          <div className="ps-grid-overlay absolute inset-0 opacity-60" />
+                <section className="relative isolate overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-br from-[#052E16] via-[#14532D] to-[#166534] shadow-card-hover mb-8">
+          {/* background photo — faded out on the left so text stays clean, visible toward the right */}
+          <img
+            src="/img/hero.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-35"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent 0%, transparent 35%, black 80%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, transparent 35%, black 80%)',
+            }}
+          />
+        
+          {/* subtle texture + glows */}
+          <div className="ps-grid-overlay absolute inset-0 opacity-30" />
           <div className="pointer-events-none absolute -top-20 -right-16 h-64 w-64 rounded-full bg-[#10B981]/25 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-24 -left-12 h-64 w-64 rounded-full bg-[#FACC15]/15 blur-3xl" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
 
           <div className="relative px-6 py-8 md:px-10 md:py-10 flex flex-col lg:flex-row items-start lg:items-center gap-8">
             <div className="flex-1 min-w-0">
@@ -88,9 +101,16 @@ export default function Dashboard() {
             </div>
 
             {/* Decorative scan-panel visual */}
-            <div className="hidden lg:block shrink-0 w-[280px] relative aspect-[4/3] rounded-2xl bg-[#052E16]/70 ring-1 ring-white/10 overflow-hidden shadow-[0_18px_44px_-16px_rgba(5,46,22,0.7)]">
+            <div className="hidden lg:block shrink-0 w-[280px] relative aspect-[4/3] rounded-2xl bg-[#052E16] ring-1 ring-white/10 overflow-hidden shadow-[0_18px_44px_-16px_rgba(5,46,22,0.7)]">
+              <img
+                src="/img/hero1.png"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#052E16]/70 via-transparent to-[#052E16]/80" />
               <div
-                className="absolute inset-0 opacity-[0.14]"
+                className="absolute inset-0 opacity-[0.12]"
                 style={{
                   backgroundImage:
                     'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
@@ -105,7 +125,7 @@ export default function Dashboard() {
               </div>
               <span className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#10B981] to-transparent animate-scan-line shadow-[0_0_12px_2px_rgba(16,185,129,0.45)]" />
               <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-white/50">Analyzing frame…</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-white/70">Analyzing frame…</span>
                 <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#FACC15]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#FACC15] animate-pulse" />
                   CV model

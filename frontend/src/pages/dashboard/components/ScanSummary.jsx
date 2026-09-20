@@ -15,7 +15,7 @@ export default function ScanSummary({ recentScans }) {
 
 
   const formatDate = (value) => {
-    if (!value) return 'â€”';
+    if (!value) return '—';
     return new Date(value).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
   };
 
@@ -65,9 +65,9 @@ export default function ScanSummary({ recentScans }) {
                     </span>
                   </div>
                   <p className="text-xs text-[#4B6357] mt-1">
-                    {formatDate(scan.started_at)} â€¢ {scan.total_detected ?? 0} Chickens
+                    {formatDate(scan.started_at)} • {scan.total_detected ?? 0} Chickens
                     {scan.diseased_count > 0 && (
-                      <span className="text-[#EF4444] font-medium"> â€¢ {scan.diseased_count} flagged</span>
+                      <span className="text-[#EF4444] font-medium"> • {scan.diseased_count} flagged</span>
                     )}
                   </p>
                 </div>

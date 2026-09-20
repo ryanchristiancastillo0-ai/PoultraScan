@@ -33,7 +33,7 @@ export default function ChickenPredictionCard({ chicken }) {
             <SeverityBadge severity={chicken.severity} />
           </div>
           <p className="text-xs text-[#4B6357] mt-0.5">
-            {chicken.breed || 'Unknown breed'} â€¢ {chicken.confidence != null ? `${chicken.confidence}% confidence` : '--'}
+            {chicken.breed || 'Unknown breed'} • {chicken.confidence != null ? `${chicken.confidence}% confidence` : '--'}
           </p>
         </div>
         <MdChevronRight className={`text-[#718279] text-lg flex-shrink-0 transition-transform ${expanded ? 'rotate-90' : ''}`} />

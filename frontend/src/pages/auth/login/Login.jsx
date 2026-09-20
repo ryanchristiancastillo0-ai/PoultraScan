@@ -81,7 +81,7 @@ export default function Login() {
       {/* Split Screen Layout */}
       <div className="flex w-full min-h-[100dvh]">
         {/* Left Side: Brand panel (Hidden below md) */}
-        <div className="hidden md:flex md:w-1/2 h-full min-h-screen relative overflow-hidden">
+        <div className="hidden md:flex md:w-1/2 h-full min-h-dvh relative overflow-hidden">
           {/* Base image - blurred */}
           <img
             src="/img/left-hero.png"

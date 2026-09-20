@@ -36,13 +36,13 @@ export default function ScanHistory() {
   const { scans, page, hasMore, loading, error, filters, updateFilters, nextPage, prevPage, removeScan } = useScanHistory();
 
   return (
-    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-screen flex flex-col font-sans">
+    <div className="bg-[#F7FAF8] text-[#10231A] antialiased min-h-dvh flex flex-col font-sans">
       <TopNav />
 <div className="md:hidden">
   <BottomNav />
 </div>
 
-      <main className="flex-grow pt-20 sm:pt-24 pb-10 px-4 md:px-8 max-w-[1280px] mx-auto w-full mb-8 md:mb-0">
+      <main className="flex-grow pt-[calc(env(safe-area-inset-top)+5rem)] sm:pt-24 pb-[calc(env(safe-area-inset-bottom)+5.5rem)] md:pb-10 px-4 md:px-8 max-w-[1280px] mx-auto w-full">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
           <div>
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E9F4EE] text-[#14532D] text-[11px] font-bold uppercase tracking-widest mb-2">

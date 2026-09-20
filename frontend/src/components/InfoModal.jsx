@@ -13,7 +13,7 @@ export default function InfoModal({ isOpen, onClose, title, children }) {
 
       <div className="info-backdrop absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="info-pop relative w-full max-w-lg max-h-[80vh] bg-white rounded-2xl shadow-xl flex flex-col overflow-hidden">
+      <div className="info-pop relative w-full max-w-lg max-h-[80dvh] bg-white rounded-2xl shadow-xl flex flex-col overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#E4ECE7] flex-shrink-0">
           <h2 className="text-base font-bold text-[#10231A]">{title}</h2>
           <button
